@@ -724,6 +724,11 @@
         <span class="label">Kinetic Subtitles &amp; 3D B-Roll</span>
         <span class="desc">Faster-Whisper word-sync, SAS 15K drive, Aero UI &amp; Dual Delivery</span>
       </a>
+      <a href="#step21-remotion-runner" class="flow-step-box">
+        <span class="idx">PHASE 21</span>
+        <span class="label">Unified Remotion Runner</span>
+        <span class="desc">13 Remotion skills, Mediabunny bridge, GPU renders &amp; dual output</span>
+      </a>
     </div>
 
     <!-- Section: High Level Architecture -->
@@ -2973,6 +2978,66 @@ projects/
       </div>
     </section>
 
+    <!-- Phase 21: Unified Remotion Runner CLI & Skills Engine -->
+    <section id="step21-remotion-runner">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">21</span>
+          Phase 21: Unified Remotion Runner CLI &amp; Skills Engine
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/remotion_agent_runner.py • .agents/skills/remotion-* • mediabunny</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Unifies all <strong>13 installed Remotion skills</strong> (from <code>.agents/skills/</code>) and <strong>35+ <code>@remotion/*</code> companion packages</strong> into a single, high-performance command-line engine. Bridges Python automation, media processing, and DaVinci Resolve workflows with Remotion's React video rendering ecosystem.
+        </p>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Key Architectural Features:</h4>
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Dual Output Architecture:</strong> Styled ANSI dashboards with formatted tables by default for human developers, plus a <code>--json</code> flag across all subcommands for automated AI agent parsing.</li>
+          <li><strong>Mediabunny In-Browser Bridge:</strong> Fast media probing via <code>mediabunny</code> (v1.64.0) to extract exact audio/video durations, dimensions, and codecs in milliseconds without FFmpeg overhead.</li>
+          <li><strong>Project Sandbox Isolation:</strong> Directs client compositions and renders into gitignored <code>projects/&lt;name&gt;/</code> while keeping core kinetic primitives in <code>src/components/kinetics/</code>.</li>
+          <li><strong>GPU Acceleration Enforcement:</strong> Automatically injects <code>--gl=angle</code> on all render runs to ensure hardware-accelerated DirectX/OpenGL rendering on Windows.</li>
+          <li><strong>13 Skills Unified:</strong> Direct subcommands for <code>doctor</code>, <code>scaffold</code>, <code>audit</code>, <code>probe-media</code>, <code>captions</code>, <code>maps</code>, <code>interactivity</code>, <code>studio</code>, <code>render</code>, <code>upgrade</code>, and <code>docs</code>.</li>
+        </ul>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Command Cheatsheet &amp; Terminal Execution:</h4>
+        <div class="code-block" style="margin-bottom: 20px;">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Environment &amp; Dependency Health Check</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py doctor
+
+<span class="comment"># 2. Probe Media Stems via Mediabunny Bridge (Duration, Dimensions, Codec)</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py probe-media assets/voiceover.mp3 <span class="flag">--json</span>
+
+<span class="comment"># 3. Scaffold a New Kinetic Composition (16:9 Landscape or 9:16 Vertical)</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py scaffold Scene01Intro <span class="flag">--format</span> 9x16 <span class="flag">--project</span> incremental_backup_2008
+
+<span class="comment"># 4. Generate Word-Level Captions for Kinetic Subtitle Pop</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py captions assets/voiceover.mp3 <span class="flag">--out</span> src/captions/scene1.json
+
+<span class="comment"># 5. Audit Composition for 100/100 Grade S MotionScore (Zero Layout Thrashing)</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py audit src/scenes/Scene01Intro.tsx <span class="flag">--fix</span>
+
+<span class="comment"># 6. Scaffold 3D Map B-Roll (MapLibre, Mapbox, or Cesium Flythroughs)</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py maps <span class="flag">--type</span> maplibre <span class="flag">--out</span> src/components/maps/ServerRouteMap.tsx
+
+<span class="comment"># 7. Launch Interactive Studio Preview Server</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py studio <span class="flag">--port</span> 3000
+
+<span class="comment"># 8. Headless Hardware-Accelerated Video Render</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py render IncrementalBackupVertical-Master <span class="flag">--out</span> out/master/video.mp4 <span class="flag">--gl</span> angle
+
+<span class="comment"># 9. Sync &amp; Upgrade all 35+ @remotion/* Dependencies</span>
+<span class="cmd">python</span> scripts/remotion_agent_runner.py upgrade <span class="flag">--dry-run</span></div>
+        </div>
+      </div>
+    </section>
+
     <!-- CLI & Antigravity Skill Reference -->
     <section id="cli-reference">
       <div class="section-title-wrap">
@@ -3076,6 +3141,11 @@ projects/
               <td><code>scripts/sfx_designer.py</code></td>
               <td><code>python scripts/sfx_designer.py --storyboard src/data/storyboard.json --mux</code></td>
               <td>Procedural 48kHz sound design placement with automated voiceover sidechain ducking.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/remotion_agent_runner.py</code></td>
+              <td><code>python scripts/remotion_agent_runner.py &lt;subcommand&gt; [flags]</code></td>
+              <td>Centralized CLI orchestrator unifying all 13 Remotion skills, Mediabunny media probing, and MotionScore auditing.</td>
             </tr>
             <tr>
               <td><code>scripts/openverse_search.py</code></td>
