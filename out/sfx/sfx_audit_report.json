@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "score": 100,
+  "totalCues": 6,
+  "duckedUnderSpeech": 1,
+  "peakDbfs": -12.04,
+  "minCueGapSec": 4.83,
+  "maxCueGapSec": 5.17,
+  "warnings": [],
+  "cues": [
+    {
+      "sceneId": "scene_1",
+      "cue": "cinematic_whoosh",
+      "hitFrame": 0,
+      "timestampSec": 0.0,
+      "nominalGainDb": -14.0,
+      "speechDucked": true,
+      "effectiveGainDb": -18.0
+    },
+    {
+      "sceneId": "scene_2",
+      "cue": "metallic_unlatch",
+      "hitFrame": 155,
+      "timestampSec": 5.167,
+      "nominalGainDb": -14.0,
+      "speechDucked": false,
+      "effectiveGainDb": -14.0
+    },
+    {
+      "sceneId": "scene_3",
+      "cue": "glass_lift",
+      "hitFrame": 305,
+      "timestampSec": 10.167,
+      "nominalGainDb": -14.0,
+      "speechDucked": false,
+      "effectiveGainDb": -14.0
+    },
+    {
+      "sceneId": "scene_4",
+      "cue": "silicon_macro_riser",
+      "hitFrame": 460,
+      "timestampSec": 15.333,
+      "nominalGainDb": -13.0,
+      "speechDucked": false,
+      "effectiveGainDb": -13.0
+    },
+    {
+      "sceneId": "scene_5",
+      "cue": "data_packet_pulse",
+      "hitFrame": 605,
+      "timestampSec": 20.167,
+      "nominalGainDb": -16.0,
+      "speechDucked": false,
+      "effectiveGainDb": -16.0
+    },
+    {
+      "sceneId": "scene_6",
+      "cue": "sub_boom_drop",
+      "hitFrame": 760,
+      "timestampSec": 25.333,
+      "nominalGainDb": -10.0,
+      "speechDucked": false,
+      "effectiveGainDb": -10.0
+    }
+  ]
+}

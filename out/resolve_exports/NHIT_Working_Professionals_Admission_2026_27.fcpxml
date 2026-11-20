@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<fcpxml version="1.9">
+  <resources>
+    <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
+    <asset id="r2" name="NHIT_Working_Professionals_Admission_2026_27.mp4" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/out/master/NHIT_Working_Professionals_Admission_2026_27.mp4" start="0s" duration="900/30s" hasVideo="1" format="r1"/>
+    <asset id="r3" name="nhit_voiceover.wav" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/public/nhit_voiceover.wav" start="0s" duration="900/30s" hasAudio="1"/>
+  </resources>
+  <library>
+    <event name="Antigravity_Productions">
+      <project name="NHIT_Working_Professionals_Admission_2026_27">
+        <sequence format="r1" duration="900/30s" tcStart="0s" tcFormat="NDF">
+          <spine>
+            <asset-clip ref="r2" offset="0s" name="[V1 Background] NHIT_Working_Professionals_Admission_2026_27" start="0s" duration="900/30s" format="r1">
+              <marker start="0/30s" duration="1/30s" value="[KINETIC] Scene 1: The Career Challenge" color="blue"/>
+              <gap name="[V2 B-ROLL / FACECAM] Scene 1: The Career Challeng" offset="0/30s" duration="150/30s" lane="1">
+                <marker start="0s" duration="1/30s" value="Drop footage here: Scene 1: The Career Challenge" color="green"/>
+              </gap>
+              <marker start="150/30s" duration="1/30s" value="[CORPORATE_SLIDE] Scene 2: Introducing NHIT Durgapur" color="cyan"/>
+              <gap name="[V2 B-ROLL / FACECAM] Scene 2: Introducing NHIT Du" offset="150/30s" duration="150/30s" lane="1">
+                <marker start="0s" duration="1/30s" value="Drop footage here: Scene 2: Introducing NHIT Durg" color="green"/>
+              </gap>
+              <marker start="300/30s" duration="1/30s" value="[INFOGRAPHIC] Scene 3: Choose Your Engineering Branch" color="yellow"/>
+              <gap name="[V2 B-ROLL / FACECAM] Scene 3: Choose Your Enginee" offset="300/30s" duration="150/30s" lane="1">
+                <marker start="0s" duration="1/30s" value="Drop footage here: Scene 3: Choose Your Engineeri" color="green"/>
+              </gap>
+              <marker start="450/30s" duration="1/30s" value="[INFOGRAPHIC] Scene 4: Candidate Eligibility" color="yellow"/>
+              <gap name="[V2 B-ROLL / FACECAM] Scene 4: Candidate Eligibili" offset="450/30s" duration="150/30s" lane="1">
+                <marker start="0s" duration="1/30s" value="Drop footage here: Scene 4: Candidate Eligibility" color="green"/>
+              </gap>
+              <marker start="600/30s" duration="1/30s" value="[CORPORATE_SLIDE] Scene 5: Affiliation and Approved Intake" color="cyan"/>
+              <gap name="[V2 B-ROLL / FACECAM] Scene 5: Affiliation and App" offset="600/30s" duration="150/30s" lane="1">
+                <marker start="0s" duration="1/30s" value="Drop footage here: Scene 5: Affiliation and Appro" color="green"/>
+              </gap>
+              <marker start="750/30s" duration="1/30s" value="[KINETIC] Scene 6: Final Brand Reveal &amp; CTA" color="blue"/>
+              <gap name="[V2 B-ROLL / FACECAM] Scene 6: Final Brand Reveal " offset="750/30s" duration="150/30s" lane="1">
+                <marker start="0s" duration="1/30s" value="Drop footage here: Scene 6: Final Brand Reveal &amp; " color="green"/>
+              </gap>
+              <asset-clip ref="r3" offset="0s" name="[A1 Voiceover] nhit_voiceover" start="0s" duration="900/30s" lane="-1"/>
+            </asset-clip>
+          </spine>
+        </sequence>
+      </project>
+    </event>
+  </library>
+</fcpxml>

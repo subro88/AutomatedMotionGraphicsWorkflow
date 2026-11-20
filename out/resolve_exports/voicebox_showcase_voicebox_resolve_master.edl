@@ -1,0 +1,8 @@
+TITLE: voicebox_showcase_voicebox_resolve_master
+FCM: NON-DROP FRAME
+
+001  AX       V     C        00:00:00:00 00:00:30:00 01:00:00:00 01:00:30:00
+* FROM CLIP NAME: voicebox_showcase_voicebox_9x16_part_01_subtitled.mp4
+
+002  AX       V     C        00:00:30:00 00:00:60:00 01:00:30:00 01:00:60:00
+* FROM CLIP NAME: voicebox_showcase_voicebox_9x16_part_02_subtitled.mp4

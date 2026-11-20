@@ -1,0 +1,41 @@
+{
+  "projectName": "Scalability_Shorts_9x16",
+  "fps": 30,
+  "aspectRatio": "9:16",
+  "durationSeconds": 56.0,
+  "totalFrames": 1680,
+  "scenes": [
+    {
+      "id": "scene_01",
+      "title": "Scene 1: Hook The 100K Server Crash",
+      "startFrame": 0,
+      "durationInFrames": 300,
+      "type": "kinetic",
+      "voiceover": "Your server just crashed under one hundred thousand concurrent requests! The CPU is pinned at one hundred percent, and your CEO is calling. What do you do?"
+    },
+    {
+      "id": "scene_02",
+      "title": "Scene 2: The 10K Scale-Up Mistake",
+      "startFrame": 300,
+      "durationInFrames": 360,
+      "type": "corporate_slide",
+      "voiceover": "Do not just Scale Up! Upgrading to a one hundred and twenty-eight core monster server costs a fortune, suffers from NUMA memory bus contention, and creates a massive Single Point of Failure."
+    },
+    {
+      "id": "scene_03",
+      "title": "Scene 3: The 4-Node HAProxy Solution",
+      "startFrame": 660,
+      "durationInFrames": 480,
+      "type": "infographic",
+      "voiceover": "The production answer is Horizontal Scaling. Distribute traffic across four lightweight stateless nodes behind an HAProxy Layer Seven load balancer. With active health checks, if one node dies, traffic reroutes in milliseconds with zero downtime."
+    },
+    {
+      "id": "scene_04",
+      "title": "Scene 4: Universal Scalability Law & CTA",
+      "startFrame": 1140,
+      "durationInFrames": 540,
+      "type": "kinetic",
+      "voiceover": "Remember the Universal Scalability Law: keep nodes stateless to avoid cross-talk delay! Head over to TechNHIT dot in for the interactive simulator and subscribe for more system design breakdowns!"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "motion-graphics-pipeline",
+  "version": "1.0.0",
+  "description": "Automated motion graphics engine with Remotion, Anime.js, and DaVinci Resolve",
+  "scripts": {
+    "start": "remotion preview src/index.ts",
+    "build:16x9": "remotion render src/index.ts Master-16x9 out/master/preview_16x9.mp4 --gl=angle",
+    "build:9x16": "remotion render src/index.ts Master-9x16 out/master/preview_9x16.mp4 --gl=angle",
+    "build:taskflow:16x9": "remotion render src/index.ts TaskFlow-16x9 out/master/taskflow_16x9.mp4 --gl=angle",
+    "build:taskflow:9x16": "remotion render src/index.ts TaskFlow-9x16 out/master/taskflow_9x16.mp4 --gl=angle",
+    "build:audiogram": "remotion render src/index.ts Audiogram-16x9 out/master/audiogram_16x9.mp4 --gl=angle",
+    "build:codewalkthrough": "remotion render src/index.ts CodeWalkthrough-16x9 out/master/codewalkthrough_16x9.mp4 --gl=angle",
+    "build:stargazer": "remotion render src/index.ts Stargazer-16x9 out/master/stargazer_16x9.mp4 --gl=angle",
+    "build:overlay": "remotion render src/index.ts Overlay-16x9 out/master/overlay_16x9.mp4 --gl=angle",
+    "build:effects": "remotion render src/index.ts EffectsShowcase-16x9 out/master/effects_16x9.mp4 --gl=angle",
+    "build:nhit": "remotion render src/index.ts NHITAdvertisement out/master/NHIT_Working_Professionals_Admission_2026_27.mp4 --gl=angle",
+    "build:nhit:45s": "remotion render src/index.ts NHIT-Broadcast-45s out/master/NHIT_Broadcast_Admission_45s.mp4 --gl=angle",
+    "build:nhit:70s": "remotion render src/index.ts NHIT-Extended-70s out/master/NHIT_Extended_Admission_70s.mp4 --gl=angle",
+    "build:infographic:16x9": "remotion render src/index.ts NHIT-Infographic-16x9 out/master/NHIT_Infographic_Admission_16x9.mp4 --gl=angle",
+    "build:infographic:9x16": "remotion render src/index.ts NHIT-Infographic-9x16 out/master/NHIT_Infographic_Admission_9x16.mp4 --gl=angle",
+    "build:scalability:16x9": "remotion render src/index.ts Scalability-Masterclass-16x9 out/master/scalability_masterclass_16x9.mp4 --gl=angle",
+    "build:scalability:9x16": "remotion render src/index.ts Scalability-Shorts-9x16 out/master/scalability_shorts_9x16.mp4 --gl=angle"
+  },
+  "dependencies": {
+    "@codepawlhq/crucible": "^0.21.0",
+    "@huggingface/transformers": "4.2.0",
+    "@react-three/fiber": "^8.18.0",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/effects": "^4.0.541",
+    "@remotion/media": "^4.0.541",
+    "@remotion/tailwind": "^4.0.541",
+    "@remotion/three": "^4.0.541",
+    "@remotion/video-matting": "4.0.541",
+    "@remotion/whisper-webgpu": "4.0.541",
+    "@types/three": "^0.187.0",
+    "animejs": "^3.2.2",
+    "autoprefixer": "^10.6.2",
+    "gsap": "^3.15.1",
+    "postcss": "^8.5.32",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.0",
+    "tailwindcss": "^3.4.19",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@types/animejs": "^3.1.12",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.2.0"
+  }
+}

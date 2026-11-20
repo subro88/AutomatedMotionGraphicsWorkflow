@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Execution Dashboard — Motion Graphics Workstation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Motion (formerly Framer Motion) Standalone Browser Core -->
+    <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+    <style>
+        :root {
+            --bg: #060911;
+            --card-bg: #0c1322;
+            --border: #1e2c4a;
+            --accent-cyan: #00f2fe;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 32px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* Ambient Background Glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 80%);
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 24px;
+            margin-bottom: 28px;
+        }
+        h1 {
+            font-size: 1.85rem;
+            margin: 0;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transform: translate3d(0, 0, 0);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card:hover {
+            transform: translate3d(0, -4px, 0);
+            border-color: rgba(0, 242, 254, 0.4);
+        }
+        .kpi-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+        .kpi-val {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .table-wrap {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow-x: auto;
+            box-shadow: 0 14px 35px rgba(0,0,0,0.5);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        th {
+            background: #0f182c;
+            color: var(--text-muted);
+            text-align: left;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.74rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        td {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+            transition: background 0.15s ease;
+        }
+        tr.table-row {
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        tr.table-row:hover td {
+            background: rgba(0, 242, 254, 0.04);
+        }
+        .nav-btn {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transform: translate3d(0, 0, 0);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+        }
+        .nav-btn:hover {
+            background: rgba(0, 242, 254, 0.2);
+            transform: translate3d(0, -2px, 0);
+        }
+        .nav-btn:active {
+            transform: translate3d(0, 1px, 0) scale(0.98);
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .badge-success {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+        .badge-aspect {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .badge-stage {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 3px 7px;
+            border-radius: 4px;
+            margin: 2px 4px 2px 0;
+            display: inline-block;
+            font-size: 0.72rem;
+        }
+        .badge-artifact {
+            background: rgba(0, 242, 254, 0.1);
+            color: #00f2fe;
+            padding: 3px 7px;
+            border-radius: 4px;
+            margin: 2px 4px 2px 0;
+            display: inline-block;
+            font-size: 0.72rem;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="header">
+            <div>
+                <h1>⚡ Pipeline Execution Dashboard</h1>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 6px;">
+                    Real-time execution telemetry from SQLite database (<code>out/pipeline_history.db</code>) • Motion GPU Accelerated
+                </p>
+            </div>
+            <div>
+                <a href="workflow_user_guide.html" class="nav-btn">← Back to User Guide</a>
+            </div>
+        </div>
+
+        <!-- KPI Summary Cards with Motion Spring Reveal -->
+        <div class="kpi-grid">
+            <div class="kpi-card" style="border-top: 3px solid #00f2fe;">
+                <div class="kpi-label">Total Production Runs</div>
+                <div class="kpi-val" style="color: #00f2fe;">2 MASTER</div>
+            </div>
+            <div class="kpi-card" style="border-top: 3px solid #fde047;">
+                <div class="kpi-label">Average Pipeline Latency</div>
+                <div class="kpi-val" style="color: #fde047;">82.6s</div>
+            </div>
+            <div class="kpi-card" style="border-top: 3px solid #10b981;">
+                <div class="kpi-label">MotionScore Performance</div>
+                <div class="kpi-val" style="color: #10b981;">GRADE S <span style="font-size: 0.9rem; font-weight: 500;">(100/100)</span></div>
+            </div>
+            <div class="kpi-card" style="border-top: 3px solid #a855f7;">
+                <div class="kpi-label">Cryptographic Receipts</div>
+                <div class="kpi-val" style="color: #c084fc;">100% SHA-256</div>
+            </div>
+        </div>
+
+        <!-- Pipeline History Table -->
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Run</th>
+                        <th>Timestamp</th>
+                        <th>Project</th>
+                        <th>Audio Source</th>
+                        <th>Aspect</th>
+                        <th>Total Latency</th>
+                        <th>Stage Durations</th>
+                        <th>Artifacts Generated</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr class="table-row">
+                        <td style="font-family: monospace; font-size: 0.8rem; color: #94a3b8;">#2</td>
+                        <td style="font-size: 0.82rem; color: #cbd5e1;">2026-11-08 18:34:44</td>
+                        <td><strong style="color: #fff;">MultiScene_Showcase</strong></td>
+                        <td style="font-family: monospace; font-size: 0.78rem; color: #38bdf8;">multiscene_showcase_voicebox.wav</td>
+                        <td><span class="badge badge-aspect">9:16</span></td>
+                        <td><strong style="color: #fde047; font-family: monospace;">85.56s</strong></td>
+                        <td>
+                            <span class="badge-stage">0_voicebox: <b>12.06s</b></span>
+                            <span class="badge-stage">1_mel_spectrum: <b>1.38s</b></span>
+                            <span class="badge-stage">2_remotion: <b>42.81s</b></span>
+                            <span class="badge-stage">3_shorts: <b>5.39s</b></span>
+                            <span class="badge-stage">4_karaoke: <b>6.68s</b></span>
+                            <span class="badge-stage">5_drfx: <b>0.08s</b></span>
+                            <span class="badge-stage">6_resolve: <b>16.89s</b></span>
+                        </td>
+                        <td>
+                            <span class="badge-artifact">spectrum.json (0.17MB)</span>
+                            <span class="badge-artifact">master_9x16.mp4 (6.81MB)</span>
+                            <span class="badge-artifact">part_01_subtitled.mp4 (12.42MB)</span>
+                            <span class="badge-artifact">resolve_master.mp4 (11.68MB)</span>
+                        </td>
+                        <td><span class="badge badge-success">SUCCESS</span></td>
+                    </tr>
+                    
+                    <tr class="table-row">
+                        <td style="font-family: monospace; font-size: 0.8rem; color: #94a3b8;">#1</td>
+                        <td style="font-size: 0.82rem; color: #cbd5e1;">2026-11-08 18:10:56</td>
+                        <td><strong style="color: #fff;">VoiceBox_Showcase</strong></td>
+                        <td style="font-family: monospace; font-size: 0.78rem; color: #38bdf8;">voicebox_showcase_voicebox.wav</td>
+                        <td><span class="badge badge-aspect">9:16</span></td>
+                        <td><strong style="color: #fde047; font-family: monospace;">79.73s</strong></td>
+                        <td>
+                            <span class="badge-stage">0_voicebox: <b>12.98s</b></span>
+                            <span class="badge-stage">1_mel_spectrum: <b>1.42s</b></span>
+                            <span class="badge-stage">2_remotion: <b>33.70s</b></span>
+                            <span class="badge-stage">3_shorts: <b>5.55s</b></span>
+                            <span class="badge-stage">4_karaoke: <b>7.85s</b></span>
+                            <span class="badge-stage">5_drfx: <b>1.08s</b></span>
+                            <span class="badge-stage">6_resolve: <b>17.14s</b></span>
+                        </td>
+                        <td>
+                            <span class="badge-artifact">spectrum.json (0.13MB)</span>
+                            <span class="badge-artifact">master_9x16.mp4 (4.28MB)</span>
+                            <span class="badge-artifact">part_01_subtitled.mp4 (7.79MB)</span>
+                            <span class="badge-artifact">resolve_master.mp4 (3.42MB)</span>
+                        </td>
+                        <td><span class="badge badge-success">SUCCESS</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Motion Animation Execution Script (with safe fallback) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.Motion && window.Motion.animate) {
+                const { animate, spring, stagger } = window.Motion;
+
+                // Animate Header
+                animate(".header", 
+                    { opacity: [0, 1], transform: ["translateY(-16px)", "translateY(0)"] },
+                    { duration: 0.5, easing: spring({ stiffness: 180, damping: 22 }) }
+                );
+
+                // Animate KPI cards with spring stagger
+                animate(".kpi-card",
+                    { opacity: [0, 1], transform: ["scale(0.92) translateY(20px)", "scale(1) translateY(0)"] },
+                    { delay: stagger(0.08, { start: 0.15 }), duration: 0.6, easing: spring({ stiffness: 160, damping: 18 }) }
+                );
+
+                // Animate table rows with staggered slide-in
+                animate(".table-row",
+                    { opacity: [0, 1], transform: ["translateY(16px)", "translateY(0)"] },
+                    { delay: stagger(0.06, { start: 0.35 }), duration: 0.5, easing: spring({ stiffness: 200, damping: 24 }) }
+                );
+            }
+        });
+    </script>
+</body>
+</html>

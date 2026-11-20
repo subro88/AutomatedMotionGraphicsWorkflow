@@ -1,0 +1,111 @@
+{
+  "format": "crucible.scene",
+  "schemaVersion": 1,
+  "geometries": [
+    { "id": "gear_body", "type": "cylinder", "bevel": 0.05, "segments": 36 },
+    { "id": "gear_tooth", "type": "box", "bevel": 0.04 },
+    { "id": "shaft", "type": "cylinder", "bevel": 0.02, "segments": 24 },
+    { "id": "base_plate", "type": "box", "bevel": 0.02 }
+  ],
+  "materials": [
+    {
+      "id": "steel_dark",
+      "color": [0.12, 0.14, 0.18],
+      "metallic": 0.92,
+      "roughness": 0.28
+    },
+    {
+      "id": "industrial_orange",
+      "color": [1.0, 0.58, 0.12],
+      "metallic": 0.85,
+      "roughness": 0.35,
+      "emission": 0.4
+    },
+    {
+      "id": "chrome_silver",
+      "color": [0.85, 0.88, 0.92],
+      "metallic": 0.98,
+      "roughness": 0.15
+    },
+    {
+      "id": "mounting_chassis",
+      "color": [0.04, 0.06, 0.10],
+      "metallic": 0.5,
+      "roughness": 0.7
+    }
+  ],
+  "nodes": [
+    {
+      "id": "chassis",
+      "geometry": "base_plate",
+      "material": "mounting_chassis",
+      "translation": [0, -0.6, 0],
+      "scale": [5.5, 0.15, 3.5]
+    },
+    {
+      "id": "gear_main_assembly",
+      "label": "Drive Gear Assembly",
+      "translation": [-0.9, 0, 0]
+    },
+    {
+      "id": "gear_main_core",
+      "parent": "gear_main_assembly",
+      "geometry": "gear_body",
+      "material": "industrial_orange",
+      "scale": [1.1, 0.25, 1.1]
+    },
+    {
+      "id": "gear_main_shaft",
+      "parent": "gear_main_assembly",
+      "geometry": "shaft",
+      "material": "chrome_silver",
+      "scale": [0.22, 0.6, 0.22]
+    },
+    {
+      "id": "gear_secondary_assembly",
+      "label": "Driven Gear Assembly",
+      "translation": [1.1, 0, 0]
+    },
+    {
+      "id": "gear_sec_core",
+      "parent": "gear_secondary_assembly",
+      "geometry": "gear_body",
+      "material": "steel_dark",
+      "scale": [0.85, 0.25, 0.85]
+    },
+    {
+      "id": "gear_sec_shaft",
+      "parent": "gear_secondary_assembly",
+      "geometry": "shaft",
+      "material": "chrome_silver",
+      "scale": [0.18, 0.55, 0.18]
+    }
+  ],
+  "camera": {
+    "eye": [0, 2.2, 4.0],
+    "target": [0.1, -0.1, 0],
+    "fov": 36
+  },
+  "environment": {
+    "setup": "studio",
+    "lightDirection": [-0.6, 0.7, 0.5],
+    "keyIntensity": 1.4,
+    "fillIntensity": 0.6,
+    "ambientIntensity": 0.35,
+    "ground": false,
+    "pointLights": [
+      {
+        "position": [-1.2, 1.5, 1.2],
+        "color": [1.0, 0.65, 0.2],
+        "intensity": 14,
+        "range": 6
+      },
+      {
+        "position": [1.5, 1.2, 1.0],
+        "color": [0.2, 0.6, 1.0],
+        "intensity": 10,
+        "range": 5
+      }
+    ]
+  }
+}

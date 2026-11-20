@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "description": "Studio Asset Vault - High-Fidelity 3D Assets for Cycles & Remotion",
+  "last_updated": "2026-11-19T16:10:13.428788+00:00",
+  "assets": {
+    "smartphone_teardown_assembly": {
+      "category": "cad_hardware",
+      "title": "Industrial Smartphone Teardown Assembly",
+      "description": "Millimeter-accurate phone CAD with CNC frame, display glass, triple camera module, and PCB",
+      "source": "GrabCAD / Procedural CAD Pipeline",
+      "fidelity": "broadcast_cycles_pbr",
+      "blend_path": "assets/studio_vault/cad_hardware/smartphone_teardown_assembly.blend",
+      "glb_path": "assets/studio_vault/cad_hardware/smartphone_teardown_assembly.glb",
+      "materials": [
+        "Mat_Titanium",
+        "Mat_Optical_Glass",
+        "Mat_FR4_PCB",
+        "Mat_Silicon_Die"
+      ]
+    },
+    "bga_processor_chip": {
+      "category": "components_altium",
+      "title": "BGA-144 High-Performance Processor Microchip",
+      "description": "Authentic electronic microchip with 144 BGA solder spheres, FR4 substrate, and 3nm silicon die",
+      "source": "Celestial Altium Library / Hardware Teardown Standards",
+      "fidelity": "micro_physics_hero",
+      "blend_path": "assets/studio_vault/components_altium/bga_processor_chip.blend",
+      "glb_path": "assets/studio_vault/components_altium/bga_processor_chip.glb",
+      "materials": [
+        "Mat_Solder_Ball",
+        "Mat_FR4_PCB",
+        "Mat_Silicon_Die",
+        "Mat_Titanium"
+      ]
+    }
+  }
+}

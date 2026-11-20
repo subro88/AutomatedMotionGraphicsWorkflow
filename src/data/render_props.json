@@ -1,0 +1,21 @@
+{
+  "primaryColor": "#0066FF",
+  "secondaryColor": "#8B5CF6",
+  "accentColor": "#00FF88",
+  "backgroundColor": "#0A0A0F",
+  "glowIntensity": 1.2,
+  "brandName": "TaskFlow",
+  "tagline": "Get Things Done. Effortlessly.",
+  "chaosHeadlineBad": "Scattered Tasks. Lost Momentum.",
+  "chaosHeadlineGood": "From Endless Chaos... to Absolute Clarity.",
+  "aiBadgeText": "+3.4 Hours Saved Today",
+  "ctaButtonText": "Start Free Trial",
+  "ctaButtonUrl": "taskflow.app",
+  "springDamping": 97,
+  "springMass": 0.44,
+  "particleCount": 20,
+  "focusScore": 94.5,
+  "statPill1": "48 Tasks Crushed",
+  "statPill2": "10x Faster",
+  "statPill3": "Top 1% Global"
+}

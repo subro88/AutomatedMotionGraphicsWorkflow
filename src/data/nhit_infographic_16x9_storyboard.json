@@ -1,0 +1,66 @@
+{
+  "projectName": "NHIT_Infographic_Admission_16x9",
+  "fps": 30,
+  "aspectRatio": "16:9",
+  "durationSeconds": 84.7,
+  "totalFrames": 2541,
+  "scenes": [
+    {
+      "id": "scene_01",
+      "title": "Scene 1: Experience & Skills Hook",
+      "startFrame": 0,
+      "durationInFrames": 210,
+      "type": "infographic",
+      "voiceover": "You have the experience, you have the skills, now it's time to take your career to the next level,"
+    },
+    {
+      "id": "scene_02",
+      "title": "Scene 2: NHIT Durgapur Campus Intro",
+      "startFrame": 210,
+      "durationInFrames": 210,
+      "type": "corporate_slide",
+      "voiceover": "introducing NHIT Durgapur, your opportunity to advance through technical education,"
+    },
+    {
+      "id": "scene_03",
+      "title": "Scene 3: Diploma Engineering Programmes",
+      "startFrame": 420,
+      "durationInFrames": 360,
+      "type": "infographic",
+      "voiceover": "choose your next step, diploma in electrical engineering or mechanical engineering, especially offered under the working professional category."
+    },
+    {
+      "id": "scene_04",
+      "title": "Scene 4: Candidate Eligibility Matrix",
+      "startFrame": 780,
+      "durationInFrames": 540,
+      "type": "infographic",
+      "voiceover": "Are you eligible? If you have the required academic qualification, 10 plus 2 with applicable subjects, 10 plus 2 vocational, or class 10 with a 2 year ITI qualification in an appropriate trade, along with a minimum of one year of full-time work experience, this opportunity could be for you."
+    },
+    {
+      "id": "scene_05",
+      "title": "Scene 5: Statutory Affiliation & AICTE",
+      "startFrame": 1320,
+      "durationInFrames": 435,
+      "type": "corporate_slide",
+      "voiceover": "We are affiliated to the West Bengal State Council of Technical and Vocational Education and Skill Development and approved by AICTE for the academic session 2026-27, don't stop at experience, add a qualification to your skills."
+    },
+    {
+      "id": "scene_06",
+      "title": "Scene 6: Limited Seats Capacity Urgency",
+      "startFrame": 1755,
+      "durationInFrames": 180,
+      "type": "kinetic",
+      "voiceover": "Hurry up, we have limited seats capacity. NHIT brings you an opportunity to strengthen your technical qualifications."
+    },
+    {
+      "id": "scene_07",
+      "title": "Scene 7: Final Branding & Helpline Callout",
+      "startFrame": 1935,
+      "durationInFrames": 606,
+      "type": "infographic",
+      "voiceover": "NHIT Durgapur, shaping engineers, building futures, visit www.nhit.in or contact NHIT at +91 98005 71423 for admission details. Your experience, your next qualification, your future."
+    }
+  ]
+}
+

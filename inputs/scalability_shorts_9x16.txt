@@ -1,0 +1,7 @@
+Your server just crashed under one hundred thousand concurrent requests! The CPU is pinned at one hundred percent, and your CEO is calling. What do you do?
+
+Do not just Scale Up! Upgrading to a one hundred and twenty-eight core monster server costs a fortune, suffers from NUMA memory bus contention, and creates a massive Single Point of Failure.
+
+The production answer is Horizontal Scaling. Distribute traffic across four lightweight stateless nodes behind an HAProxy Layer Seven load balancer. With active health checks, if one node dies, traffic reroutes in milliseconds with zero downtime.
+
+Remember the Universal Scalability Law: keep nodes stateless to avoid cross-talk delay! Head over to TechNHIT dot in for the interactive simulator and subscribe for more system design breakdowns!

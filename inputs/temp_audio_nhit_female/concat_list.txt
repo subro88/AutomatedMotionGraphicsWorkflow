@@ -1,0 +1,7 @@
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_nhit_female/seg_0_padded.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_nhit_female/seg_1_padded.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_nhit_female/seg_2_padded.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_nhit_female/seg_3_padded.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_nhit_female/seg_4_padded.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_nhit_female/seg_5_padded.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_nhit_female/seg_6_padded.wav'

@@ -1,0 +1,139 @@
+{
+  "timestamp": "hardware_teardown_sfx.wav",
+  "audio_file": "C:\\Users\\User\\Desktop\\Graphics design\\DaVincirelove_Motion_Graphics_Workflow\\out\\sfx\\hardware_teardown_sfx.wav",
+  "duration_seconds": 30.0,
+  "overall_acoustic_score": 74.2,
+  "grade": "GRADE B",
+  "global_features": {
+    "peak_dbfs": -12.04,
+    "rms_dbfs": -37.21,
+    "crest_factor_db": 25.16,
+    "zcr": 0.0042,
+    "centroid_est_hz": 101.0
+  },
+  "speech_masking_status": "OPTIMAL",
+  "speech_masking_index_db": 0.0,
+  "cues_evaluated": 6,
+  "dsp_modulations_recommended": 1,
+  "modulations": [
+    {
+      "action": "SOFTEN_ATTACK",
+      "param": "attack_time_ms",
+      "target_value": 45.0
+    }
+  ],
+  "cue_details": [
+    {
+      "scene_id": "scene_1",
+      "title": "What's Inside a Modern Smartphone?",
+      "cue_description": "cinematic_whoosh",
+      "start_sec": 0.0,
+      "end_sec": 5.0,
+      "semantic_match_score": 65.0,
+      "status": "WARN",
+      "evaluator": "Acoustic Signature Analyzer (Too percussive for a smooth whoosh)",
+      "features": {
+        "peak_dbfs": -24.06,
+        "rms_dbfs": -50.22,
+        "crest_factor_db": 26.16,
+        "zcr": 0.0002,
+        "centroid_est_hz": 5.4
+      },
+      "dsp_modulation_feedback": {
+        "action": "SOFTEN_ATTACK",
+        "param": "attack_time_ms",
+        "target_value": 45.0
+      }
+    },
+    {
+      "scene_id": "scene_2",
+      "title": "Display & Adhesive Unlatching",
+      "cue_description": "metallic_unlatch",
+      "start_sec": 5.0,
+      "end_sec": 10.0,
+      "semantic_match_score": 80.0,
+      "status": "PASS",
+      "evaluator": "Acoustic Signature Analyzer (High transient attack matches mechanical impact; Spectral centroid too muddy for metallic sound)",
+      "features": {
+        "peak_dbfs": -14.59,
+        "rms_dbfs": -46.9,
+        "crest_factor_db": 32.31,
+        "zcr": 0.0073,
+        "centroid_est_hz": 176.0
+      },
+      "dsp_modulation_feedback": null
+    },
+    {
+      "scene_id": "scene_3",
+      "title": "Power Subsystem & Internal Stack",
+      "cue_description": "glass_lift",
+      "start_sec": 10.0,
+      "end_sec": 15.0,
+      "semantic_match_score": 75.0,
+      "status": "WARN",
+      "evaluator": "Acoustic Signature Analyzer (Acoustic envelope matches general storyboard cue)",
+      "features": {
+        "peak_dbfs": -15.69,
+        "rms_dbfs": -42.84,
+        "crest_factor_db": 27.15,
+        "zcr": 0.0064,
+        "centroid_est_hz": 153.0
+      },
+      "dsp_modulation_feedback": null
+    },
+    {
+      "scene_id": "scene_4",
+      "title": "Main Logic Board & 3nm Silicon Die",
+      "cue_description": "silicon_macro_riser",
+      "start_sec": 15.0,
+      "end_sec": 20.0,
+      "semantic_match_score": 65.0,
+      "status": "WARN",
+      "evaluator": "Acoustic Signature Analyzer (Too percussive for a smooth whoosh)",
+      "features": {
+        "peak_dbfs": -15.63,
+        "rms_dbfs": -37.48,
+        "crest_factor_db": 21.85,
+        "zcr": 0.0077,
+        "centroid_est_hz": 185.2
+      },
+      "dsp_modulation_feedback": null
+    },
+    {
+      "scene_id": "scene_5",
+      "title": "High-Speed Bus & Electrical Signal Flow",
+      "cue_description": "data_packet_pulse",
+      "start_sec": 20.0,
+      "end_sec": 25.0,
+      "semantic_match_score": 65.0,
+      "status": "WARN",
+      "evaluator": "Acoustic Signature Analyzer (Acoustic envelope matches general storyboard cue)",
+      "features": {
+        "peak_dbfs": -19.86,
+        "rms_dbfs": -47.02,
+        "crest_factor_db": 27.16,
+        "zcr": 0.0031,
+        "centroid_est_hz": 74.6
+      },
+      "dsp_modulation_feedback": null
+    },
+    {
+      "scene_id": "scene_6",
+      "title": "Precision Micro-Engineering at Scale",
+      "cue_description": "sub_boom_drop",
+      "start_sec": 25.0,
+      "end_sec": 30.0,
+      "semantic_match_score": 95.0,
+      "status": "PASS",
+      "evaluator": "Acoustic Signature Analyzer (Deep sub-bass fundamental verified)",
+      "features": {
+        "peak_dbfs": -12.04,
+        "rms_dbfs": -30.65,
+        "crest_factor_db": 18.61,
+        "zcr": 0.0005,
+        "centroid_est_hz": 11.8
+      },
+      "dsp_modulation_feedback": null
+    }
+  ]
+}

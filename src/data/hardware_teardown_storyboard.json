@@ -1,0 +1,147 @@
+{
+  "fps": 30,
+  "totalDurationInFrames": 900,
+  "recipe": "hardware-teardown",
+  "recipeName": "Branch Education 3D Hardware Teardown (Exploded Smartphone)",
+  "aspectRatio": "16:9",
+  "intensity": "Level 5 (Macro-Teardown)",
+  "theme": "branch-hardware",
+  "palette": {
+    "primary": "#00E5FF",
+    "secondary": "#FFFFFF",
+    "accent": "#FFB300",
+    "glow": "rgba(0, 229, 255, 0.6)",
+    "bg": "#06090E",
+    "silicon": "#1B222C",
+    "copper": "#C87D55",
+    "gold": "#FFD700"
+  },
+  "scenes": [
+    {
+      "id": "scene_1",
+      "type": "hardware_3d",
+      "archetype": "hero_assembly",
+      "title": "What's Inside a Modern Smartphone?",
+      "subtitle": "Engineering Architecture • Hermetic Chassis & Exterior Assembly",
+      "visualCue": "Sleek titanium and Gorilla glass smartphone hero shot orbiting in pristine studio lighting",
+      "sfxCue": "cinematic_whoosh",
+      "sfxFrameOffset": 0,
+      "hardwareAction": "chassis_orbit",
+      "explodeFactor": 0.0,
+      "cameraDistance": 320,
+      "cameraPitch": 15,
+      "cameraYaw": -25,
+      "callouts": [
+        { "id": "callout_glass", "target": "display_glass", "label": "Ceramic Shield Glass", "spec": "Dual-Ion Exchange" },
+        { "id": "callout_chassis", "target": "chassis_frame", "label": "Aerospace Titanium", "spec": "Grade 5 PVD Coated" }
+      ],
+      "startFrame": 0,
+      "durationInFrames": 150
+    },
+    {
+      "id": "scene_2",
+      "type": "hardware_3d",
+      "archetype": "display_unlatch",
+      "title": "Display & Adhesive Unlatching",
+      "subtitle": "120Hz LTPO OLED Panel • Water-Resistant Pressure Gasket",
+      "visualCue": "Display panel separates cleanly along Z-axis revealing underlying copper graphite heat dissipation sheet",
+      "sfxCue": "metallic_unlatch",
+      "sfxFrameOffset": 5,
+      "hardwareAction": "lift_display",
+      "explodeFactor": 0.35,
+      "cameraDistance": 280,
+      "cameraPitch": 35,
+      "cameraYaw": 10,
+      "callouts": [
+        { "id": "callout_oled", "target": "display_panel", "label": "LTPO 2.0 OLED", "spec": "1 - 120Hz Adaptive Refresh" },
+        { "id": "callout_gasket", "target": "seal_gasket", "label": "IP68 Adhesive Gasket", "spec": "6m Submersion Resistance" }
+      ],
+      "startFrame": 150,
+      "durationInFrames": 150
+    },
+    {
+      "id": "scene_3",
+      "type": "hardware_3d",
+      "archetype": "battery_separation",
+      "title": "Power Subsystem & Internal Stack",
+      "subtitle": "High-Density Li-Ion Cell & Dual-Layer Substrate Separation",
+      "visualCue": "L-shaped battery detaches alongside Taptic Engine and Qi2 wireless charging induction coil",
+      "sfxCue": "glass_lift",
+      "sfxFrameOffset": 5,
+      "hardwareAction": "explode_stack",
+      "explodeFactor": 0.75,
+      "cameraDistance": 300,
+      "cameraPitch": 45,
+      "cameraYaw": -40,
+      "callouts": [
+        { "id": "callout_battery", "target": "battery_pack", "label": "High-Density Li-Ion", "spec": "4,422 mAh • 17.18 Wh" },
+        { "id": "callout_coil", "target": "wireless_coil", "label": "Wireless Induction", "spec": "15W Qi2 Fast Charge" }
+      ],
+      "startFrame": 300,
+      "durationInFrames": 150
+    },
+    {
+      "id": "scene_4",
+      "type": "hardware_3d",
+      "archetype": "macro_silicon_zoom",
+      "title": "Main Logic Board & 3nm Silicon Die",
+      "subtitle": "Stacked Logic Board • 16 Billion Transistors Under EMI Shields",
+      "visualCue": "Electromagnetic shielding peels away as camera swoops into an extreme macro focus on the central processor die",
+      "sfxCue": "silicon_macro_riser",
+      "sfxFrameOffset": 10,
+      "hardwareAction": "zoom_processor",
+      "explodeFactor": 1.0,
+      "cameraDistance": 110,
+      "cameraPitch": 60,
+      "cameraYaw": 5,
+      "callouts": [
+        { "id": "callout_soc", "target": "processor_die", "label": "3nm System-on-Chip", "spec": "16 Billion FinFET Transistors" },
+        { "id": "callout_ram", "target": "lpddr5_memory", "label": "Unified LPDDR5X", "spec": "8GB • 6400 Mbps" }
+      ],
+      "startFrame": 450,
+      "durationInFrames": 150
+    },
+    {
+      "id": "scene_5",
+      "type": "hardware_3d",
+      "archetype": "signal_flow_pulse",
+      "title": "High-Speed Bus & Electrical Signal Flow",
+      "subtitle": "Differential Micro-Striplines & Microsecond Memory Fetches",
+      "visualCue": "Luminescent electron packet streams race across multi-layer copper PCB traces between RAM and Neural Engine",
+      "sfxCue": "data_packet_pulse",
+      "sfxFrameOffset": 5,
+      "hardwareAction": "pulse_signals",
+      "explodeFactor": 0.85,
+      "cameraDistance": 140,
+      "cameraPitch": 50,
+      "cameraYaw": 20,
+      "callouts": [
+        { "id": "callout_bus", "target": "interconnect_bus", "label": "Interconnect Bus", "spec": "51.2 GB/s Bandwidth" },
+        { "id": "callout_vias", "target": "micro_vias", "label": "Laser-Drilled Microvias", "spec": "10-Layer High Density PCB" }
+      ],
+      "startFrame": 600,
+      "durationInFrames": 150
+    },
+    {
+      "id": "scene_6",
+      "type": "hardware_3d",
+      "archetype": "teardown_recap",
+      "title": "Precision Micro-Engineering at Scale",
+      "subtitle": "Over 1,200 Discrete Components Operating in Perfect Synchrony",
+      "visualCue": "All layers glide gracefully back toward hermetic registration as comprehensive hardware specification HUD materializes",
+      "sfxCue": "sub_boom_drop",
+      "sfxFrameOffset": 10,
+      "hardwareAction": "reassemble_hero",
+      "explodeFactor": 0.15,
+      "cameraDistance": 260,
+      "cameraPitch": 25,
+      "cameraYaw": -15,
+      "callouts": [
+        { "id": "callout_sensor", "target": "camera_sensor", "label": "48MP Quad-Bayer", "spec": "Sensor-Shift OIS" },
+        { "id": "callout_modem", "target": "modem_chip", "label": "5G Sub-6 / mmWave", "spec": "Carrier Aggregation" }
+      ],
+      "startFrame": 750,
+      "durationInFrames": 150
+    }
+  ]
+}

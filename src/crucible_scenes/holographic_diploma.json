@@ -1,0 +1,96 @@
+{
+  "format": "crucible.scene",
+  "schemaVersion": 1,
+  "geometries": [
+    { "id": "diploma_plaque", "type": "box", "bevel": 0.06 },
+    { "id": "gold_seal", "type": "cylinder", "bevel": 0.03, "segments": 48 },
+    { "id": "orbit_ring_outer", "type": "cylinder", "bevel": 0.02, "segments": 48 },
+    { "id": "tech_pedestal", "type": "cylinder", "bevel": 0.05, "segments": 36 }
+  ],
+  "materials": [
+    {
+      "id": "gold_emblem",
+      "color": [1.0, 0.74, 0.05],
+      "metallic": 0.95,
+      "roughness": 0.22,
+      "emission": 0.5
+    },
+    {
+      "id": "acrylic_glass",
+      "color": [0.08, 0.12, 0.22],
+      "metallic": 0.1,
+      "roughness": 0.1,
+      "transmission": 0.7
+    },
+    {
+      "id": "neon_cyan_pulse",
+      "color": [0.05, 0.85, 1.0],
+      "metallic": 0.2,
+      "roughness": 0.15,
+      "emission": 2.8
+    },
+    {
+      "id": "dark_obsidian",
+      "color": [0.03, 0.04, 0.07],
+      "metallic": 0.8,
+      "roughness": 0.4
+    }
+  ],
+  "nodes": [
+    {
+      "id": "pedestal",
+      "geometry": "tech_pedestal",
+      "material": "dark_obsidian",
+      "translation": [0, -1.2, 0],
+      "scale": [1.8, 0.2, 1.8]
+    },
+    {
+      "id": "diploma_slab",
+      "geometry": "diploma_plaque",
+      "material": "acrylic_glass",
+      "translation": [0, 0, 0],
+      "scale": [1.6, 2.1, 0.12]
+    },
+    {
+      "id": "nhit_seal",
+      "geometry": "gold_seal",
+      "material": "gold_emblem",
+      "translation": [0, 0.35, 0.08],
+      "scale": [0.48, 0.04, 0.48]
+    },
+    {
+      "id": "orbit_ring",
+      "geometry": "orbit_ring_outer",
+      "material": "neon_cyan_pulse",
+      "translation": [0, 0, 0],
+      "scale": [1.9, 0.02, 1.9]
+    }
+  ],
+  "camera": {
+    "eye": [0, 1.2, 3.8],
+    "target": [0, 0, 0],
+    "fov": 32
+  },
+  "environment": {
+    "setup": "studio",
+    "lightDirection": [-0.3, 0.9, 0.5],
+    "keyIntensity": 1.6,
+    "fillIntensity": 0.7,
+    "ambientIntensity": 0.45,
+    "ground": false,
+    "pointLights": [
+      {
+        "position": [0, 1.5, 1.5],
+        "color": [1.0, 0.82, 0.3],
+        "intensity": 18,
+        "range": 6
+      },
+      {
+        "position": [0, -0.8, 1.2],
+        "color": [0.0, 0.7, 1.0],
+        "intensity": 15,
+        "range": 5
+      }
+    ]
+  }
+}

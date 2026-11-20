@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<fcpxml version="1.9">
+  <resources>
+    <format id="r1" name="FFVideoFormat1920p30" frameDuration="1/30s" width="1080" height="1920"/>
+    <asset id="r2" name="NHIT_Infographic_Admission_9x16.mp4" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/out/master/NHIT_Infographic_Admission_9x16.mp4" start="0s" duration="2541/30s" hasVideo="1" format="r1"/>
+    <asset id="r3" name="nhit_elevenlabs_audio.wav" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/public/nhit_elevenlabs_audio.wav" start="0s" duration="2541/30s" hasAudio="1"/>
+  </resources>
+  <library>
+    <event name="Antigravity_Productions">
+      <project name="NHIT_Infographic_Admission_9x16">
+        <sequence format="r1" duration="2541/30s" tcStart="0s" tcFormat="NDF">
+          <spine>
+            <asset-clip ref="r2" offset="0s" name="[V1 Background] NHIT_Infographic_Admission_9x16" start="0s" duration="2541/30s" format="r1">
+              <marker start="0/30s" duration="1/30s" value="[INFOGRAPHIC] Scene 1: Experience &amp; Skills Hook" color="yellow"/>
+              <marker start="210/30s" duration="1/30s" value="[CORPORATE_SLIDE] Scene 2: NHIT Durgapur Campus Intro" color="cyan"/>
+              <marker start="420/30s" duration="1/30s" value="[INFOGRAPHIC] Scene 3: Diploma Engineering Programmes" color="yellow"/>
+              <marker start="780/30s" duration="1/30s" value="[INFOGRAPHIC] Scene 4: Candidate Eligibility Matrix" color="yellow"/>
+              <marker start="1320/30s" duration="1/30s" value="[CORPORATE_SLIDE] Scene 5: Statutory Affiliation &amp; AICTE" color="cyan"/>
+              <marker start="1755/30s" duration="1/30s" value="[KINETIC] Scene 6: Limited Seats Capacity Urgency" color="blue"/>
+              <marker start="1935/30s" duration="1/30s" value="[INFOGRAPHIC] Scene 7: Final Branding &amp; Helpline Callout" color="yellow"/>
+              <asset-clip ref="r3" offset="0s" name="[A1 Voiceover] nhit_elevenlabs_audio" start="0s" duration="2541/30s" lane="-1"/>
+            </asset-clip>
+          </spine>
+        </sequence>
+      </project>
+    </event>
+  </library>
+</fcpxml>

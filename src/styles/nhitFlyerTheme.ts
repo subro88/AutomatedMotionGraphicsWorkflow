@@ -1,0 +1,42 @@
+export const NHIT_FLYER_THEME = {
+  colors: {
+    bgDark: "#0B0F19",
+    bgCard: "rgba(15, 23, 42, 0.96)",
+    bgCardRed: "rgba(211, 47, 47, 0.12)",
+    primaryRed: "#D32F2F",
+    crimsonDark: "#9A0007",
+    brightRed: "#EF4444",
+    goldAccent: "#FFB800",
+    goldLight: "#FDE047",
+    white: "#FFFFFF",
+    textLight: "#F8FAFC",
+    textMuted: "#94A3B8",
+    borderRed: "#D32F2F",
+    borderMuted: "rgba(255, 255, 255, 0.15)",
+  },
+  fonts: {
+    headline: "'Montserrat', 'Arial Black', -apple-system, sans-serif",
+    body: "'Inter', 'Segoe UI', -apple-system, sans-serif",
+    mono: "'JetBrains Mono', 'Consolas', monospace",
+  },
+  brand: {
+    name: "THE NEW HORIZONS INSTITUTE OF TECHNOLOGY",
+    shortName: "NHIT",
+    location: "DURGAPUR, WEST BENGAL",
+    tagline: "SHAPING ENGINEERS, BUILDING FUTURES.",
+    helpline: "+91 98005 71423",
+    website: "WWW.NHIT.IN",
+    session: "2026–27",
+    category: "WORKING PROFESSIONALS CATEGORY",
+    seatsTotal: 60,
+    seatsElectrical: 30,
+    seatsMechanical: 30,
+    memo: "WBSCTVESD/TED/2026-27/AFF/DET/WP/0004",
+  },
+  springConfig: {
+    damping: 100,
+    mass: 0.8,
+    stiffness: 120,
+  },
+};
+

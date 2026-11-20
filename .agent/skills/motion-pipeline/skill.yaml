@@ -1,0 +1,47 @@
+name: motion_pipeline_runner
+description: "Executes the full automated Remotion, Whisper, Voice Box, Crucible 3D, and DaVinci Resolve motion graphics pipeline."
+parameters:
+  type: object
+  properties:
+    action:
+      type: string
+      enum: [
+        "run-all",
+        "voicebox",
+        "extract-audio",
+        "render-remotion",
+        "render-crucible",
+        "slice-shorts",
+        "karaoke",
+        "build-drfx",
+        "build-nhit-drfx",
+        "assemble-resolve",
+        "hybrid-3d-resolve",
+        "qa-check",
+        "generate-receipt",
+        "dashboard"
+      ]
+      description: "Pipeline command to run."
+    audio:
+      type: string
+      description: "Path to input audio file in inputs/."
+    text:
+      type: string
+      description: "Direct speech text string for Voice Box neural synthesis."
+    script:
+      type: string
+      description: "Path to text or markdown script file for Voice Box."
+    voice:
+      type: string
+      description: "Voice preset (tech, energetic, female-friendly, casual, indian-male, bengali, etc.) or Microsoft neural voice."
+    clone:
+      type: string
+      description: "Voice profile reference WAV file in assets/voices/ or Kokoro dual-weight blend (e.g., af_heart:0.6,am_adam:0.4)."
+    project:
+      type: string
+      description: "Target Resolve Project name."
+    aspect:
+      type: string
+      enum: ["9:16", "16:9"]
+      description: "Aspect ratio for composition and timeline."
+  required: ["action"]

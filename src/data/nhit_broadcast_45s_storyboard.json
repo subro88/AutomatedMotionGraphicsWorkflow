@@ -1,0 +1,66 @@
+{
+  "projectName": "NHIT_Broadcast_Admission_45s",
+  "fps": 30,
+  "aspectRatio": "16:9",
+  "durationSeconds": 45.0,
+  "totalFrames": 1350,
+  "scenes": [
+    {
+      "id": "scene_01",
+      "title": "Scene 1: Experience & Skills Hook",
+      "startFrame": 0,
+      "durationInFrames": 180,
+      "type": "kinetic",
+      "voiceover": "You have the experience. You have the skills. Now it's time to take your career to the next level!"
+    },
+    {
+      "id": "scene_02",
+      "title": "Scene 2: Introducing NHIT Durgapur",
+      "startFrame": 180,
+      "durationInFrames": 150,
+      "type": "corporate_slide",
+      "voiceover": "Introducing NHIT Durgapur – your opportunity to advance through technical education."
+    },
+    {
+      "id": "scene_03",
+      "title": "Scene 3: Diploma Engineering Branches",
+      "startFrame": 330,
+      "durationInFrames": 210,
+      "type": "infographic",
+      "voiceover": "Choose your next step. Diploma in Electrical Engineering or Mechanical Engineering, specially offered under the Working Professionals category."
+    },
+    {
+      "id": "scene_04",
+      "title": "Scene 4: Candidate Eligibility",
+      "startFrame": 540,
+      "durationInFrames": 210,
+      "type": "infographic",
+      "voiceover": "Are you eligible? If you have the required academic qualification along with a minimum of one year of full-time work experience, this opportunity could be for you."
+    },
+    {
+      "id": "scene_05",
+      "title": "Scene 5: AICTE & Council Affiliation",
+      "startFrame": 750,
+      "durationInFrames": 210,
+      "type": "corporate_slide",
+      "voiceover": "We are Affiliated to the West Bengal State Council of Technical and Vocational Education and Skill Development and Approved by AICTE for the academic session 2026–27."
+    },
+    {
+      "id": "scene_06",
+      "title": "Scene 6: Limited Seats & Urgency",
+      "startFrame": 960,
+      "durationInFrames": 195,
+      "type": "kinetic",
+      "voiceover": "Don't stop at experience. Add a qualification to your skills. Hurry up we have limited seats capacity, NHIT brings you an opportunity to strengthen your technical qualifications."
+    },
+    {
+      "id": "scene_07",
+      "title": "Scene 7: Final Branding & Direct CTA",
+      "startFrame": 1155,
+      "durationInFrames": 195,
+      "type": "kinetic",
+      "voiceover": "NHIT Durgapur – Shaping Engineers, Building Futures. Visit www.nhit.in or contact NHIT at +91 98005 71423 for admission details. Your Experience. Your Next Qualification. Your Future."
+    }
+  ]
+}
+

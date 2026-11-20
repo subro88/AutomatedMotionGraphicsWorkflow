@@ -1,0 +1,223 @@
+{
+  "fps": 30,
+  "totalDurationInFrames": 900,
+  "recipe": "showreel-launch",
+  "recipeName": "Showreel / Launch Trailer (60 FPS Beat-Synced)",
+  "aspectRatio": "16:9",
+  "intensity": "Level 5 (Hyper-Cine)",
+  "theme": "showreel-launch",
+  "palette": {
+    "primary": "#FF5722",
+    "secondary": "#FFFFFF",
+    "accent": "#FFB800",
+    "glow": "rgba(255, 87, 34, 0.5)",
+    "bg": "#0A0A0A"
+  },
+  "scenes": [
+    {
+      "id": "scene_1",
+      "type": "kinetic",
+      "archetype": "showreel_cold_open",
+      "title": "Command attention with sub-frame precision",
+      "subtitle": "Showreel / Launch Trailer (60 FPS Beat-Synced) • Beat 1",
+      "visualCue": "High-octane typographic sting with sub-frame shutter blur and stark contrast flash",
+      "sfxCue": "sub_boom_drop",
+      "sfxFrameOffset": 0,
+      "motionPhysics": {
+        "damping": 9,
+        "stiffness": 180,
+        "mass": 0.5
+      },
+      "primaryColor": "#FF5722",
+      "secondaryColor": "#FFFFFF",
+      "accentColor": "#FFB800",
+      "glowColor": "rgba(255, 87, 34, 0.5)",
+      "backgroundColor": "#0A0A0A",
+      "startFrame": 0,
+      "durationInFrames": 180,
+      "brollImage": "assets/broll/scene_1_broll.jpg"
+    },
+    {
+      "id": "scene_2",
+      "type": "corporate_slide",
+      "archetype": "friction_contrast_break",
+      "title": "Engineered for 60 FPS cinematic motion",
+      "subtitle": "Showreel / Launch Trailer (60 FPS Beat-Synced) • Beat 2",
+      "visualCue": "Alternating inverted frames with high-tension typography and staccato kinetic cuts",
+      "sfxCue": "snappy_pop",
+      "sfxFrameOffset": 0,
+      "motionPhysics": {
+        "damping": 10,
+        "stiffness": 160,
+        "mass": 0.55
+      },
+      "primaryColor": "#FF5722",
+      "secondaryColor": "#FFFFFF",
+      "accentColor": "#FFB800",
+      "glowColor": "rgba(255, 87, 34, 0.5)",
+      "backgroundColor": "#0A0A0A",
+      "category": "Showreel / Launch Trailer",
+      "bullets": [
+        "Engineered for 60 FPS cinematic",
+        "motion.",
+        "High-fidelity motion execution"
+      ],
+      "startFrame": 180,
+      "durationInFrames": 180,
+      "brollImage": "assets/broll/scene_2_broll.jpg"
+    },
+    {
+      "id": "scene_3",
+      "type": "infographic",
+      "archetype": "feature_cascade_surge",
+      "title": "Pure mathematical beat-grid synchronization",
+      "subtitle": "Showreel / Launch Trailer (60 FPS Beat-Synced) • Beat 3",
+      "visualCue": "Synchronized beat-grid cascading metrics accelerating across musical eighths",
+      "sfxCue": "kick_hit",
+      "sfxFrameOffset": 0,
+      "motionPhysics": {
+        "damping": 8,
+        "stiffness": 190,
+        "mass": 0.45
+      },
+      "primaryColor": "#FF5722",
+      "secondaryColor": "#FFFFFF",
+      "accentColor": "#FFB800",
+      "glowColor": "rgba(255, 87, 34, 0.5)",
+      "backgroundColor": "#0A0A0A",
+      "metricValue": "+142%",
+      "metricLabel": "Quantitative Milestone",
+      "chartBars": [
+        {
+          "label": "Baseline / Prev",
+          "value": 35
+        },
+        {
+          "label": "Accelerated Run",
+          "value": 72
+        },
+        {
+          "label": "Target Milestone",
+          "value": 98
+        }
+      ],
+      "startFrame": 360,
+      "durationInFrames": 180,
+      "brollImage": "assets/broll/scene_3_broll.jpg"
+    },
+    {
+      "id": "scene_4",
+      "type": "three_core",
+      "archetype": "climax_3d_shockwave",
+      "title": "Pushing creative boundaries beyond the limit",
+      "subtitle": "Showreel / Launch Trailer (60 FPS Beat-Synced) • Beat 4",
+      "visualCue": "Crucible 3D spatial geometry expanding with radial shockwave and camera zoom punch",
+      "sfxCue": "heavy_sub_impact",
+      "sfxFrameOffset": 0,
+      "motionPhysics": {
+        "damping": 11,
+        "stiffness": 140,
+        "mass": 0.7
+      },
+      "primaryColor": "#FF5722",
+      "secondaryColor": "#FFFFFF",
+      "accentColor": "#FFB800",
+      "glowColor": "rgba(255, 87, 34, 0.5)",
+      "backgroundColor": "#0A0A0A",
+      "metricLabel": "Spatial PBR Visualization",
+      "modelAsset": "assets/crucible/climax_3d_shockwave.glb",
+      "startFrame": 540,
+      "durationInFrames": 180,
+      "brollImage": "assets/broll/scene_4_broll.jpg"
+    },
+    {
+      "id": "scene_5",
+      "type": "kinetic",
+      "archetype": "brand_climax_cta",
+      "title": "Build your next masterpiece today",
+      "subtitle": "Showreel / Launch Trailer (60 FPS Beat-Synced) • Beat 5",
+      "visualCue": "Final brand lockup explosion resolving into high-conversion action badge",
+      "sfxCue": "logo_sub_boom",
+      "sfxFrameOffset": 0,
+      "motionPhysics": {
+        "damping": 10,
+        "stiffness": 170,
+        "mass": 0.6
+      },
+      "primaryColor": "#FF5722",
+      "secondaryColor": "#FFFFFF",
+      "accentColor": "#FFB800",
+      "glowColor": "rgba(255, 87, 34, 0.5)",
+      "backgroundColor": "#0A0A0A",
+      "startFrame": 720,
+      "durationInFrames": 180
+    }
+  ],
+  "bgmTrack": "assets/bgm/master_bgm.mp3",
+  "mediaAttributions": [
+    {
+      "assetType": "image",
+      "sceneId": "scene_1",
+      "localFile": "assets\\broll\\scene_1_broll.jpg",
+      "title": "6 windows",
+      "creator": "kevin dooley",
+      "creatorUrl": "https://www.flickr.com/photos/12836528@N00",
+      "license": "BY",
+      "licenseVersion": "2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "source": "https://www.flickr.com/photos/12836528@N00/8603887892",
+      "sha256": "151fe7f8eba857b607cb3b36a0d9ba320bdc078079e543e2702e4e3294db2d29"
+    },
+    {
+      "assetType": "image",
+      "sceneId": "scene_2",
+      "localFile": "assets\\broll\\scene_2_broll.jpg",
+      "title": "6 windows",
+      "creator": "kevin dooley",
+      "creatorUrl": "https://www.flickr.com/photos/12836528@N00",
+      "license": "BY",
+      "licenseVersion": "2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "source": "https://www.flickr.com/photos/12836528@N00/8603887892",
+      "sha256": "151fe7f8eba857b607cb3b36a0d9ba320bdc078079e543e2702e4e3294db2d29"
+    },
+    {
+      "assetType": "image",
+      "sceneId": "scene_3",
+      "localFile": "assets\\broll\\scene_3_broll.jpg",
+      "title": "6 windows",
+      "creator": "kevin dooley",
+      "creatorUrl": "https://www.flickr.com/photos/12836528@N00",
+      "license": "BY",
+      "licenseVersion": "2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "source": "https://www.flickr.com/photos/12836528@N00/8603887892",
+      "sha256": "151fe7f8eba857b607cb3b36a0d9ba320bdc078079e543e2702e4e3294db2d29"
+    },
+    {
+      "assetType": "image",
+      "sceneId": "scene_4",
+      "localFile": "assets\\broll\\scene_4_broll.jpg",
+      "title": "6 windows",
+      "creator": "kevin dooley",
+      "creatorUrl": "https://www.flickr.com/photos/12836528@N00",
+      "license": "BY",
+      "licenseVersion": "2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "source": "https://www.flickr.com/photos/12836528@N00/8603887892",
+      "sha256": "151fe7f8eba857b607cb3b36a0d9ba320bdc078079e543e2702e4e3294db2d29"
+    },
+    {
+      "assetType": "audio_bgm",
+      "localFile": "assets\\bgm\\master_bgm.mp3",
+      "title": "scaryscape_voicestringcalling.wav",
+      "creator": "suonho",
+      "creatorUrl": "https://freesound.org/people/suonho",
+      "license": "BY",
+      "licenseVersion": "4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://freesound.org/people/suonho/sounds/58962",
+      "sha256": "362aa91663a0c0d23675afe06460f624959029074238a1912f5885a9d48a18c7"
+    }
+  ]
+}

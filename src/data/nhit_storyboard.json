@@ -1,0 +1,58 @@
+{
+  "projectName": "NHIT_Working_Professionals_Admission_2026_27",
+  "fps": 30,
+  "aspectRatio": "16:9",
+  "durationSeconds": 30.0,
+  "totalFrames": 900,
+  "scenes": [
+    {
+      "id": "scene_01",
+      "title": "Scene 1: The Career Challenge",
+      "startFrame": 0,
+      "durationInFrames": 150,
+      "type": "kinetic",
+      "voiceover": "You have the experience. You have the skills. Now it's time to take your career to the next level."
+    },
+    {
+      "id": "scene_02",
+      "title": "Scene 2: Introducing NHIT Durgapur",
+      "startFrame": 150,
+      "durationInFrames": 150,
+      "type": "corporate_slide",
+      "voiceover": "Introducing The New Horizons Institute of Technology, Durgapur. Your opportunity to advance through technical education."
+    },
+    {
+      "id": "scene_03",
+      "title": "Scene 3: Choose Your Engineering Branch",
+      "startFrame": 300,
+      "durationInFrames": 150,
+      "type": "infographic",
+      "voiceover": "Choose your next step. Electrical Engineering or Mechanical Engineering. Two opportunities to build your technical future."
+    },
+    {
+      "id": "scene_04",
+      "title": "Scene 4: Candidate Eligibility",
+      "startFrame": 450,
+      "durationInFrames": 150,
+      "type": "infographic",
+      "voiceover": "If you have the required academic qualification and at least one year of regular work experience, this opportunity could be for you."
+    },
+    {
+      "id": "scene_05",
+      "title": "Scene 5: Affiliation and Approved Intake",
+      "startFrame": 600,
+      "durationInFrames": 150,
+      "type": "corporate_slide",
+      "voiceover": "With 30 approved seats each in Electrical and Mechanical Engineering, take your next step towards professional growth."
+    },
+    {
+      "id": "scene_06",
+      "title": "Scene 6: Final Brand Reveal & CTA",
+      "startFrame": 750,
+      "durationInFrames": 150,
+      "type": "kinetic",
+      "voiceover": "The New Horizons Institute of Technology, Durgapur. Shape your engineering career today. Enquire now."
+    }
+  ]
+}
+

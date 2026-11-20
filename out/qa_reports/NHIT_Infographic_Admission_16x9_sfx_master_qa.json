@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-11-19T20:01:18.195231",
+  "video_path": "C:\\Users\\User\\Desktop\\Graphics design\\DaVincirelove_Motion_Graphics_Workflow\\out\\master\\NHIT_Infographic_Admission_16x9_sfx_master.mp4",
+  "overall_status": "FAIL",
+  "warnings": [
+    "Loudness deviation: -24.2 LUFS vs -16.0 target",
+    "High-contrast content detected in outermost 3% raster border"
+  ],
+  "metadata": {
+    "file_name": "NHIT_Infographic_Admission_16x9_sfx_master.mp4",
+    "file_size_bytes": 39965968,
+    "duration_sec": 84.693,
+    "width": 1920,
+    "height": 1080,
+    "aspect_ratio": "16:9",
+    "fps": 30.0,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000,
+    "audio_channels": 2,
+    "bit_rate": 3775137
+  },
+  "audio_loudness": {
+    "integrated_lufs": -24.2,
+    "target_lufs": -16.0,
+    "tolerance_lufs": 1.5,
+    "lufs_difference": 8.2,
+    "lufs_pass": false,
+    "true_peak_dbtp": -10.0,
+    "true_peak_pass": true,
+    "loudness_range_lra": 4.3,
+    "lra_pass": true,
+    "overall_audio_pass": false,
+    "recommendation": "Adjust master volume by +8.2 dB to reach -16.0 LUFS target."
+  },
+  "safe_area_geometry": {
+    "action_safe_pass": false,
+    "title_safe_pass": false,
+    "social_ui_pass": true,
+    "blank_frame_detected": false,
+    "samples_analyzed": 5
+  },
+  "annotated_overlay_path": "C:\\Users\\User\\Desktop\\Graphics design\\DaVincirelove_Motion_Graphics_Workflow\\out\\qa_reports\\NHIT_Infographic_Admission_16x9_sfx_master_safe_area.png",
+  "execution_time_sec": 5.51
+}

@@ -1,0 +1,11 @@
+Black Friday at midnight. Your production server is hit with one hundred thousand requests per second. The CPU pins at one hundred percent, connections back up, and your users are greeted with the dreaded 504 Gateway Timeout. Why did your system collapse?
+
+The instinctive reaction is Vertical Scaling: Scale Up. You double the RAM and upgrade to a monster one hundred and twenty-eight core CPU. But hardware has a hard ceiling. Beyond sixty-four cores, Non-Uniform Memory Access—NUMA bus contention—drastically slows down memory throughput. Worse, you now have a massive, five-thousand-dollar Single Point of Failure.
+
+The engineering solution is Horizontal Scaling: Scale Out. Instead of one massive machine, we distribute traffic across a cluster of identical, stateless application nodes. At the gateway sits HAProxy, an ultra-fast Layer Seven reverse proxy that balances incoming requests using Round Robin and Least Connections.
+
+Take a look at the production HAProxy configuration. Under the frontend block, we bind port eighty and port four-forty-three. In the backend, we define our worker nodes with active health checks: check inter two thousand, rise two, fall three. If Node Two crashes, HAProxy instantly reroutes traffic with zero dropped packets and zero downtime.
+
+Scalability isn't infinite. According to Neil Gunther's Universal Scalability Law, throughput is capped by two factors: serialization contention, sigma, and crosstalk coherency delay, kappa. If your nodes constantly chat across the network to synchronize state, adding more nodes actually degrades performance. Keep your application layer strictly stateless.
+
+To build resilient systems: decouple state into Redis and read-replica databases, enforce automated autoscaling, and practice chaos engineering. Master the complete system design runbook and interactive simulations on TechNHIT dot in. Subscribe for more deep-dive engineering masterclasses.

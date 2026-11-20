@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<fcpxml version="1.10">
+  <resources>
+    <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)" />
+    <asset id="r2" name="NHIT_Infographic_Admission_16x9.mp4" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/out/master/NHIT_Infographic_Admission_16x9.mp4" start="0s" duration="2541/30s" hasVideo="1" format="r1" />
+    <asset id="r3" name="nhit_elevenlabs_audio.wav" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/public/nhit_elevenlabs_audio.wav" start="0s" duration="2541/30s" hasAudio="1" />
+    <asset id="r4" name="master_sfx.wav" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/out/sfx/master_sfx.wav" start="0s" duration="2541/30s" hasAudio="1" />
+    <asset id="r5" name="master_bgm.mp3" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/assets/bgm/master_bgm.mp3" start="0s" duration="2541/30s" hasAudio="1" />
+  </resources>
+  <library>
+    <event name="Crucible_3D_Productions">
+      <project name="NHIT_Admission_Hybrid_3D_Master">
+        <sequence format="r1" duration="2541/30s" tcStart="0s" tcFormat="NDF">
+          <spine>
+            <asset-clip ref="r2" offset="0s" name="[V1 Remotion Base + Crucible 3D Plates]" start="0s" duration="2541/30s" format="r1">
+              <marker start="0/30s" duration="1/30s" value="[3D MARKER] Scene 1: Holographic Diploma 3D Hook" color="cyan" />
+              <marker start="210/30s" duration="1/30s" value="[3D MARKER] Scene 2: NHIT Campus Intro" color="blue" />
+              <marker start="420/30s" duration="1/30s" value="[3D MARKER] Scene 3A: Electrical Transformer 3D B-Roll" color="yellow" />
+              <marker start="600/30s" duration="1/30s" value="[3D MARKER] Scene 3B: Mechanical Gears 3D B-Roll" color="orange" />
+              <marker start="780/30s" duration="1/30s" value="[3D MARKER] Scene 4: Candidate Eligibility Matrix" color="blue" />
+              <marker start="1320/30s" duration="1/30s" value="[3D MARKER] Scene 5: AICTE &amp; Council Affiliation" color="green" />
+              <marker start="1755/30s" duration="1/30s" value="[3D MARKER] Scene 6: Limited Seats Urgency (60 Seats)" color="magenta" />
+              <marker start="1935/30s" duration="1/30s" value="[3D MARKER] Scene 7: Holographic Seal Final CTA Helpline" color="cyan" />
+              <gap name="[V2 Track for NHIT_Admission_Kit.drfx Titles]" offset="0s" duration="2541/30s" lane="1" />
+              <asset-clip ref="r3" offset="0s" name="[A1 Voiceover] nhit_elevenlabs_audio.wav" start="0s" duration="2541/30s" lane="-1" />
+              <asset-clip ref="r4" offset="0s" name="[A2 Real SFX] master_sfx.wav" start="0s" duration="2541/30s" lane="-2" />
+              <asset-clip ref="r5" offset="0s" name="[A3 Openverse BGM] master_bgm.mp3" start="0s" duration="2541/30s" lane="-3" />
+            </asset-clip>
+          </spine>
+        </sequence>
+      </project>
+    </event>
+  </library>
+</fcpxml>

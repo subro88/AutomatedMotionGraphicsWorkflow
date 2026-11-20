@@ -1,0 +1,1456 @@
+{
+  "bpm": 120.0,
+  "fps": 30,
+  "totalFrames": 900,
+  "durationSec": 30.0,
+  "framesPerBeat": 15.0,
+  "framesPerEighth": 7.5,
+  "beats": [
+    {
+      "beat": 1,
+      "frame": 0,
+      "timestampSec": 0.0,
+      "isBarStart": true,
+      "measure": 1,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 2,
+      "frame": 15,
+      "timestampSec": 0.5,
+      "isBarStart": false,
+      "measure": 1,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 3,
+      "frame": 30,
+      "timestampSec": 1.0,
+      "isBarStart": false,
+      "measure": 1,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 4,
+      "frame": 45,
+      "timestampSec": 1.5,
+      "isBarStart": false,
+      "measure": 1,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 5,
+      "frame": 60,
+      "timestampSec": 2.0,
+      "isBarStart": true,
+      "measure": 2,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 6,
+      "frame": 75,
+      "timestampSec": 2.5,
+      "isBarStart": false,
+      "measure": 2,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 7,
+      "frame": 90,
+      "timestampSec": 3.0,
+      "isBarStart": false,
+      "measure": 2,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 8,
+      "frame": 105,
+      "timestampSec": 3.5,
+      "isBarStart": false,
+      "measure": 2,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 9,
+      "frame": 120,
+      "timestampSec": 4.0,
+      "isBarStart": true,
+      "measure": 3,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 10,
+      "frame": 135,
+      "timestampSec": 4.5,
+      "isBarStart": false,
+      "measure": 3,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 11,
+      "frame": 150,
+      "timestampSec": 5.0,
+      "isBarStart": false,
+      "measure": 3,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 12,
+      "frame": 165,
+      "timestampSec": 5.5,
+      "isBarStart": false,
+      "measure": 3,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 13,
+      "frame": 180,
+      "timestampSec": 6.0,
+      "isBarStart": true,
+      "measure": 4,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 14,
+      "frame": 195,
+      "timestampSec": 6.5,
+      "isBarStart": false,
+      "measure": 4,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 15,
+      "frame": 210,
+      "timestampSec": 7.0,
+      "isBarStart": false,
+      "measure": 4,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 16,
+      "frame": 225,
+      "timestampSec": 7.5,
+      "isBarStart": false,
+      "measure": 4,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 17,
+      "frame": 240,
+      "timestampSec": 8.0,
+      "isBarStart": true,
+      "measure": 5,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 18,
+      "frame": 255,
+      "timestampSec": 8.5,
+      "isBarStart": false,
+      "measure": 5,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 19,
+      "frame": 270,
+      "timestampSec": 9.0,
+      "isBarStart": false,
+      "measure": 5,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 20,
+      "frame": 285,
+      "timestampSec": 9.5,
+      "isBarStart": false,
+      "measure": 5,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 21,
+      "frame": 300,
+      "timestampSec": 10.0,
+      "isBarStart": true,
+      "measure": 6,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 22,
+      "frame": 315,
+      "timestampSec": 10.5,
+      "isBarStart": false,
+      "measure": 6,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 23,
+      "frame": 330,
+      "timestampSec": 11.0,
+      "isBarStart": false,
+      "measure": 6,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 24,
+      "frame": 345,
+      "timestampSec": 11.5,
+      "isBarStart": false,
+      "measure": 6,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 25,
+      "frame": 360,
+      "timestampSec": 12.0,
+      "isBarStart": true,
+      "measure": 7,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 26,
+      "frame": 375,
+      "timestampSec": 12.5,
+      "isBarStart": false,
+      "measure": 7,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 27,
+      "frame": 390,
+      "timestampSec": 13.0,
+      "isBarStart": false,
+      "measure": 7,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 28,
+      "frame": 405,
+      "timestampSec": 13.5,
+      "isBarStart": false,
+      "measure": 7,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 29,
+      "frame": 420,
+      "timestampSec": 14.0,
+      "isBarStart": true,
+      "measure": 8,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 30,
+      "frame": 435,
+      "timestampSec": 14.5,
+      "isBarStart": false,
+      "measure": 8,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 31,
+      "frame": 450,
+      "timestampSec": 15.0,
+      "isBarStart": false,
+      "measure": 8,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 32,
+      "frame": 465,
+      "timestampSec": 15.5,
+      "isBarStart": false,
+      "measure": 8,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 33,
+      "frame": 480,
+      "timestampSec": 16.0,
+      "isBarStart": true,
+      "measure": 9,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 34,
+      "frame": 495,
+      "timestampSec": 16.5,
+      "isBarStart": false,
+      "measure": 9,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 35,
+      "frame": 510,
+      "timestampSec": 17.0,
+      "isBarStart": false,
+      "measure": 9,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 36,
+      "frame": 525,
+      "timestampSec": 17.5,
+      "isBarStart": false,
+      "measure": 9,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 37,
+      "frame": 540,
+      "timestampSec": 18.0,
+      "isBarStart": true,
+      "measure": 10,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 38,
+      "frame": 555,
+      "timestampSec": 18.5,
+      "isBarStart": false,
+      "measure": 10,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 39,
+      "frame": 570,
+      "timestampSec": 19.0,
+      "isBarStart": false,
+      "measure": 10,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 40,
+      "frame": 585,
+      "timestampSec": 19.5,
+      "isBarStart": false,
+      "measure": 10,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 41,
+      "frame": 600,
+      "timestampSec": 20.0,
+      "isBarStart": true,
+      "measure": 11,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 42,
+      "frame": 615,
+      "timestampSec": 20.5,
+      "isBarStart": false,
+      "measure": 11,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 43,
+      "frame": 630,
+      "timestampSec": 21.0,
+      "isBarStart": false,
+      "measure": 11,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 44,
+      "frame": 645,
+      "timestampSec": 21.5,
+      "isBarStart": false,
+      "measure": 11,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 45,
+      "frame": 660,
+      "timestampSec": 22.0,
+      "isBarStart": true,
+      "measure": 12,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 46,
+      "frame": 675,
+      "timestampSec": 22.5,
+      "isBarStart": false,
+      "measure": 12,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 47,
+      "frame": 690,
+      "timestampSec": 23.0,
+      "isBarStart": false,
+      "measure": 12,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 48,
+      "frame": 705,
+      "timestampSec": 23.5,
+      "isBarStart": false,
+      "measure": 12,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 49,
+      "frame": 720,
+      "timestampSec": 24.0,
+      "isBarStart": true,
+      "measure": 13,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 50,
+      "frame": 735,
+      "timestampSec": 24.5,
+      "isBarStart": false,
+      "measure": 13,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 51,
+      "frame": 750,
+      "timestampSec": 25.0,
+      "isBarStart": false,
+      "measure": 13,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 52,
+      "frame": 765,
+      "timestampSec": 25.5,
+      "isBarStart": false,
+      "measure": 13,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 53,
+      "frame": 780,
+      "timestampSec": 26.0,
+      "isBarStart": true,
+      "measure": 14,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 54,
+      "frame": 795,
+      "timestampSec": 26.5,
+      "isBarStart": false,
+      "measure": 14,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 55,
+      "frame": 810,
+      "timestampSec": 27.0,
+      "isBarStart": false,
+      "measure": 14,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 56,
+      "frame": 825,
+      "timestampSec": 27.5,
+      "isBarStart": false,
+      "measure": 14,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 57,
+      "frame": 840,
+      "timestampSec": 28.0,
+      "isBarStart": true,
+      "measure": 15,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    },
+    {
+      "beat": 58,
+      "frame": 855,
+      "timestampSec": 28.5,
+      "isBarStart": false,
+      "measure": 15,
+      "beatInMeasure": 2,
+      "type": "beat"
+    },
+    {
+      "beat": 59,
+      "frame": 870,
+      "timestampSec": 29.0,
+      "isBarStart": false,
+      "measure": 15,
+      "beatInMeasure": 3,
+      "type": "beat"
+    },
+    {
+      "beat": 60,
+      "frame": 885,
+      "timestampSec": 29.5,
+      "isBarStart": false,
+      "measure": 15,
+      "beatInMeasure": 4,
+      "type": "beat"
+    },
+    {
+      "beat": 61,
+      "frame": 900,
+      "timestampSec": 30.0,
+      "isBarStart": true,
+      "measure": 16,
+      "beatInMeasure": 1,
+      "type": "bar_downbeat"
+    }
+  ],
+  "eighthNotes": [
+    0,
+    8,
+    15,
+    22,
+    30,
+    38,
+    45,
+    52,
+    60,
+    68,
+    75,
+    82,
+    90,
+    98,
+    105,
+    112,
+    120,
+    128,
+    135,
+    142,
+    150,
+    158,
+    165,
+    172,
+    180,
+    188,
+    195,
+    202,
+    210,
+    218,
+    225,
+    232,
+    240,
+    248,
+    255,
+    262,
+    270,
+    278,
+    285,
+    292,
+    300,
+    308,
+    315,
+    322,
+    330,
+    338,
+    345,
+    352,
+    360,
+    368,
+    375,
+    382,
+    390,
+    398,
+    405,
+    412,
+    420,
+    428,
+    435,
+    442,
+    450,
+    458,
+    465,
+    472,
+    480,
+    488,
+    495,
+    502,
+    510,
+    518,
+    525,
+    532,
+    540,
+    548,
+    555,
+    562,
+    570,
+    578,
+    585,
+    592,
+    600,
+    608,
+    615,
+    622,
+    630,
+    638,
+    645,
+    652,
+    660,
+    668,
+    675,
+    682,
+    690,
+    698,
+    705,
+    712,
+    720,
+    728,
+    735,
+    742,
+    750,
+    758,
+    765,
+    772,
+    780,
+    788,
+    795,
+    802,
+    810,
+    818,
+    825,
+    832,
+    840,
+    848,
+    855,
+    862,
+    870,
+    878,
+    885,
+    892
+  ],
+  "transients": [
+    {
+      "frame": 1,
+      "timestampSec": 0.05,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 10,
+      "timestampSec": 0.333,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 18,
+      "timestampSec": 0.616,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 27,
+      "timestampSec": 0.899,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 35,
+      "timestampSec": 1.182,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 44,
+      "timestampSec": 1.465,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 52,
+      "timestampSec": 1.748,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 61,
+      "timestampSec": 2.031,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 69,
+      "timestampSec": 2.314,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 78,
+      "timestampSec": 2.596,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 85,
+      "timestampSec": 2.829,
+      "energy": 0.0017,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 93,
+      "timestampSec": 3.112,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 102,
+      "timestampSec": 3.395,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 110,
+      "timestampSec": 3.678,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 119,
+      "timestampSec": 3.961,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 127,
+      "timestampSec": 4.244,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 136,
+      "timestampSec": 4.527,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 144,
+      "timestampSec": 4.81,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 153,
+      "timestampSec": 5.093,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 161,
+      "timestampSec": 5.376,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 168,
+      "timestampSec": 5.609,
+      "energy": 0.0017,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 177,
+      "timestampSec": 5.892,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 185,
+      "timestampSec": 6.175,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 194,
+      "timestampSec": 6.458,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 202,
+      "timestampSec": 6.741,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 211,
+      "timestampSec": 7.024,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 219,
+      "timestampSec": 7.307,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 228,
+      "timestampSec": 7.59,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 236,
+      "timestampSec": 7.873,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 245,
+      "timestampSec": 8.156,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 253,
+      "timestampSec": 8.439,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 260,
+      "timestampSec": 8.672,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 269,
+      "timestampSec": 8.954,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 277,
+      "timestampSec": 9.237,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 286,
+      "timestampSec": 9.52,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 294,
+      "timestampSec": 9.803,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 303,
+      "timestampSec": 10.086,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 311,
+      "timestampSec": 10.369,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 320,
+      "timestampSec": 10.652,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 328,
+      "timestampSec": 10.935,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 337,
+      "timestampSec": 11.218,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 344,
+      "timestampSec": 11.451,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 352,
+      "timestampSec": 11.734,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 361,
+      "timestampSec": 12.017,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 369,
+      "timestampSec": 12.3,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 377,
+      "timestampSec": 12.583,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 386,
+      "timestampSec": 12.866,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 394,
+      "timestampSec": 13.149,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 403,
+      "timestampSec": 13.432,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 411,
+      "timestampSec": 13.715,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 420,
+      "timestampSec": 13.998,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 427,
+      "timestampSec": 14.231,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 435,
+      "timestampSec": 14.514,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 444,
+      "timestampSec": 14.797,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 452,
+      "timestampSec": 15.079,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 461,
+      "timestampSec": 15.362,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 469,
+      "timestampSec": 15.645,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 478,
+      "timestampSec": 15.928,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 486,
+      "timestampSec": 16.211,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 495,
+      "timestampSec": 16.494,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 503,
+      "timestampSec": 16.777,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 510,
+      "timestampSec": 17.01,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 519,
+      "timestampSec": 17.293,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 527,
+      "timestampSec": 17.576,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 536,
+      "timestampSec": 17.859,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 544,
+      "timestampSec": 18.142,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 553,
+      "timestampSec": 18.425,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 561,
+      "timestampSec": 18.708,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 570,
+      "timestampSec": 18.991,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 578,
+      "timestampSec": 19.274,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 587,
+      "timestampSec": 19.557,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 594,
+      "timestampSec": 19.79,
+      "energy": 0.0017,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 602,
+      "timestampSec": 20.073,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 611,
+      "timestampSec": 20.356,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 619,
+      "timestampSec": 20.639,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 628,
+      "timestampSec": 20.921,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 636,
+      "timestampSec": 21.204,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 645,
+      "timestampSec": 21.487,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 653,
+      "timestampSec": 21.77,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 662,
+      "timestampSec": 22.053,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 670,
+      "timestampSec": 22.336,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 677,
+      "timestampSec": 22.569,
+      "energy": 0.0017,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 686,
+      "timestampSec": 22.852,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 694,
+      "timestampSec": 23.135,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 703,
+      "timestampSec": 23.418,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 711,
+      "timestampSec": 23.701,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 720,
+      "timestampSec": 23.984,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 728,
+      "timestampSec": 24.267,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 736,
+      "timestampSec": 24.55,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 745,
+      "timestampSec": 24.833,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 753,
+      "timestampSec": 25.116,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 762,
+      "timestampSec": 25.399,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 769,
+      "timestampSec": 25.632,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 777,
+      "timestampSec": 25.915,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 786,
+      "timestampSec": 26.198,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 794,
+      "timestampSec": 26.481,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 803,
+      "timestampSec": 26.764,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 811,
+      "timestampSec": 27.046,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 820,
+      "timestampSec": 27.329,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 828,
+      "timestampSec": 27.612,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 837,
+      "timestampSec": 27.895,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 845,
+      "timestampSec": 28.178,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 852,
+      "timestampSec": 28.411,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 861,
+      "timestampSec": 28.694,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 869,
+      "timestampSec": 28.977,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 878,
+      "timestampSec": 29.26,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 886,
+      "timestampSec": 29.543,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 895,
+      "timestampSec": 29.826,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 903,
+      "timestampSec": 30.109,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 912,
+      "timestampSec": 30.392,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 920,
+      "timestampSec": 30.675,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 929,
+      "timestampSec": 30.958,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 936,
+      "timestampSec": 31.191,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 944,
+      "timestampSec": 31.474,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 953,
+      "timestampSec": 31.757,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 961,
+      "timestampSec": 32.04,
+      "energy": 0.002,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 970,
+      "timestampSec": 32.323,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 978,
+      "timestampSec": 32.606,
+      "energy": 0.0021,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 987,
+      "timestampSec": 32.889,
+      "energy": 0.0022,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 995,
+      "timestampSec": 33.171,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 1004,
+      "timestampSec": 33.454,
+      "energy": 0.0023,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 1012,
+      "timestampSec": 33.737,
+      "energy": 0.0024,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 1019,
+      "timestampSec": 33.97,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 1028,
+      "timestampSec": 34.253,
+      "energy": 0.0018,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 1036,
+      "timestampSec": 34.536,
+      "energy": 0.0019,
+      "type": "audio_transient"
+    },
+    {
+      "frame": 1045,
+      "timestampSec": 34.819,
+      "energy": 0.002,
+      "type": "audio_transient"
+    }
+  ],
+  "recommendedSceneCuts": [
+    60,
+    120,
+    180,
+    240,
+    300,
+    360,
+    420,
+    480,
+    540,
+    600,
+    660,
+    720,
+    780,
+    840,
+    900
+  ]
+}

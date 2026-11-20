@@ -1,0 +1,7 @@
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_variant_1_45s/seg_0_fitted.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_variant_1_45s/seg_1_fitted.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_variant_1_45s/seg_2_fitted.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_variant_1_45s/seg_3_fitted.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_variant_1_45s/seg_4_fitted.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_variant_1_45s/seg_5_fitted.wav'
+file 'C:/Users/User/Desktop/Graphics design/DaVincirelove_Motion_Graphics_Workflow/inputs/temp_audio_variant_1_45s/seg_6_fitted.wav'

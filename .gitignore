@@ -1,0 +1,72 @@
+# ==============================================================================
+# Automated Motion Graphics & DaVinci Resolve Workflow .gitignore
+# ==============================================================================
+
+# Node.js & Remotion Dependencies
+node_modules/
+.npm/
+.remotion/
+package-lock.json.bak
+
+# Heavy AI & Neural Model Binaries (Reproducible via scripts/download_kokoro_model.py)
+assets/models/kokoro/*.onnx
+assets/models/kokoro/*.bin
+models/
+*.onnx
+*.bin
+*.pt
+*.pth
+*.safetensors
+
+# Render Outputs & Video Masters (Exclude heavy video/audio renders, keep tracking & receipts)
+out/master/
+out/shorts/
+out/stills/
+out/qa_reports/temp_samples/
+out/**/*.mp4
+out/**/*.mov
+out/**/*.avi
+out/**/*.mkv
+out/**/*.wav
+out/*.png
+out/sfx/*.wav
+out/resolve_exports/*.mp4
+
+# SQLite Pipeline History & Local DBs
+*.db
+*.sqlite
+*.sqlite3
+out/pipeline_history.db
+
+# Python bytecode & environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# DaVinci Resolve & System temporary caches
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
+.agent_scratch/

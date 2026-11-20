@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<fcpxml version="1.10">
+  <resources>
+    <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)" />
+    <asset id="r2" name="multiscene_showcase_voicebox_9x16.mp4" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/out/master/multiscene_showcase_voicebox_9x16.mp4" start="0s" duration="900/30s" hasVideo="1" format="r1" />
+    <asset id="r3" name="bengali_female_test.wav" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/inputs/bengali_female_test.wav" start="0s" duration="900/30s" hasAudio="1" />
+    <asset id="r4" name="hardware_teardown_sfx.wav" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/out/sfx/hardware_teardown_sfx.wav" start="0s" duration="900/30s" hasAudio="1" />
+    <asset id="r5" name="master_bgm.mp3" src="file:///C:/Users/User/Desktop/Graphics%20design/DaVincirelove_Motion_Graphics_Workflow/assets/bgm/master_bgm.mp3" start="0s" duration="900/30s" hasAudio="1" />
+  </resources>
+  <library>
+    <event name="Branch_Education_Teardowns">
+      <project name="Smartphone_Exploded_3D_Master">
+        <sequence format="r1" duration="900/30s" tcStart="0s" tcFormat="NDF">
+          <spine>
+            <asset-clip ref="r2" offset="0s" name="[V1 3D Smartphone Teardown Plates]" start="0s" duration="900/30s" format="r1">
+              <marker start="0/30s" duration="1/30s" value="[TEARDOWN] Scene 1: Hero Smartphone Exterior Assembly" color="cyan" />
+              <marker start="150/30s" duration="1/30s" value="[TEARDOWN] Scene 2: Display &amp; Adhesive Unlatching (Z: 120mm)" color="yellow" />
+              <marker start="300/30s" duration="1/30s" value="[TEARDOWN] Scene 3: Battery &amp; Induction Coil Separation" color="green" />
+              <marker start="450/30s" duration="1/30s" value="[TEARDOWN] Scene 4: Main Logic Board &amp; 3nm Silicon Die" color="magenta" />
+              <marker start="600/30s" duration="1/30s" value="[TEARDOWN] Scene 5: High-Speed Bus &amp; Electrical Signal Pulse" color="blue" />
+              <marker start="750/30s" duration="1/30s" value="[TEARDOWN] Scene 6: Reassembly Registration &amp; Specs Summary" color="cyan" />
+              <gap name="[V2 Remotion Technical HUD &amp; Callout Overlays]" offset="0s" duration="900/30s" lane="1" />
+              <asset-clip ref="r3" offset="0s" name="[A1 Voiceover] bengali_female_test.wav" start="0s" duration="900/30s" lane="-1" />
+              <asset-clip ref="r4" offset="0s" name="[A2 Teardown Foley] hardware_teardown_sfx.wav" start="0s" duration="900/30s" lane="-2" />
+              <asset-clip ref="r5" offset="0s" name="[A3 Openverse BGM] master_bgm.mp3" start="0s" duration="900/30s" lane="-3" />
+            </asset-clip>
+          </spine>
+        </sequence>
+      </project>
+    </event>
+  </library>
+</fcpxml>
