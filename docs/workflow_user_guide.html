@@ -917,13 +917,14 @@ launch_app.bat
 
       <div class="card">
         <p style="color: var(--text-muted); margin-bottom: 16px;">
-          Converts plain text or full Markdown script files into broadcast-quality neural speech using <strong>Voice Box</strong>. Supports a high-performance <strong>Dual Voice Architecture</strong>:
+          Converts plain text or full Markdown script files into broadcast-quality neural speech using <strong>Voice Box</strong>. Supports a high-performance <strong>Triple Voice Architecture</strong>:
         </p>
         <ul style="color: var(--text-muted); font-size: 0.9rem; margin-left: 20px; line-height: 1.8; margin-bottom: 20px;">
+          <li><strong>🎙️ Cloned User Voice (<code>myVoice</code> @ http://127.0.0.1:17493):</strong> Native integration with the official Voicebox Desktop app and MCP server. Uses your personal cloned voice profile (<code>myVoice</code> / ID: <code>85e227cd-f7fc-4fa1-8659-6b512f4fc557</code>) with automatic Faster-Whisper word boundary synchronization.</li>
           <li><strong>🇮🇳 Native Indian English &amp; Hindi Voices:</strong> Built-in Indian male (<code>en-IN-PrabhatNeural</code>, <code>hi-IN-MadhurNeural</code>, <code>hm_omega</code>) and Indian female (<code>en-IN-NeerjaNeural</code>, <code>en-IN-NeerjaExpressiveNeural</code>, <code>hi-IN-SwaraNeural</code>, <code>hf_alpha</code>) with authentic accent cadence for tech tutorials, SaaS explainers, and corporate slideshows.</li>
           <li><strong>🧠 Kokoro-82M Local Engine (Jamie Pine Voicebox Stack):</strong> 100% offline neural speech running via ONNX with 54 voices (e.g. <code>kokoro-heart</code>, <code>kokoro-adam</code>, <code>kokoro-bella</code>), zero cloud latency, zero API costs, and voice style vector blending (e.g. <code>af_heart:0.6,am_adam:0.4</code>).</li>
-          <li><strong>🎙️ Edge-TTS Cloud Engine:</strong> Ultra-fast Microsoft Neural voices (<code>en-US-ChristopherNeural</code>, <code>en-US-GuyNeural</code>, etc.) with custom pitch/rate controls.</li>
-          <li><strong>🔊 FFmpeg Broadcast Mastering:</strong> Both engines automatically trim silence and normalize audio loudness to EBU R128 (-16 LUFS) at 44.1 kHz mono for perfect Remotion and DaVinci Resolve alignment.</li>
+          <li><strong>☁️ Edge-TTS Cloud Engine:</strong> Ultra-fast Microsoft Neural voices (<code>en-US-ChristopherNeural</code>, <code>en-US-GuyNeural</code>, etc.) with custom pitch/rate controls.</li>
+          <li><strong>🔊 FFmpeg Broadcast Mastering &amp; Subtitles:</strong> All engines automatically trim silence and normalize audio loudness to EBU R128 (-16 LUFS) at 44.1 kHz mono, while automatically generating word-level timestamp JSON for <code>KineticSubtitleEngine.tsx</code>.</li>
         </ul>
 
         <!-- Voice Box Subtitled Result Showcase -->
@@ -951,17 +952,20 @@ launch_app.bat
             <span>Terminal Command (Voice Box direct run or via pipeline)</span>
             <span>CLI</span>
           </div>
-          <div class="code-body"><span class="comment"># 1. Synthesize speech using Kokoro-82M (Jamie Pine Local Offline Engine)</span>
+          <div class="code-body"><span class="comment"># 1. Synthesize speech using your personal cloned voice (myVoice @ http://127.0.0.1:17493)</span>
+<span class="cmd">python</span> scripts/voicebox.py <span class="flag">--text</span> <span class="arg">"Welcome to the workstation..."</span> <span class="flag">--voice</span> myvoice <span class="flag">--out</span> <span class="arg">inputs/narration.wav</span>
+
+<span class="comment"># 2. Synthesize speech using Kokoro-82M (Offline Neural ONNX)</span>
 <span class="cmd">python</span> scripts/voicebox.py <span class="flag">--text</span> <span class="arg">"Your video script text..."</span> <span class="flag">--voice</span> kokoro-heart <span class="flag">--out</span> <span class="arg">inputs/narration.wav</span>
 
-<span class="comment"># 2. Voice blend / style vector mixing (Custom Voice Cloning profile)</span>
+<span class="comment"># 3. Voice blend / style vector mixing (Kokoro style blending)</span>
 <span class="cmd">python</span> scripts/voicebox.py <span class="flag">--text</span> <span class="arg">"Your video script text..."</span> <span class="flag">--blend</span> <span class="arg">"af_heart:0.6,am_adam:0.4"</span> <span class="flag">--out</span> <span class="arg">inputs/blended.wav</span>
 
-<span class="comment"># 3. Or synthesize via Edge-TTS Cloud</span>
+<span class="comment"># 4. Or synthesize via Edge-TTS Cloud</span>
 <span class="cmd">python</span> scripts/voicebox.py <span class="flag">--text</span> <span class="arg">"Your script..."</span> <span class="flag">--voice</span> tech <span class="flag">--out</span> <span class="arg">inputs/narration.wav</span>
 
-<span class="comment"># 4. Or execute the entire motion pipeline directly from text in one touch:</span>
-<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--action</span> run-all <span class="flag">--text</span> <span class="arg">"Your script text..."</span> <span class="flag">--voice</span> kokoro-adam <span class="flag">--project</span> <span class="arg">"MyReel"</span></div>
+<span class="comment"># 5. Execute entire motion pipeline directly with myVoice in one touch:</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--action</span> run-all <span class="flag">--text</span> <span class="arg">"Your script text..."</span> <span class="flag">--voice</span> myvoice <span class="flag">--project</span> <span class="arg">"MyReel"</span></div>
         </div>
       </div>
     </section>

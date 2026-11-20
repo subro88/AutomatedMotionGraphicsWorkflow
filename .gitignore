@@ -78,5 +78,6 @@ projects/
 out/
 *.wav
 *.mp4
+inputs/*.subtitles.json
 public/incremental_backup/
 assets/Incremental Backup in Windows Server 2008/
