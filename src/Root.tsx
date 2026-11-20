@@ -34,6 +34,17 @@ import { Scene07AomeiBackupper } from "./incremental_backup/scenes/Scene07AomeiB
 import { Scene08Limitations } from "./incremental_backup/scenes/Scene08Limitations";
 import { Scene09EndOfSupport } from "./incremental_backup/scenes/Scene09EndOfSupport";
 import { Scene10FinalSummary } from "./incremental_backup/scenes/Scene10FinalSummary";
+import { IncrementalBackupVerticalMaster } from "./incremental_backup/vertical/IncrementalBackupVerticalMaster";
+import { Scene01Vertical } from "./incremental_backup/vertical/Scene01Vertical";
+import { Scene02Vertical } from "./incremental_backup/vertical/Scene02Vertical";
+import { Scene03Vertical } from "./incremental_backup/vertical/Scene03Vertical";
+import { Scene04Vertical } from "./incremental_backup/vertical/Scene04Vertical";
+import { Scene05Vertical } from "./incremental_backup/vertical/Scene05Vertical";
+import { Scene06Vertical } from "./incremental_backup/vertical/Scene06Vertical";
+import { Scene07Vertical } from "./incremental_backup/vertical/Scene07Vertical";
+import { Scene08Vertical } from "./incremental_backup/vertical/Scene08Vertical";
+import { Scene09Vertical } from "./incremental_backup/vertical/Scene09Vertical";
+import { Scene10Vertical } from "./incremental_backup/vertical/Scene10Vertical";
 
 interface MasterProps {
   baseRadius: number;
@@ -950,6 +961,100 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
+      />
+
+      {/* =========================================================================
+          16. INCREMENTAL BACKUP VERTICAL SHORTS (9:16 - 1080x1920 @ 30 FPS)
+          Insiderforce / Reels / TikTok Kinetic Typography & 3D B-Roll Edition
+          ========================================================================= */}
+      <Composition
+        id="Incremental-Backup-Vertical-Master-9x16"
+        component={IncrementalBackupVerticalMaster}
+        durationInFrames={10487}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      <Composition
+        id="Incremental-Vertical-Scene01"
+        component={Scene01Vertical}
+        durationInFrames={914}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene02"
+        component={Scene02Vertical}
+        durationInFrames={1510}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene03"
+        component={Scene03Vertical}
+        durationInFrames={1111}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene04"
+        component={Scene04Vertical}
+        durationInFrames={780}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene05"
+        component={Scene05Vertical}
+        durationInFrames={893}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene06"
+        component={Scene06Vertical}
+        durationInFrames={1022}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene07"
+        component={Scene07Vertical}
+        durationInFrames={1216}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene08"
+        component={Scene08Vertical}
+        durationInFrames={1217}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene09"
+        component={Scene09Vertical}
+        durationInFrames={763}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Incremental-Vertical-Scene10"
+        component={Scene10Vertical}
+        durationInFrames={1061}
+        fps={30}
+        width={1080}
+        height={1920}
       />
     </>
   );

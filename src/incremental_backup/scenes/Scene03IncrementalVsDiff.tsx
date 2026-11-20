@@ -4,6 +4,7 @@ import { THEME } from "../theme";
 import { CanvaCard } from "../components/CanvaCard";
 import { HeaderBanner } from "../components/HeaderBanner";
 import { FileBlockStack } from "../components/FileBlockStack";
+import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
 
 export const Scene03IncrementalVsDiff: React.FC = () => {
   const frame = useCurrentFrame();
@@ -217,6 +218,20 @@ export const Scene03IncrementalVsDiff: React.FC = () => {
           <span>Differential: Only requires Full + Latest Differential</span>
         </div>
       </div>
+
+      {/* Dynamic Kinetic Subtitle Engine */}
+      <KineticSubtitleEngine
+        sceneId="scene3"
+        fontSize={36}
+        layout="landscape"
+        style={{
+          position: "absolute",
+          bottom: "16px",
+          left: 0,
+          right: 0,
+          zIndex: 10,
+        }}
+      />
     </div>
   );
 };

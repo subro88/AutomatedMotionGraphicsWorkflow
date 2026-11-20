@@ -3,6 +3,7 @@ import { spring, useCurrentFrame, useVideoConfig, Audio, staticFile } from "remo
 import { THEME } from "../theme";
 import { CanvaCard } from "../components/CanvaCard";
 import { HeaderBanner } from "../components/HeaderBanner";
+import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
 
 export const Scene07AomeiBackupper: React.FC = () => {
   const frame = useCurrentFrame();
@@ -495,6 +496,20 @@ export const Scene07AomeiBackupper: React.FC = () => {
           Features and availability depend on the software edition.
         </div>
       </div>
+
+      {/* Dynamic Kinetic Subtitle Engine */}
+      <KineticSubtitleEngine
+        sceneId="scene7"
+        fontSize={36}
+        layout="landscape"
+        style={{
+          position: "absolute",
+          bottom: "16px",
+          left: 0,
+          right: 0,
+          zIndex: 10,
+        }}
+      />
     </div>
   );
 };

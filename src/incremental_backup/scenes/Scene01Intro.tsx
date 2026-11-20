@@ -4,6 +4,7 @@ import { THEME } from "../theme";
 import { CanvaCard } from "../components/CanvaCard";
 import { HeaderBanner } from "../components/HeaderBanner";
 import { ServerIllustration } from "../components/ServerIllustration";
+import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
 
 export const Scene01Intro: React.FC = () => {
   const frame = useCurrentFrame();
@@ -180,6 +181,20 @@ export const Scene01Intro: React.FC = () => {
           <ServerIllustration delay={15} highlightBackup />
         </div>
       </div>
+
+      {/* Dynamic Kinetic Subtitle Engine */}
+      <KineticSubtitleEngine
+        sceneId="scene1"
+        fontSize={38}
+        layout="landscape"
+        style={{
+          position: "absolute",
+          bottom: "22px",
+          left: 0,
+          right: 0,
+          zIndex: 10,
+        }}
+      />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { spring, useCurrentFrame, useVideoConfig, Audio, staticFile } from "remo
 import { THEME } from "../theme";
 import { CanvaCard } from "../components/CanvaCard";
 import { HeaderBanner } from "../components/HeaderBanner";
+import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
 
 export const Scene06ScheduleBackup: React.FC = () => {
   const frame = useCurrentFrame();
@@ -196,6 +197,20 @@ export const Scene06ScheduleBackup: React.FC = () => {
           </div>
         </CanvaCard>
       </div>
+
+      {/* Dynamic Kinetic Subtitle Engine */}
+      <KineticSubtitleEngine
+        sceneId="scene6"
+        fontSize={36}
+        layout="landscape"
+        style={{
+          position: "absolute",
+          bottom: "16px",
+          left: 0,
+          right: 0,
+          zIndex: 10,
+        }}
+      />
     </div>
   );
 };

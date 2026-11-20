@@ -47,7 +47,12 @@ export const IncrementalBackupMaster: React.FC = () => {
       <Series.Sequence durationInFrames={1022}>
         <Scene06ScheduleBackup />
       </Series.Sequence>
-      <Series.Sequence durationInFrames={1216}>
+      <Series.Sequence
+        durationInFrames={1216}
+        style={{
+          scale: 1.226
+        }}
+      >
         <Scene07AomeiBackupper />
       </Series.Sequence>
       <Series.Sequence durationInFrames={1217}>
