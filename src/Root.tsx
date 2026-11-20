@@ -23,6 +23,17 @@ import { GsapEngineeringMotion } from "./components/GsapEngineeringMotion";
 import { HardwareTeardownScene } from "./HardwareTeardownScene";
 import { DocumentaryHistoryScene } from "./DocumentaryHistoryScene";
 import { PodcastStudioScene } from "./PodcastStudioScene";
+import { IncrementalBackupMaster } from "./incremental_backup/IncrementalBackupMaster";
+import { Scene01Intro } from "./incremental_backup/scenes/Scene01Intro";
+import { Scene02WhatIsIncremental } from "./incremental_backup/scenes/Scene02WhatIsIncremental";
+import { Scene03IncrementalVsDiff } from "./incremental_backup/scenes/Scene03IncrementalVsDiff";
+import { Scene04WindowsServerBackup } from "./incremental_backup/scenes/Scene04WindowsServerBackup";
+import { Scene05ConfigurePerformance } from "./incremental_backup/scenes/Scene05ConfigurePerformance";
+import { Scene06ScheduleBackup } from "./incremental_backup/scenes/Scene06ScheduleBackup";
+import { Scene07AomeiBackupper } from "./incremental_backup/scenes/Scene07AomeiBackupper";
+import { Scene08Limitations } from "./incremental_backup/scenes/Scene08Limitations";
+import { Scene09EndOfSupport } from "./incremental_backup/scenes/Scene09EndOfSupport";
+import { Scene10FinalSummary } from "./incremental_backup/scenes/Scene10FinalSummary";
 
 interface MasterProps {
   baseRadius: number;
@@ -844,6 +855,101 @@ export const RemotionRoot: React.FC = () => {
           headline: "YOU HAVE THE EXPERIENCE.",
           tagline: "NOW GET THE QUALIFICATION."
         }}
+      />
+
+      {/* =========================================================================
+          15. INCREMENTAL BACKUP IN WINDOWS SERVER 2008 (CANVA-STYLE MASTERCLASS)
+          Full 10-Scene Master Educational Explainer Video (1920x1080 @ 30 FPS)
+          ========================================================================= */}
+      <Composition
+        id="Incremental-Backup-Master-16x9"
+        component={IncrementalBackupMaster}
+        durationInFrames={10487}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Individual Modular Scenes for Fine-Grained Preview & Testing */}
+      <Composition
+        id="Incremental-Scene01"
+        component={Scene01Intro}
+        durationInFrames={914}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene02"
+        component={Scene02WhatIsIncremental}
+        durationInFrames={1510}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene03"
+        component={Scene03IncrementalVsDiff}
+        durationInFrames={1111}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene04"
+        component={Scene04WindowsServerBackup}
+        durationInFrames={780}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene05"
+        component={Scene05ConfigurePerformance}
+        durationInFrames={893}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene06"
+        component={Scene06ScheduleBackup}
+        durationInFrames={1022}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene07"
+        component={Scene07AomeiBackupper}
+        durationInFrames={1216}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene08"
+        component={Scene08Limitations}
+        durationInFrames={1217}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene09"
+        component={Scene09EndOfSupport}
+        durationInFrames={763}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Incremental-Scene10"
+        component={Scene10FinalSummary}
+        durationInFrames={1061}
+        fps={30}
+        width={1920}
+        height={1080}
       />
     </>
   );
