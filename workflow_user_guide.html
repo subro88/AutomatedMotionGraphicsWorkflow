@@ -1,0 +1,3149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automated Motion Graphics & DaVinci Resolve Workstation — User Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #060911;
+      --bg-surface: #0c1322;
+      --bg-card: #111a2f;
+      --bg-card-hover: #16223c;
+      --border-subtle: #1e2c4a;
+      --border-glow: #00f2fe44;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-violet: #8b5cf6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --code-bg: #090e1a;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 0;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(79, 172, 254, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover {
+      color: #67e8f9;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 24px 100px;
+    }
+
+    /* Top Hero Header */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(12, 19, 34, 0.95), rgba(17, 26, 47, 0.85));
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 320px;
+      height: 100%;
+      background: linear-gradient(270deg, rgba(0, 242, 254, 0.12), transparent);
+      pointer-events: none;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: var(--accent-cyan);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    .pill-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    h1.hero-title {
+      font-size: 2.85rem;
+      font-weight: 800;
+      line-height: 1.18;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 80%, var(--accent-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 840px;
+      line-height: 1.65;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-meta-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .hero-meta-value {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Grid & Cards */
+    .section-title-wrap {
+      margin-bottom: 24px;
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title-num {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #060911;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      margin-bottom: 32px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card:hover {
+      border-color: rgba(0, 242, 254, 0.35);
+    }
+
+    /* Interactive Pipeline Flow Diagram */
+    .flow-stepper {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 1024px) {
+      .flow-stepper {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 640px) {
+      .flow-stepper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .flow-step-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .flow-step-box:hover, .flow-step-box.active {
+      background: var(--bg-card);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .flow-step-box .idx {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.05em;
+    }
+
+    .flow-step-box .label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .flow-step-box .desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    /* Screenshots and Media Showcase */
+    .screenshot-frame {
+      background: #05070e;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: 20px 0;
+      position: relative;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.7);
+    }
+
+    .screenshot-toolbar {
+      background: #090e1a;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .screenshot-toolbar-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .screenshot-toolbar-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .screenshot-title {
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+    }
+
+    .screenshot-img-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #030509;
+      padding: 16px;
+      min-height: 280px;
+    }
+
+    .screenshot-img-wrap img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .screenshot-img-wrap img:hover {
+      transform: scale(1.015);
+    }
+
+    .screenshot-caption {
+      padding: 12px 18px;
+      background: var(--bg-card);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .screenshot-caption .tag {
+      background: rgba(0, 242, 254, 0.15);
+      color: var(--accent-cyan);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* Dual Comparison Layout */
+    .dual-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 840px) {
+      .dual-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Code Blocks */
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin: 16px 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .code-header {
+      background: #0d1527;
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .code-body {
+      padding: 16px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .code-body .cmd { color: #34d399; font-weight: 600; }
+    .code-body .flag { color: #f472b6; }
+    .code-body .arg { color: #fde047; }
+    .code-body .comment { color: #64748b; font-style: italic; }
+
+    /* Tables */
+    .clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.88rem;
+    }
+
+    .clean-table th {
+      background: #0d1527;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .clean-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-main);
+    }
+
+    .clean-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      border-left: 4px solid var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.05);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .callout.amber {
+      border-color: var(--accent-amber);
+      background: rgba(245, 158, 11, 0.05);
+    }
+
+    .callout.emerald {
+      border-color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .callout p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Architecture Diagram */
+    .arch-diagram {
+      background: #070c17;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    @media (max-width: 900px) {
+      .arch-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .arch-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+    }
+
+    .arch-card h4 {
+      font-size: 0.95rem;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .arch-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .arch-card li {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .arch-card li::before {
+      content: "•";
+      color: var(--accent-cyan);
+      font-weight: bold;
+    }
+
+    /* Floating Quick Nav */
+    .quick-nav {
+      position: sticky;
+      top: 20px;
+      background: rgba(12, 19, 34, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 20px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 100;
+      overflow-x: auto;
+    }
+
+    .quick-nav a {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .quick-nav a:hover, .quick-nav a.active {
+      color: var(--accent-cyan);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 40px;
+      margin-top: 80px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Hero Header -->
+    <header class="hero-banner">
+      <div class="pill-badge">
+        <span class="dot"></span>
+        Zero-Touch Motion Engine · Antigravity Workstation
+      </div>
+      <h1 class="hero-title">Automated Motion Graphics &amp; DaVinci Resolve Workflow</h1>
+      <p class="hero-subtitle">
+        An enterprise-grade, deterministic automated media workstation that ingests raw audio voiceovers, computes frame-accurate Mel-frequency spectral visualizations, renders GPU-accelerated Remotion + Anime.js kinetic compositions, slices 30-second vertical Shorts, burns word-level bouncing karaoke subtitles with Faster-Whisper &amp; NVENC, packages Fusion templates, and assembles multi-track timelines inside DaVinci Resolve.
+      </p>
+
+      <div class="hero-meta-grid">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Workstation GPU</span>
+          <span class="hero-meta-value">NVIDIA RTX 3060 Laptop (NVENC Gen 7)</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Motion Renderer</span>
+          <span class="hero-meta-value">Remotion v4 + Anime.js 3.2</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Speech AI Engine</span>
+          <span class="hero-meta-value">Faster-Whisper (CUDA / FP16)</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">NLE Integrator</span>
+          <span class="hero-meta-value">DaVinci Resolve v20.3+ API</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Quick Navigation Sticky Bar -->
+    <nav class="quick-nav">
+      <strong style="color: #fff; font-size: 0.84rem;">Jump to:</strong>
+      <a href="#desktop-gui" style="color: #10b981; font-weight: bold;">🖥️ Desktop GUI App</a>
+      <a href="#pipeline-architecture">Architecture</a>
+      <a href="#step0-voicebox">0. Voice Box (TTS &amp; Clone)</a>
+      <a href="#step1-spectrum">1. Mel Spectrogram</a>
+      <a href="#step2-remotion">2. Remotion Render</a>
+      <a href="#step3-shorts">3. Shorts Slicing</a>
+      <a href="#step4-karaoke">4. Karaoke Subtitles</a>
+      <a href="#step5-drfx">5. Fusion .drfx</a>
+      <a href="#step6-resolve">6. Resolve Assembly</a>
+      <a href="#step7-crucible" style="color: #38bdf8; font-weight: bold;">7. Crucible 3D Engine</a>
+      <a href="#step8-drfx" style="color: #f59e0b; font-weight: bold;">8. Native DRFX Titles</a>
+      <a href="#step9-hybrid-resolve" style="color: #a855f7; font-weight: bold;">9. Hybrid 3D Timeline</a>
+      <a href="#step10-qa-receipt" style="color: #10b981; font-weight: bold;">10. QA &amp; Provenance Ledger</a>
+      <a href="#step11-motion-director" style="color: #ec4899; font-weight: bold;">11. Motion Video Director</a>
+      <a href="#step12-motion-ai" style="color: #38bdf8; font-weight: bold;">12. Motion AI Kit</a>
+      <a href="#step13-iart-motion" style="color: #10b981; font-weight: bold;">13. iart-ai Motion Skills</a>
+      <a href="dashboard.html" style="color: #fde047;">📊 Live Dashboard</a>
+      <a href="#cli-reference">CLI Reference</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+    </nav>
+
+    <!-- Interactive Stepper -->
+    <div class="flow-stepper">
+      <a href="#step1-spectrum" class="flow-step-box active">
+        <span class="idx">PHASE 01</span>
+        <span class="label">Spectral Audio</span>
+        <span class="desc">Pure NumPy Mel filterbank &amp; FFT energy</span>
+      </a>
+      <a href="#step2-remotion" class="flow-step-box">
+        <span class="idx">PHASE 02</span>
+        <span class="label">Kinetic Motion</span>
+        <span class="desc">Remotion + Anime.js SVG path morphing</span>
+      </a>
+      <a href="#step3-shorts" class="flow-step-box">
+        <span class="idx">PHASE 03</span>
+        <span class="label">Shorts Slicing</span>
+        <span class="desc">30s NVENC chunking with 1.0s audio tail fade</span>
+      </a>
+      <a href="#step4-karaoke" class="flow-step-box">
+        <span class="idx">PHASE 04</span>
+        <span class="label">Whisper Karaoke</span>
+        <span class="desc">Word-level bouncing ASS burn via libass</span>
+      </a>
+      <a href="#step5-drfx" class="flow-step-box">
+        <span class="idx">PHASE 05</span>
+        <span class="label">Template (.drfx)</span>
+        <span class="desc">Zip-packaged Fusion macro deployed to Resolve</span>
+      </a>
+      <a href="#step6-resolve" class="flow-step-box">
+        <span class="idx">PHASE 06</span>
+        <span class="label">Resolve Assembly</span>
+        <span class="desc">Multi-track timeline, grades, markers, EDL</span>
+      </a>
+      <a href="#step7-crucible" class="flow-step-box">
+        <span class="idx">PHASE 07</span>
+        <span class="label">Crucible 3D</span>
+        <span class="desc">AI-driven 3D engine B-roll (Gears, Transformer, Diploma)</span>
+      </a>
+      <a href="#step8-drfx" class="flow-step-box">
+        <span class="idx">PHASE 08</span>
+        <span class="label">DRFX Titles</span>
+        <span class="desc">4 native interactive titles with live Inspector controls</span>
+      </a>
+      <a href="#step9-hybrid-resolve" class="flow-step-box">
+        <span class="idx">PHASE 09</span>
+        <span class="label">Hybrid Timeline</span>
+        <span class="desc">4-track master (3D + 2D + DRFX + Voiceover)</span>
+      </a>
+      <a href="#step10-qa-receipt" class="flow-step-box">
+        <span class="idx">PHASE 10</span>
+        <span class="label">QA &amp; Ledger</span>
+        <span class="desc">Safe-area, EBU R128 loudness &amp; execution receipts</span>
+      </a>
+      <a href="#step11-motion-director" class="flow-step-box">
+        <span class="idx">PHASE 11</span>
+        <span class="label">Director Recipes</span>
+        <span class="desc">4 reverse-engineered production recipes &amp; intensity matrix</span>
+      </a>
+      <a href="#step12-motion-ai" class="flow-step-box">
+        <span class="idx">PHASE 12</span>
+        <span class="label">Motion AI Kit</span>
+        <span class="desc">Performance Doctor &amp; GPU-accelerated web springs</span>
+      </a>
+      <a href="#step13-iart-motion" class="flow-step-box">
+        <span class="idx">PHASE 13</span>
+        <span class="label">Motion Skills Suite</span>
+        <span class="desc">19-pack catalog &amp; Visual Contact Sheet Verifier</span>
+      </a>
+      <a href="#step14-skillsllm-beatgrid" class="flow-step-box">
+        <span class="idx">PHASE 14</span>
+        <span class="label">Beat-Grid &amp; Showreel</span>
+        <span class="desc">SkillsLLM sync, transient detection &amp; Resolve color EDL</span>
+      </a>
+      <a href="#step15-real-sfx" class="flow-step-box">
+        <span class="idx">PHASE 15</span>
+        <span class="label">Real SFX Audio Engine</span>
+        <span class="desc">Clipwing Foley studio, sidechain ducking &amp; Fairlight Track A2</span>
+      </a>
+      <a href="#step16-openverse-media" class="flow-step-box">
+        <span class="idx">PHASE 16</span>
+        <span class="label">Openverse Media Engine</span>
+        <span class="desc">WordPress CC0/Public Domain B-Roll, BGM &amp; Fairlight Track A3</span>
+      </a>
+      <a href="#step17-hardware-teardown" class="flow-step-box">
+        <span class="idx">PHASE 17</span>
+        <span class="label">Branch 3D Teardown</span>
+        <span class="desc">Exploded assemblies, 3D tracking &amp; Remotion HUD</span>
+      </a>
+      <a href="#step18-multi-genre-router" class="flow-step-box">
+        <span class="idx">PHASE 18</span>
+        <span class="label">Multi-Genre Router</span>
+        <span class="desc">Motion Graphics, 3D Teardowns, Documentary &amp; Podcasts</span>
+      </a>
+      <a href="#step19-project-isolation" class="flow-step-box">
+        <span class="idx">PHASE 19</span>
+        <span class="label">Project Isolation &amp; Git</span>
+        <span class="desc">Gitignored projects/* workspace, CLI scaffolding &amp; zero auto-push</span>
+      </a>
+      <a href="#step20-kinetic-3d-broll" class="flow-step-box">
+        <span class="idx">PHASE 20</span>
+        <span class="label">Kinetic Subtitles &amp; 3D B-Roll</span>
+        <span class="desc">Faster-Whisper word-sync, SAS 15K drive, Aero UI &amp; Dual Delivery</span>
+      </a>
+    </div>
+
+    <!-- Section: High Level Architecture -->
+    <section id="pipeline-architecture">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">⚙</span>
+          Pipeline Architecture &amp; Dataflow
+        </h2>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 20px;">
+          The pipeline connects five decoupled, highly-optimized computational engines into a single automated pipeline orchestrated by the Antigravity Skill runner (<code style="color: var(--accent-cyan);">run.py</code>).
+        </p>
+
+        <div class="arch-diagram">
+          <div class="arch-grid">
+            <div class="arch-card">
+              <h4>1. Audio Engine</h4>
+              <ul>
+                <li>FFmpeg PCM s16le stream</li>
+                <li>NumPy Mel Filterbank (20-8000Hz)</li>
+                <li>Hanning Windowed FFT</li>
+                <li>Frame-accurate JSON export</li>
+              </ul>
+            </div>
+            <div class="arch-card">
+              <h4>2. Motion Engine</h4>
+              <ul>
+                <li>Remotion React Composition</li>
+                <li>Anime.js SVG Path Morphing</li>
+                <li>Deterministic frame seek</li>
+                <li>Dual Aspect: 16:9 &amp; 9:16</li>
+              </ul>
+            </div>
+            <div class="arch-card">
+              <h4>3. AI Subtitle Engine</h4>
+              <ul>
+                <li>Faster-Whisper (CUDA FP16)</li>
+                <li>Millisecond word timestamps</li>
+                <li>ASS <code>{\k}</code> bouncing karaoke</li>
+                <li>FFmpeg <code>libass</code> + NVENC burn</li>
+              </ul>
+            </div>
+            <div class="arch-card">
+              <h4>4. Resolve NLE Engine</h4>
+              <ul>
+                <li>Fusion Macro generator</li>
+                <li>Automatic <code>.drfx</code> installer</li>
+                <li>Resolve Studio Python API</li>
+                <li>CMX3600 EDL &amp; NVENC fallback</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout emerald">
+          <div class="callout-title" style="color: var(--accent-emerald);">
+            ✔ Zero-Touch Automation Guarantee
+          </div>
+          <p>
+            Every phase executes deterministically without user prompts. If DaVinci Resolve Studio IPC is offline or running on Free Edition, the pipeline automatically compiles a CMX3600 EDL, synthesizes the multi-track timeline via NVENC, and deploys a 1-click import script to Resolve's <code>Fusion/Scripts/Utility</code> directory.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Desktop Studio GUI Section -->
+    <section id="desktop-gui">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">🖥️</span>
+          Unified Desktop Studio GUI Application
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">launch_app.bat • app.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 20px;">
+          The entire motion graphics workstation is unified inside a <strong>Native PySide6 (Qt) Desktop Application</strong>. It brings together Voice Box speech synthesis, visual storyboard sequencing, Remotion WebGL rendering, Faster-Whisper subtitles, DaVinci Resolve FCPXML exports, and real-time execution monitoring in a single high-performance window.
+        </p>
+
+        <!-- Desktop App Preview Showcase -->
+        <div class="screenshot-frame">
+          <div class="screenshot-toolbar">
+            <div class="screenshot-toolbar-dots">
+              <span class="screenshot-toolbar-dot dot-red"></span>
+              <span class="screenshot-toolbar-dot dot-yellow"></span>
+              <span class="screenshot-toolbar-dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Motion Graphics &amp; DaVinci Resolve Workstation (PySide6 Native Desktop App)</div>
+            <div></div>
+          </div>
+          <div class="screenshot-img-wrap" style="background: #030509; padding: 12px;">
+            <img src="screenshots/desktop_app_preview.png" alt="Desktop Studio GUI App Preview" style="width: 100%; max-height: 520px; object-fit: contain;">
+          </div>
+          <div class="screenshot-caption">
+            <span>Main Studio Window with Tabbed Controls, Global 1-Touch Execution Bar, and Live Streaming Console</span>
+            <span class="tag">PySide6 6.12 • Windows Native</span>
+          </div>
+        </div>
+
+        <!-- Dual Tab Showcase -->
+        <div class="dual-showcase" style="margin-top: 24px;">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Tab 2: Visual Storyboard Director</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/desktop_app_tab_storyboard.png" alt="Storyboard Tab Preview" style="max-height: 280px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Scene archetypes, start frames, and duration manager</span>
+              <span class="tag">Tab 2</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Tab 5: DaVinci Resolve &amp; SQLite History</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/desktop_app_tab_history.png" alt="History Tab Preview" style="max-height: 280px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>1-Click FCPXML export, 3D LUT opener, and run logs</span>
+              <span class="tag">Tab 5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tweak Studio Showcase -->
+        <div class="screenshot-frame" style="margin-top: 24px;">
+          <div class="screenshot-toolbar">
+            <div class="traffic-lights">
+              <span class="traffic-light red"></span>
+              <span class="traffic-light yellow"></span>
+              <span class="traffic-light green"></span>
+            </div>
+            <div class="screenshot-title">Tab 3: Motion Graphics Tweak Studio (Split-View Inspector &amp; Live Scrubber)</div>
+          </div>
+          <div class="screenshot-img-wrap" style="background: #030509; padding: 12px;">
+            <img src="screenshots/desktop_app_tab_tweak_studio.png" alt="Motion Graphics Tweak Studio Preview" style="width: 100%; max-height: 520px; object-fit: contain;">
+          </div>
+          <div class="screenshot-caption">
+            <span>Split-view layout with live frame canvas &amp; 0–600 frame scrubber on the left, and dynamic property inspector with 1-click style presets (👑 Saffron &amp; Gold, ⚡ Cyber Neon, ⚪ Apple Minimal, 🔮 Obsidian Violet, 🌿 Emerald) on the right</span>
+            <span class="tag">Tab 3 • Tweak Studio</span>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 32px 0 16px;">Clean Instructions: How to Use the Desktop App</h3>
+        <ol style="color: var(--text-muted); font-size: 0.9rem; margin-left: 20px; line-height: 1.8;">
+          <li><strong>Launch the App:</strong> Double-click <code>launch_app.bat</code> in the project folder (or run <code>python app.py</code> in terminal).</li>
+          <li><strong>Input Script &amp; Voice (Tab 1):</strong> Type or paste your script text, select a Neural Voice (e.g. <code>ChristopherNeural</code>), set aspect ratio (9:16 or 16:9), and optionally pick a voice sample from <code>assets/voices/</code>.</li>
+          <li><strong>Review Storyboard (Tab 2):</strong> Click <em>"Auto-Generate Storyboard from Script"</em> to break sentences into Kinetic, Corporate Slide, and Infographic scenes.</li>
+          <li><strong>Remotion &amp; 3D Controls (Tab 3):</strong> Pick from 23 compositions, scrub frames with the new <strong>Blender-style DCC Drag-to-Scrub boxes</strong> (click &amp; drag left/right, Shift+drag for 10x precision, or double-click to type), adjust spring damping/mass/particles/glow, and preview live still frames.</li>
+          <li><strong>Shorts &amp; Subtitles (Tab 4):</strong> Set slice length (30s) and Faster-Whisper model size.</li>
+          <li><strong>One-Touch Execution:</strong> Click the big cyan <strong>"▶ Run Entire Autonomous Pipeline"</strong> button at the bottom. Watch the animated progress bar and color-coded streaming logs as your video is rendered, sliced, subtitled, and exported to DaVinci Resolve!</li>
+          <li><strong>Final Touch in Resolve (Tab 5):</strong> Click <em>"Export Multi-Track FCPXML Timeline"</em> to open in DaVinci Resolve and apply the included <code>Tech_Cinematic.cube</code> LUT.</li>
+        </ol>
+
+        <div class="code-block" style="margin-top: 24px;">
+          <div class="code-header">
+            <span>Launch Desktop App</span>
+            <span>Windows Explorer / CMD</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Double click from Windows Explorer:</span>
+launch_app.bat
+
+<span class="comment"># 2. Or run via Python 3.12:</span>
+<span class="cmd">python</span> app.py</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 0: Voice Box Speech & Voice Cloning -->
+    <section id="step0-voicebox">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">0</span>
+          Phase 0: Voice Box Neural Speech &amp; Voice Profiles
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/voicebox.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Converts plain text or full Markdown script files into broadcast-quality neural speech using <strong>Voice Box</strong>. Supports a high-performance <strong>Dual Voice Architecture</strong>:
+        </p>
+        <ul style="color: var(--text-muted); font-size: 0.9rem; margin-left: 20px; line-height: 1.8; margin-bottom: 20px;">
+          <li><strong>🇮🇳 Native Indian English &amp; Hindi Voices:</strong> Built-in Indian male (<code>en-IN-PrabhatNeural</code>, <code>hi-IN-MadhurNeural</code>, <code>hm_omega</code>) and Indian female (<code>en-IN-NeerjaNeural</code>, <code>en-IN-NeerjaExpressiveNeural</code>, <code>hi-IN-SwaraNeural</code>, <code>hf_alpha</code>) with authentic accent cadence for tech tutorials, SaaS explainers, and corporate slideshows.</li>
+          <li><strong>🧠 Kokoro-82M Local Engine (Jamie Pine Voicebox Stack):</strong> 100% offline neural speech running via ONNX with 54 voices (e.g. <code>kokoro-heart</code>, <code>kokoro-adam</code>, <code>kokoro-bella</code>), zero cloud latency, zero API costs, and voice style vector blending (e.g. <code>af_heart:0.6,am_adam:0.4</code>).</li>
+          <li><strong>🎙️ Edge-TTS Cloud Engine:</strong> Ultra-fast Microsoft Neural voices (<code>en-US-ChristopherNeural</code>, <code>en-US-GuyNeural</code>, etc.) with custom pitch/rate controls.</li>
+          <li><strong>🔊 FFmpeg Broadcast Mastering:</strong> Both engines automatically trim silence and normalize audio loudness to EBU R128 (-16 LUFS) at 44.1 kHz mono for perfect Remotion and DaVinci Resolve alignment.</li>
+        </ul>
+
+        <!-- Voice Box Subtitled Result Showcase -->
+        <div class="screenshot-frame">
+          <div class="screenshot-toolbar">
+            <div class="screenshot-toolbar-dots">
+              <span class="screenshot-toolbar-dot dot-red"></span>
+              <span class="screenshot-toolbar-dot dot-yellow"></span>
+              <span class="screenshot-toolbar-dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Voice Box Neural Speech + Bouncing Karaoke Subtitles Output</div>
+            <div></div>
+          </div>
+          <div class="screenshot-img-wrap" style="background: #060911;">
+            <img src="screenshots/voicebox_karaoke_subtitled.png" alt="Voice Box Render Result" style="max-height: 420px;">
+          </div>
+          <div class="screenshot-caption">
+            <span>Synthesized with Voice Box: <code>"Artificial intelligence and kinetic motion graphics are now fully autonomous..."</code></span>
+            <span class="tag">Voice Box (ChristopherNeural)</span>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Command (Voice Box direct run or via pipeline)</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Synthesize speech using Kokoro-82M (Jamie Pine Local Offline Engine)</span>
+<span class="cmd">python</span> scripts/voicebox.py <span class="flag">--text</span> <span class="arg">"Your video script text..."</span> <span class="flag">--voice</span> kokoro-heart <span class="flag">--out</span> <span class="arg">inputs/narration.wav</span>
+
+<span class="comment"># 2. Voice blend / style vector mixing (Custom Voice Cloning profile)</span>
+<span class="cmd">python</span> scripts/voicebox.py <span class="flag">--text</span> <span class="arg">"Your video script text..."</span> <span class="flag">--blend</span> <span class="arg">"af_heart:0.6,am_adam:0.4"</span> <span class="flag">--out</span> <span class="arg">inputs/blended.wav</span>
+
+<span class="comment"># 3. Or synthesize via Edge-TTS Cloud</span>
+<span class="cmd">python</span> scripts/voicebox.py <span class="flag">--text</span> <span class="arg">"Your script..."</span> <span class="flag">--voice</span> tech <span class="flag">--out</span> <span class="arg">inputs/narration.wav</span>
+
+<span class="comment"># 4. Or execute the entire motion pipeline directly from text in one touch:</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--action</span> run-all <span class="flag">--text</span> <span class="arg">"Your script text..."</span> <span class="flag">--voice</span> kokoro-adam <span class="flag">--project</span> <span class="arg">"MyReel"</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 1: Spectral Analysis -->
+    <section id="step1-spectrum">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">1</span>
+          Phase 1: Mel-Frequency Spectral Analysis
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/extract_audio.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted);">
+          Extracts raw audio samples directly via FFmpeg stdout pipe into memory, constructs triangular Mel filterbanks across human auditory perceptional bands (20 Hz to 8000 Hz), calculates Hanning-windowed power spectral densities, and normalizes decibel values into <code style="color: var(--accent-cyan);">src/data/spectrum.json</code>.
+        </p>
+
+        <!-- Waveform & Spectrogram Screenshots -->
+        <div class="screenshot-frame">
+          <div class="screenshot-toolbar">
+            <div class="screenshot-toolbar-dots">
+              <span class="screenshot-toolbar-dot dot-red"></span>
+              <span class="screenshot-toolbar-dot dot-yellow"></span>
+              <span class="screenshot-toolbar-dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">FFmpeg Audio Spectrogram (Magma Density) &amp; Cyan Waveform</div>
+            <div></div>
+          </div>
+          <div class="screenshot-img-wrap" style="flex-direction: column; gap: 12px; background: #080d19;">
+            <img src="screenshots/audio_spectrogram_plot.png" alt="Audio Mel Spectrogram" style="max-height: 280px; width: 100%; object-fit: contain;">
+            <img src="screenshots/audio_waveform.png" alt="Audio Waveform" style="max-height: 100px; width: 100%; object-fit: cover;">
+          </div>
+          <div class="screenshot-caption">
+            <span>Real-time audio spectral frequency distribution generated from <code>inputs/test_voiceover.wav</code></span>
+            <span class="tag">NumPy FFT + Mel Filterbank</span>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Command</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="cmd">python</span> scripts/extract_audio.py <span class="flag">--audio</span> <span class="arg">inputs/test_voiceover.wav</span> <span class="flag">--out</span> <span class="arg">src/data/spectrum.json</span> <span class="flag">--fps</span> 30 <span class="flag">--bars</span> 24</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2: Remotion & Anime.js Rendering -->
+    <section id="step2-remotion">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">2</span>
+          Phase 2: Remotion &amp; Anime.js Motion Graphics Render
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">src/Root.tsx</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Renders high-framerate, audio-reactive compositions in both <strong>16:9 Landscape (1920x1080)</strong> and <strong>9:16 Vertical (1080x1920)</strong>. Remotion reads the frame counter and seeks Anime.js animations deterministically to prevent frame jitter:
+        </p>
+
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; font-size: 0.9rem;">
+          <li><strong>Radial Bars:</strong> 24 frequency bands mapped to line heights with circular angular offsets.</li>
+          <li><strong>Continuous Spin:</strong> Outer bars rotate at a constant velocity (22°/sec) anchored to the center.</li>
+          <li><strong>Deterministic Path Morph:</strong> Anime.js smoothly morphs SVG curves between a Diamond and a Circle.</li>
+          <li><strong>Bass Pulse Ring:</strong> Low-frequency bands (0–4) drive a pulsing dynamic glow radius.</li>
+        </ul>
+
+        <!-- Dual 16:9 and 9:16 Showcase -->
+        <div class="dual-showcase">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Master-16x9 (1920x1080) · Frame 150</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap" style="min-height: 220px;">
+              <img src="screenshots/kinetic_master_16x9.png" alt="Remotion 16x9 Kinetic Master Render">
+            </div>
+            <div class="screenshot-caption">
+              <span>Full Landscape composition for YouTube / Desktop</span>
+              <span class="tag">1920 × 1080</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Master-9x16 (1080x1920) · Frame 150</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap" style="min-height: 220px;">
+              <img src="screenshots/kinetic_master_9x16.png" alt="Remotion 9x16 Kinetic Master Render" style="max-height: 280px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Vertical composition for Shorts / Reels / TikTok</span>
+              <span class="tag">1080 × 1920</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multi-Scene Deck Showcase: Corporate Slides & Infographics -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 32px 0 16px;">Multi-Scene Storyboard Archetypes (Script-Driven)</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          When executing in multi-scene mode, the engine sequences between <strong>Kinetic Motion Graphics</strong>, <strong>Corporate Executive Slides</strong>, and <strong>Infographics</strong> based on semantic beats in your script:
+        </p>
+
+        <div class="dual-showcase">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Corporate Executive Slide Deck (16:9)</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap" style="min-height: 220px;">
+              <img src="screenshots/scene2_corporate_slide_16x9.png" alt="Corporate Slide 16x9 Preview">
+            </div>
+            <div class="screenshot-caption">
+              <span>Glassmorphism card, category badge, and staggered animated bullets</span>
+              <span class="tag">CorporateSlideScene</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Infographics &amp; Quantitative Analytics (16:9)</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap" style="min-height: 220px;">
+              <img src="screenshots/scene3_infographic_16x9.png" alt="Infographics 16x9 Preview">
+            </div>
+            <div class="screenshot-caption">
+              <span>Dynamic metric counter, circular gauge, and comparative bar graph</span>
+              <span class="tag">InfographicScene</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dual-showcase" style="margin-top: 24px;">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Corporate Slide Vertical (9:16 Shorts)</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap" style="min-height: 220px;">
+              <img src="screenshots/scene2_corporate_slide_9x16.png" alt="Corporate Slide 9x16 Preview" style="max-height: 380px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Mobile-optimized vertical executive presentation card</span>
+              <span class="tag">1080 × 1920</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Infographic Vertical (9:16 Shorts)</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap" style="min-height: 220px;">
+              <img src="screenshots/scene3_infographic_9x16.png" alt="Infographic 9x16 Preview" style="max-height: 380px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Vertical animated data gauge and analytics comparison</span>
+              <span class="tag">1080 × 1920</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Multi-Scene Render Deliverable Showcase -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 32px 0 16px;">Live Multi-Scene Output Showcase (Subtitled Vertical Shorts)</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          Rendered from a single text script through <strong>Voice Box</strong>, <strong>MultiSceneDeck</strong>, and <strong>Faster-Whisper</strong>:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px;">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Scene 1: Kinetic Motion</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/showcase_part01_scene1.png" alt="Scene 1 Kinetic Subtitled" style="max-height: 340px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Dynamic audio geometry</span>
+              <span class="tag">00:03.00</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Scene 2: Corporate Slide</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/showcase_part01_scene2.png" alt="Scene 2 Corporate Slide Subtitled" style="max-height: 340px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Executive Glassmorphism</span>
+              <span class="tag">00:14.00</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-title">Scene 3: Infographic</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/showcase_part01_scene3.png" alt="Scene 3 Infographic Subtitled" style="max-height: 340px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Metric gauge &amp; analytics</span>
+              <span class="tag">00:24.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- GSAP HyperFrames-Style Motion Engine Showcase -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 36px 0 16px;">⚡ GSAP (GreenSock) HyperFrames-Style Motion Engine</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          Inspired by <strong>HeyGen's HyperFrames</strong> deterministic animation architecture, we integrated <strong>GSAP 3.15</strong> into Remotion via a custom <code>useGsapTimeline</code> hook. Paused GSAP timelines are precisely stepped frame-by-frame via <code>tl.seek(frame / fps)</code>, enabling complex SVG circuit vector tracing, staggered kinetic typography, and blueprint reticles without dropped frames:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 28px;">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">GsapMotion-16x9 (1920x1080) · Frame 75</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/gsap_test_frame.png" alt="GSAP Motion 16x9 Landscape Preview" style="width: 100%; border-radius: 6px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Staggered character blast, circuit vector tracing, and dual branch cards</span>
+              <span class="tag">GsapMotion-16x9</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">GsapMotion-9x16 (1080x1920) · Frame 90</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px; text-align: center;">
+              <img src="screenshots/gsap_test_frame_9x16.png" alt="GSAP Motion 9x16 Vertical Preview" style="max-height: 280px; margin: 0 auto; display: block; border-radius: 6px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Vertical mobile reel with rotating blueprint reticle and kinetic header</span>
+              <span class="tag">GsapMotion-9x16</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Remotion Templates Catalog Showcase -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 36px 0 16px;">Remotion.dev Templates Catalog &amp; Project Alignment</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          Comprehensive audit against the official <strong>remotion.dev/templates</strong> catalog with newly implemented high-value templates:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 28px;">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Podcast Audiogram Card</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/audiogram_preview.png" alt="Audiogram Template Preview" style="max-height: 240px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Dynamic audio waveform bars, avatar ring, and timecode</span>
+              <span class="tag">Audiogram-16x9 / 9x16</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Code Hike / Code Walkthrough</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/codewalkthrough_preview.png" alt="Code Walkthrough Template Preview" style="max-height: 240px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Dark IDE window, syntax tokens, line spotlight, and status pill</span>
+              <span class="tag">CodeWalkthrough-16x9 / 9x16</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">GitHub Stargazer Milestone</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/stargazer_preview.png" alt="Stargazer Template Preview" style="max-height: 240px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Star counter ticker, golden Octocat badge, and confetti</span>
+              <span class="tag">Stargazer-16x9 / 9x16</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Transparent Alpha Overlays</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/overlay_preview.png" alt="Transparent Overlay Template Preview" style="max-height: 240px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Alpha lower-third, corner subscribe pill, and callout for Resolve</span>
+              <span class="tag">Overlay-16x9 / 9x16</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D WebGL Graphics & Three.js Integration Showcase -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 36px 0 16px;">3D Spatial &amp; WebGL Visualizations (@remotion/three)</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          Hardware-accelerated 3D scenes rendered in real time using <strong>Three.js</strong> and <strong>@remotion/three</strong> with custom lighting, materials, and camera perspectives:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px;">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">3D Tech Torus Core</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/three_core_preview.png" alt="3D Core Preview" style="max-height: 220px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Wireframe torus knot &amp; icosahedron</span>
+              <span class="tag">ThreeCore</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">3D Isometric Columns</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/three_bars_preview.png" alt="3D Isometric Bars Preview" style="max-height: 220px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Elevated columns &amp; grid floor</span>
+              <span class="tag">ThreeBars</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">3D Hologram Card</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/three_hologram_preview.png" alt="3D Hologram Preview" style="max-height: 220px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Translucent glass &amp; neon edge</span>
+              <span class="tag">ThreeHologram</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post-Processing & GLSL Shaders Showcase (@remotion/effects) -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 36px 0 16px;">GPU Post-Processing &amp; Shader FX (@remotion/effects)</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          Native WebGL shader post-processing pipeline utilizing <strong>@remotion/effects</strong> with <code>&lt;HtmlInCanvas&gt;</code> rendering for duotone color remapping, retro pixelation, and motion blur:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 28px;">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Spotify Gradient Duotone Shader</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/effects_duotone_preview.png" alt="Duotone Shader Preview" style="max-height: 240px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>GLSL 2-color duotone mapping (#0066FF &amp; #00FF88)</span>
+              <span class="tag">EffectsShowcase (Phase 2)</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-title">Cyber Pixelate &amp; Glitch Shader</div>
+            </div>
+            <div class="screenshot-img-wrap" style="padding: 10px;">
+              <img src="screenshots/effects_pixelate_preview.png" alt="Pixelate Shader Preview" style="max-height: 240px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Hardware-accelerated pixelation filter (8px grid scale)</span>
+              <span class="tag">EffectsShowcase (Phase 3)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1-Click Launchers and Remotion Studio -->
+        <div class="callout emerald" style="margin-top: 24px;">
+          <div class="callout-title" style="color: var(--accent-emerald);">
+            🚀 1-Click Windows Launchers Included (.bat)
+          </div>
+          <p>
+            <strong><code>launch_voicebox.bat</code>:</strong> Double-click to launch the dedicated Voice Box Studio GUI for standalone neural speech synthesis, in-app audio playback, and EBU R128 mastering.<br>
+            <strong><code>launch_remotion_studio.bat</code>:</strong> Double-click to launch Remotion Studio on <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> with real-time frame scrubbing, props customization, and live hot-reloading.<br>
+            <strong><code>run_pipeline.bat</code>:</strong> Double-click to execute the entire end-to-end multimodal pipeline from desktop with zero terminal setup.
+          </p>
+        </div>
+
+        <div class="code-block" style="margin-top: 28px;">
+          <div class="code-header">
+            <span>Interactive Storyboard Builder Web GUI (Port 8080)</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># Launch the visual Storyboard Builder to tweak scene cards before rendering</span>
+<span class="cmd">python</span> scripts/storyboard_gui.py
+
+<span class="comment"># Launch Remotion Studio for live browser frame-by-frame scrubbing</span>
+<span class="cmd">npm</span> start
+
+<span class="comment"># Render 3D Three.js compositions directly</span>
+<span class="cmd">npx</span> remotion render src/index.ts ThreeCore-16x9 out/master/three_core.mp4 <span class="flag">--gl=angle</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3: Vertical Shorts Slicing -->
+    <section id="step3-shorts">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">3</span>
+          Phase 3: Vertical Shorts Chunking &amp; Audio Tail Fade
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/slice_shorts.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted);">
+          Inspects the duration of the rendered video and slices it into continuous 30-second segments optimized for mobile feeds. To prevent abrupt audio cutoffs between clips, it applies a 1.0-second smooth exponential audio tail fade via FFmpeg's <code style="color: var(--accent-cyan);">afade=t=out</code> audio filter.
+        </p>
+
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>Output Segment</th>
+              <th>Time Range</th>
+              <th>Audio Fade Window</th>
+              <th>Hardware Encoder</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>part_01.mp4</code></td>
+              <td>00:00.00 – 00:30.00</td>
+              <td>29.0s – 30.0s (1.0s tail fade)</td>
+              <td>NVIDIA NVENC (<code>h264_nvenc</code> Preset P6)</td>
+            </tr>
+            <tr>
+              <td><code>part_02.mp4</code></td>
+              <td>00:30.00 – 00:35.00</td>
+              <td>34.0s – 35.0s (1.0s tail fade)</td>
+              <td>NVIDIA NVENC (<code>h264_nvenc</code> Preset P6)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Command</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="cmd">python</span> scripts/slice_shorts.py <span class="flag">--video</span> <span class="arg">out/master/test_voiceover_9x16.mp4</span> <span class="flag">--out-dir</span> <span class="arg">out/shorts/test_voiceover</span> <span class="flag">--duration</span> 30</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 4: Faster-Whisper Bouncing Karaoke Subtitles -->
+    <section id="step4-karaoke">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">4</span>
+          Phase 4: Faster-Whisper Word-Level Bouncing Karaoke Subtitles
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/whisper_karaoke.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Using <strong>Faster-Whisper</strong> with CUDA acceleration, speech is transcribed down to millisecond-accurate word boundaries. The engine groups words into readable chunks (3 words/group), formats Advanced SubStation Alpha (<code>.ass</code>) styles with bouncing karaoke tags (<code>{\k}</code> and <code>{\t(\fscx120\fscy120)}</code>), and burns them with FFmpeg's <code style="color: var(--accent-cyan);">libass</code> hardware filter.
+        </p>
+
+        <!-- Karaoke Subtitle Screenshots Showcase -->
+        <div class="dual-showcase">
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Burned-In Karaoke · Frame A (00:03.00)</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap">
+              <img src="screenshots/karaoke_subtitles_frame1.png" alt="Karaoke Subtitles Burned Screenshot 1" style="max-height: 380px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Word highlighting with scale bounce and outline shadow</span>
+              <span class="tag">Arial Black 76pt</span>
+            </div>
+          </div>
+
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Burned-In Karaoke · Frame B (00:07.00)</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap">
+              <img src="screenshots/karaoke_subtitles_frame2.png" alt="Karaoke Subtitles Burned Screenshot 2" style="max-height: 380px;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Dynamic cyan/yellow highlight on active spoken syllable</span>
+              <span class="tag">NVENC Burn (191+ FPS)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Command</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="cmd">python</span> scripts/whisper_karaoke.py <span class="flag">--video</span> <span class="arg">out/shorts/test_voiceover/test_voiceover_9x16_part_01.mp4</span> <span class="flag">--model</span> tiny</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 5: DaVinci Resolve Template Packaging -->
+    <section id="step5-drfx">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">5</span>
+          Phase 5: Fusion .drfx Motion Kit Packaging &amp; Auto-Install
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/build_drfx.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Builds a self-contained Blackmagic Fusion Title Template (.setting) with user-adjustable sliders (Size, GlowColor, Text) inside DaVinci Resolve's Edit Inspector. The bundle is packaged into standard ZIP format with <code>.drfx</code> extension and copied directly to Resolve's Fusion Support directory:
+        </p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Resolve Fusion Templates Directory Path</span>
+            <span>Path</span>
+          </div>
+          <div class="code-body">%APPDATA%\Blackmagic Design\DaVinci Resolve\Support\Fusion\Templates\Edit\Titles\</div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Command</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="cmd">python</span> scripts/build_drfx.py <span class="flag">--name</span> <span class="arg">"TechBlog_Motion_Kit"</span> <span class="flag">--out</span> <span class="arg">out/drfx</span> <span class="flag">--install</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 6: DaVinci Resolve Timeline Assembly -->
+    <section id="step6-resolve">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">6</span>
+          Phase 6: Multi-Track Timeline Assembly &amp; Master Export
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/resolve_timeline_builder.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Assembles a multi-track production project containing:
+        </p>
+
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; font-size: 0.9rem;">
+          <li><strong>Track V1:</strong> Rendered Kinetic Motion Graphics video clips.</li>
+          <li><strong>Track A1:</strong> Primary Voiceover Audio track.</li>
+          <li><strong>Track A2:</strong> Ambient background music track (mixed with -14dB ducking).</li>
+          <li><strong>Chapter Markers:</strong> Cyan &amp; Yellow markers with text notes.</li>
+          <li><strong>Color Grading:</strong> <code>.drx</code> node grade applied to all timeline clips.</li>
+        </ul>
+
+        <!-- Resolve Export Screenshot Showcase -->
+        <div class="screenshot-frame">
+          <div class="screenshot-toolbar">
+            <div class="screenshot-toolbar-dots">
+              <span class="screenshot-toolbar-dot dot-red"></span>
+              <span class="screenshot-toolbar-dot dot-yellow"></span>
+              <span class="screenshot-toolbar-dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">DaVinci Resolve Multi-Track Master Export Preview</div>
+            <div></div>
+          </div>
+          <div class="screenshot-img-wrap" style="background: #060911;">
+            <img src="screenshots/resolve_export_preview.png" alt="Resolve Export Preview" style="max-height: 420px;">
+          </div>
+          <div class="screenshot-caption">
+            <span>Exported Master Video: <code>out/resolve_exports/test_voiceover_resolve_master.mp4</code></span>
+            <span class="tag">H.264 / AAC High Profile Master</span>
+          </div>
+        </div>
+
+        <div class="callout emerald" style="margin-top: 24px;">
+          <div class="callout-title" style="color: var(--accent-emerald);">
+            🎬 DaVinci Resolve "Final Touch" Workflow (FCPXML Import)
+          </div>
+          <p style="margin-bottom: 12px;">
+            Every pipeline run automatically compiles a standard <strong>Final Cut Pro XML (<code>out/resolve_exports/&lt;project&gt;.fcpxml</code>)</strong>. This connects Remotion's programmatic graphics with DaVinci Resolve's Hollywood post-production suite:
+          </p>
+          <ul style="color: var(--text-muted); font-size: 0.88rem; margin-left: 20px; line-height: 1.7;">
+            <li><strong>1-Click Timeline Import:</strong> Open DaVinci Resolve and go to <code>File ➔ Import ➔ Timeline... (Import AAF, EDL, XML)</code>, then select your <code>.fcpxml</code>. Resolve will instantly populate the timeline with all tracks, video cuts, and audio.</li>
+            <li><strong>Track V1 (Motion Background):</strong> Contains your high-resolution Remotion render (3D scenes, corporate slides, and kinetic graphics).</li>
+            <li><strong>Track V2 (Pre-Sliced B-Roll &amp; Facecam):</strong> Pre-cut into exact sentence intervals matching your voiceover. Simply drag and drop your talking-head camera clips or screen recordings onto the green markers on Track V2.</li>
+            <li><strong>Track A1 &amp; A2:</strong> Track A1 holds your studio clean voiceover; Track A2 holds ambient background music.</li>
+            <li><strong>Color Grading with <code>Tech_Cinematic.cube</code>:</strong> In Resolve's <strong>Color Page</strong>, right-click the video node ➔ <code>LUT ➔ Custom / Tech_Cinematic.cube</code> (located in <code>assets/grades/</code>) for instant S-curve contrast, crisp cyan shadow push, and protected skin tones.</li>
+            <li><strong>Fairlight Voice Mastering &amp; Auto-Ducking:</strong>
+              <ol style="margin-left: 20px; margin-top: 6px;">
+                <li><strong>Voice EQ (Track A1):</strong> Enable 6-band parametric EQ, set high-pass filter at 80 Hz to cut rumble, and add a gentle 2.5 dB bell boost at 3.2 kHz for vocal clarity.</li>
+                <li><strong>Dynamics / Compressor (Track A1):</strong> Set ratio to 3:1, threshold at -18 dB, and attack to 15 ms. Turn on "Send" on Track A1 dynamics.</li>
+                <li><strong>Auto-Ducking (Track A2 BGM):</strong> Open Track A2 Dynamics, enable Compressor, and toggle "Listen" to Track A1. Whenever you speak, the background music will automatically duck by -14 dB!</li>
+              </ol>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Remotion vs Resolve Comparison Table -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 32px 0 16px;">Decision Matrix: When is Remotion Enough vs. When to Use DaVinci Resolve?</h3>
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Production Scenario</th>
+              <th>Use Remotion Standalone?</th>
+              <th>Use DaVinci Resolve Final Touch?</th>
+              <th>Recommended Path</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Automated Social Shorts / Reels / TikTok</strong></td>
+              <td>✔ 100% Sufficient</td>
+              <td>Optional (not required)</td>
+              <td><strong>Remotion + Voice Box</strong> renders, slices, and burns karaoke subtitles automatically in 80 seconds.</td>
+            </tr>
+            <tr>
+              <td><strong>Corporate Slides &amp; Infographic Decks</strong></td>
+              <td>✔ 100% Sufficient</td>
+              <td>Optional</td>
+              <td><strong>MultiSceneDeck</strong> generates animated slides, percentage gauges, and bar charts directly.</td>
+            </tr>
+            <tr>
+              <td><strong>Talking-Head / YouTube Video with Facecam</strong></td>
+              <td>Generates background graphics</td>
+              <td>✔ Essential for compositing</td>
+              <td>Import <code>.fcpxml</code> into Resolve, drop your webcam/facecam onto Track V2 over the Remotion background.</td>
+            </tr>
+            <tr>
+              <td><strong>Broadcast / Film Color Grading</strong></td>
+              <td>Basic CSS/WebGL color</td>
+              <td>✔ Essential</td>
+              <td>Use Resolve's Color Page with Film Emulation LUTs, HDR color wheels, and power windows.</td>
+            </tr>
+            <tr>
+              <td><strong>Studio Vocal Dynamics &amp; Sound Design</strong></td>
+              <td>Basic audio mixing</td>
+              <td>✔ Essential</td>
+              <td>Use Resolve Fairlight for multiband vocal compression, De-Esser, and sidechain ducking.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Remotion <Timeline /> Architectural Breakdown -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 32px 0 16px;">Architectural Breakdown: Remotion &lt;Timeline /&gt; vs. DaVinci Resolve vs. Desktop Studio</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+          Reference: <a href="https://www.remotion.dev/docs/timeline" target="_blank" style="color: var(--accent-cyan); text-decoration: underline;">https://www.remotion.dev/docs/timeline</a>
+        </p>
+
+        <div class="card" style="margin-bottom: 24px; background: rgba(10, 16, 30, 0.9);">
+          <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">What is Remotion's &lt;Timeline /&gt; Component?</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 16px;">
+            The <code>&lt;Timeline /&gt;</code> package is Remotion's official commercial React UI component designed for <strong>web application developers building in-browser SaaS video editors</strong> (such as Canva, Descript, or CapCut Web). It provides React hooks and context providers (<code>TimelineProvider</code>, <code>TimelineZoomProvider</code>) to render a visual multi-track timeline inside a web browser with drag-and-drop layer reordering, item trimming, and real-time syncing to Remotion's <code>&lt;Player /&gt;</code>.
+          </p>
+
+          <table class="clean-table" style="margin-bottom: 16px;">
+            <thead>
+              <tr>
+                <th>Feature / Dimension</th>
+                <th>Remotion &lt;Timeline /&gt; (Web React)</th>
+                <th>DaVinci Resolve Studio (Our Pipeline)</th>
+                <th>Workstation Desktop GUI (app.py)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Primary Purpose</strong></td>
+                <td>Building web-based SaaS video editors for browser end-users.</td>
+                <td>Industry-standard Hollywood post-production, grading, and mastering.</td>
+                <td>Zero-touch automation, script-to-video compilation, and live preview.</td>
+              </tr>
+              <tr>
+                <td><strong>Licensing &amp; Cost</strong></td>
+                <td>Paid commercial add-on license required for proprietary apps.</td>
+                <td>One-time Studio license or 100% Free Edition with FCPXML/EDL.</td>
+                <td>Free and open-source (Python, PySide6, React, Node.js).</td>
+              </tr>
+              <tr>
+                <td><strong>Color Science</strong></td>
+                <td>Standard sRGB CSS / WebGL rendering.</td>
+                <td>32-bit floating point DaVinci YRGB Color Managed with 3D LUTs.</td>
+                <td>Synchronized 3D LUT presets (<code>Tech_Cinematic.cube</code>).</td>
+              </tr>
+              <tr>
+                <td><strong>Audio Engine</strong></td>
+                <td>Basic HTML5 web audio mixing via <code>&lt;Audio&gt;</code>.</td>
+                <td>Fairlight DAW: 6-band parametric EQ, sidechain ducking, de-essing.</td>
+                <td>EBU R128 (-16 LUFS) normalization and vocal mastering via FFmpeg.</td>
+              </tr>
+              <tr>
+                <td><strong>Rendering Speed</strong></td>
+                <td>Browser CPU or AWS Lambda cloud rendering.</td>
+                <td>NVIDIA NVENC Gen 7 hardware acceleration directly on your GPU.</td>
+                <td>Local GPU NVENC batch rendering with parallel subagents.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout emerald" style="margin-top: 16px;">
+            <div class="callout-title" style="color: var(--accent-emerald);">
+              💡 Architectural Recommendation for This Workstation
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.7;">
+              Because our workstation is an <strong>automated, high-performance motion graphics pipeline</strong>, using <strong>DaVinci Resolve via our 1-click FCPXML engine</strong> is far more powerful and cost-effective than embedding Remotion's commercial web <code>&lt;Timeline /&gt;</code>. You get GPU-accelerated 32-bit floating point color grading, Hollywood-grade Fairlight audio sidechain ducking, and talking-head B-roll compositing on Track V2 without any browser memory constraints or commercial SaaS licensing costs!
+            </p>
+          </div>
+        </div>
+
+        <div class="callout amber">
+          <div class="callout-title" style="color: var(--accent-amber);">
+            DaVinci Resolve Free vs. Studio API Handling
+          </div>
+          <p>
+            In DaVinci Resolve Free edition, external IPC scripting is disabled by Blackmagic Design. 
+            <code>resolve_timeline_builder.py</code> automatically detects this and generates a standardized <strong>CMX3600 EDL and FCPXML</strong>, renders the multi-track master via NVENC, and installs an <code>Antigravity_Timeline_Importer.py</code> script into <code>Fusion/Scripts/Utility</code> so you can open DaVinci Resolve and import the timeline in 1 click from the Workspace menu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 7: Crucible 3D AI-Driven B-Roll Engine -->
+    <section id="step7-crucible">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">7</span>
+          Phase 7: Crucible 3D AI-Driven B-Roll Engine
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">@codepawlhq/crucible • scripts/render_crucible_scenes.mjs</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          The workstation integrates <strong>Crucible (<a href="https://github.com/codepawl/crucible" target="_blank">@codepawlhq/crucible</a>)</strong>, a dedicated WebGL2/WebGPU 3D rendering engine and path tracer designed specifically to be driven by AI agents. Rather than coding verbose Three.js shaders or running heavy Blender scripts, scenes are declared as pure <strong>JSON Scene Recipes</strong>, verified via automated review grids, and rendered out as high-resolution visual plates.
+        </p>
+
+        <!-- 3D Render Gallery -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 24px;">
+          
+          <!-- Mechanical Gears Card -->
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Mechanical Gears · 3D B-Roll Plate</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap">
+              <img src="screenshots/crucible_mechanical_gears.png" alt="Crucible 3D Mechanical Gears" style="max-height: 220px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Interlocking spur gear train · Industrial Orange (#FF9D32)</span>
+              <span class="tag">Mechanical Eng.</span>
+            </div>
+          </div>
+
+          <!-- Electrical Transformer Card -->
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Power Transformer · 3D B-Roll Plate</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap">
+              <img src="screenshots/crucible_electrical_transformer.png" alt="Crucible 3D Electrical Transformer" style="max-height: 220px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Substation bushings &amp; Electric Blue (#087EFF) glow pulse</span>
+              <span class="tag">Electrical Eng.</span>
+            </div>
+          </div>
+
+          <!-- Holographic Diploma Card -->
+          <div class="screenshot-frame" style="margin: 0;">
+            <div class="screenshot-toolbar">
+              <div class="screenshot-toolbar-dots">
+                <span class="screenshot-toolbar-dot dot-red"></span>
+                <span class="screenshot-toolbar-dot dot-yellow"></span>
+                <span class="screenshot-toolbar-dot dot-green"></span>
+              </div>
+              <div class="screenshot-title">Holographic Diploma · Hero Hook</div>
+              <div></div>
+            </div>
+            <div class="screenshot-img-wrap">
+              <img src="screenshots/crucible_holographic_diploma.png" alt="Crucible 3D Holographic Diploma" style="max-height: 220px; object-fit: contain;">
+            </div>
+            <div class="screenshot-caption">
+              <span>Floating seal badge · Gold (#FFB800) &amp; telemetry rings</span>
+              <span class="tag">Hero Hook</span>
+            </div>
+          </div>
+
+        </div>
+
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>3D Scene Recipe</th>
+              <th>PBR Materials &amp; Physics</th>
+              <th>Lighting Setup</th>
+              <th>Output Destination</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>src/crucible_scenes/mechanical_gears.json</code></td>
+              <td>Brushed steel (met: 0.92, rough: 0.28) + Industrial Orange (#FF9D32)</td>
+              <td>Dual point lights + Studio rim highlights</td>
+              <td><code>out/crucible_renders/</code> &amp; <code>public/3d_broll/</code></td>
+            </tr>
+            <tr>
+              <td><code>src/crucible_scenes/electrical_transformer.json</code></td>
+              <td>Charcoal tank + Electric Blue (#087EFF) emissive glow pulse</td>
+              <td>High-intensity 22W blue key light</td>
+              <td><code>out/crucible_renders/</code> &amp; <code>public/3d_broll/</code></td>
+            </tr>
+            <tr>
+              <td><code>src/crucible_scenes/holographic_diploma.json</code></td>
+              <td>Beveled gold seal (#FFB800) + acrylic glass slab + obsidian pedestal</td>
+              <td>Dual-color ambient rim (Gold/Cyan)</td>
+              <td><code>out/crucible_renders/</code> &amp; <code>public/3d_broll/</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Command / 1-Click Batch</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># Re-render all Crucible 3D scenes via GPU:</span>
+<span class="cmd">render_3d_broll.bat</span>  <span class="comment"># or node scripts/render_crucible_scenes.mjs</span>
+
+<span class="comment"># Launch persistent Crucible MCP server for AI agents:</span>
+<span class="cmd">launch_crucible_mcp.bat</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 8: DaVinci Resolve Native DRFX Interactive Titles -->
+    <section id="step8-drfx">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">8</span>
+          Phase 8: DaVinci Resolve Native .drfx Motion Kit &amp; Keyframing
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">NHIT_Admission_Kit.drfx • scripts/build_nhit_drfx.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          While pre-rendered MP4 videos have pixels "baked in", <strong>DaVinci Resolve Fusion Templates (<code>.drfx</code>)</strong> contain live mathematical vector nodes (<code>Text+</code>, <code>Transform</code>, <code>Merge</code>). When dropped onto the timeline, every single text box, font size, color slider, and position value is <strong>100% editable inside DaVinci Resolve's Edit Page Inspector</strong> with real-time keyframing!
+        </p>
+
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>Title Template</th>
+              <th>Visual Role</th>
+              <th>Editable Inspector Parameters</th>
+              <th>Install Path</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>NHIT_Main_Headline</code></td>
+              <td>Hero Hook &amp; Institution Label</td>
+              <td>Headline Text, Sub-Headline, Institution Label, Font Size, RGB Colors, Box Opacity</td>
+              <td><code>Effects Library > Toolbox > Titles > NHIT Admission</code></td>
+            </tr>
+            <tr>
+              <td><code>NHIT_Branch_Seats_Card</code></td>
+              <td>2-Column Branch Card</td>
+              <td>Left/Right Branch Names, Seat Counts (30 Seats EE / 30 Seats ME), Intake Footer Label</td>
+              <td><code>Effects Library > Toolbox > Titles > NHIT Admission</code></td>
+            </tr>
+            <tr>
+              <td><code>NHIT_Eligibility_Badge</code></td>
+              <td>4-Tier Qualification Matrix</td>
+              <td>Header Title, 10+2 Science, 10+2 Vocational, 10th+ITI, and 1-Year Work Experience</td>
+              <td><code>Effects Library > Toolbox > Titles > NHIT Admission</code></td>
+            </tr>
+            <tr>
+              <td><code>NHIT_CTA_Helpline</code></td>
+              <td>Admissions Open &amp; Contact Bar</td>
+              <td>Admissions Text, Helpline (+91 98005 71423), Website (www.nhit.in), Institutional Tagline</td>
+              <td><code>Effects Library > Toolbox > Titles > NHIT Admission</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout emerald" style="margin-top: 20px;">
+          <div class="callout-title" style="color: var(--accent-emerald);">
+            How to Add &amp; Adjust Keyframes Inside DaVinci Resolve
+          </div>
+          <ol style="color: var(--text-muted); margin-left: 20px; font-size: 0.88rem; line-height: 1.8;">
+            <li><strong>The Inspector Diamond (<code>◇</code>):</strong> Select the Title clip on Track V3, go to <em>Inspector > Video > Transform</em>, and click the diamond icon next to Position, Zoom, or Opacity to create keyframes.</li>
+            <li><strong>Timeline Curve Editor (<code>[~]</code>):</strong> Click the curve icon on the bottom right of the clip on the track to drag smooth Bézier handles and ease in/out.</li>
+            <li><strong>Fusion Spline Editor:</strong> Right-click the clip &gt; <em>"Open in Fusion Page"</em>, press <code>F4</code>, select keyframe points, and press <code>S</code> to smooth curves.</li>
+          </ol>
+        </div>
+
+        <div class="code-block" style="margin-top: 20px;">
+          <div class="code-header">
+            <span>Terminal Command</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="cmd">python</span> scripts/build_nhit_drfx.py  <span class="comment"># Builds and automatically deploys NHIT_Admission_Kit.drfx to Resolve</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 9: Hybrid Multi-Track 3D Timeline -->
+    <section id="step9-hybrid-resolve">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">9</span>
+          Phase 9: Hybrid 3D Multi-Track Master Timeline Assembly
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/generate_hybrid_3d_fcpxml.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          The ultimate broadcast production workflow combines all layers into a single coordinated <strong>DaVinci Resolve FCPXML project</strong>:
+        </p>
+
+        <div class="arch-grid" style="margin-bottom: 24px;">
+          <div class="arch-card">
+            <h4>Track V1: 3D B-Roll Plates</h4>
+            <ul>
+              <li>Crucible 3D Gears, Transformer, and Holographic Diploma</li>
+              <li>High-res GPU visual backdrop</li>
+              <li>Cinema Rec.709 color space</li>
+            </ul>
+          </div>
+          <div class="arch-card">
+            <h4>Track V2: 2D Remotion Reticles</h4>
+            <ul>
+              <li>Technical telemetry and radial gauges</li>
+              <li>Animated engineering circuit lines</li>
+              <li>Transparent alpha overlay</li>
+            </ul>
+          </div>
+          <div class="arch-card">
+            <h4>Track V3: DRFX Native Titles</h4>
+            <ul>
+              <li>NHIT Admission Kit title macros</li>
+              <li>100% editable text &amp; colors in Inspector</li>
+              <li>Native keyframe easing curves</li>
+            </ul>
+          </div>
+          <div class="arch-card">
+            <h4>Track A1: Master Voiceover</h4>
+            <ul>
+              <li>ElevenLabs Niraj / Voicebox neural WAV</li>
+              <li>EBU R128 (-16 LUFS) normalization</li>
+              <li>Exact frame-synced scene markers</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Command</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="cmd">python</span> scripts/generate_hybrid_3d_fcpxml.py  <span class="comment"># Outputs out/resolve_exports/NHIT_Hybrid_3D_Resolve_Timeline.fcpxml</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 10: Automated QA Safe-Area & Provenance Receipt -->
+    <section id="step10-qa-receipt">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">10</span>
+          Phase 10: Automated Broadcast Safe-Area &amp; Provenance Ledger
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/qa_validator.py &amp; scripts/receipt_generator.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Inspired by <strong>Showtime's automated QA safe-area auditing</strong> and broadcast engineering standards, Phase 10 provides automated post-render compliance verification and cryptographic execution receipts:
+        </p>
+
+        <div class="arch-grid" style="margin-bottom: 24px;">
+          <div class="arch-card">
+            <h4>📐 Safe-Area Boundaries (SMPTE ST 2046-1)</h4>
+            <ul>
+              <li><strong>Action Safe (90%):</strong> 5% outer margin verified for frame-edge cutoffs.</li>
+              <li><strong>Title Safe (80%):</strong> 10% inner margin for critical typography legibility.</li>
+              <li><strong>Social UI Clearance (9:16):</strong> Detects intrusions into Top 15% (header/profile) and Bottom 20% (captions/audio reel buttons).</li>
+            </ul>
+          </div>
+          <div class="arch-card">
+            <h4>🔊 Audio Loudness (EBU R128 / ITU-R BS.1770)</h4>
+            <ul>
+              <li><strong>Integrated Loudness:</strong> Target -16.0 LUFS (±1.5 LUFS) for online web &amp; broadcast ads.</li>
+              <li><strong>Maximum True Peak:</strong> Must stay below ≤ -1.0 dBTP to avoid inter-sample DAC clipping.</li>
+              <li><strong>Loudness Range (LRA):</strong> &lt; 14.0 LU for dynamic, punchy dialogue consistency.</li>
+            </ul>
+          </div>
+          <div class="arch-card">
+            <h4>🔐 Cryptographic Provenance Ledger</h4>
+            <ul>
+              <li><strong>SHA-256 Hashes:</strong> Master video, voiceover audio, and storyboard assets.</li>
+              <li><strong>Design Tokens:</strong> Palettes (#071B33 Navy, #087EFF Blue, #FF9D32 Orange) and font weights.</li>
+              <li><strong>Host Audit:</strong> Git commit hash, Remotion v4.0.541, FFmpeg v9.0.2, Python 3.12.</li>
+            </ul>
+          </div>
+          <div class="arch-card">
+            <h4>📜 Dual-Format Receipts</h4>
+            <ul>
+              <li><strong>Human-Readable Markdown:</strong> <code>out/receipts/*_receipt.md</code> with full audit badges.</li>
+              <li><strong>Automation JSON:</strong> <code>out/receipts/*_receipt.json</code> for CI/CD pipeline automation.</li>
+              <li><strong>Desktop Studio Tab 6:</strong> Interactive GUI telemetry inspection and live preview.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="color: var(--text-main); margin: 20px 0 12px 0;">Visual QA Diagnostic Overlay Plates</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+          The QA system programmatically generates diagnostic plates with cyan 90% Action-Safe lines, amber 80% Title-Safe lines, red social UI obstruction zones, and floating telemetry HUD cards:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; margin-bottom: 24px;">
+          <div style="background: var(--bg-alt); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">16:9 Broadcast Landscape Plate</h4>
+            <img src="screenshots/NHIT_Infographic_Admission_16x9_safe_area.png" alt="16:9 QA Safe Area Overlay" style="width: 100%; border-radius: 6px; border: 1px solid rgba(0, 242, 254, 0.3);">
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 8px;">90% Action Safe / 80% Title Safe Wireframes with HUD Telemetry</p>
+          </div>
+          <div style="background: var(--bg-alt); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+            <h4 style="color: var(--accent-pink); margin-bottom: 8px;">9:16 Vertical Reel Plate (Shorts / TikTok)</h4>
+            <img src="screenshots/NHIT_Infographic_Admission_9x16_safe_area.png" alt="9:16 QA Safe Area Overlay" style="width: 55%; margin: 0 auto; display: block; border-radius: 6px; border: 1px solid rgba(255, 45, 85, 0.4);">
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 8px;">Top 15% &amp; Bottom 20% Red Shaded Social Feed Obstruction Danger Zones</p>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Commands</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Run Automated Safe-Area &amp; EBU R128 Audio Loudness Check</span>
+<span class="cmd">python</span> scripts/qa_validator.py --video "out/master/NHIT_Infographic_Admission_16x9.mp4"
+
+<span class="comment"># 2. Generate Cryptographic Production Receipt &amp; Provenance Ledger</span>
+<span class="cmd">python</span> scripts/receipt_generator.py --video "out/master/NHIT_Infographic_Admission_16x9.mp4"
+
+<span class="comment"># 3. Or invoke through the unified Antigravity Motion Pipeline runner</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py --action qa-check --video out/master/NHIT_Infographic_Admission_16x9.mp4
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py --action generate-receipt --video out/master/NHIT_Infographic_Admission_16x9.mp4</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 11: Motion Video Director & Reverse-Engineered Recipes -->
+    <section id="step11-motion-director">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">11</span>
+          Phase 11: AI Motion Video Director &amp; 4 Production Recipes
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.agent/skills/motion-video-director • scripts/storyboard_generator.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Adapted from <strong>mattypark's Motion-graphics-skill</strong>, the workstation now features an autonomous <strong>Motion Video Director</strong> skill. The director acts as Director, Producer, Motion Designer, Video Editor, and Sound Designer in one—guiding the pipeline from a raw script or concept into a broadcast-ready video with zero manual After Effects work.
+        </p>
+
+        <!-- Golden Rules -->
+        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+          <h4 style="color: #10b981; margin-bottom: 8px; font-size: 0.95rem;">🏆 Golden Directing Rules</h4>
+          <ol style="color: var(--text-muted); font-size: 0.88rem; margin-left: 20px; line-height: 1.8;">
+            <li><strong>Workstation Preflight:</strong> Run <code>python .agent/skills/motion-video-director/scripts/preflight.py</code> to audit Node, Python, FFmpeg, Remotion, and Faster-Whisper.</li>
+            <li><strong>Editing Intensity Alignment:</strong> Calibrate pacing from Level 1 (Subtle Corporate) to Level 5 (Hyper-Cine Documentary) before staging scenes.</li>
+            <li><strong>Sound Synchronized to Sight:</strong> Audio hits, risers, whooshes, and sub-booms land on the exact first frame of visual cuts.</li>
+            <li><strong>2D by Default, 3D at Peaks:</strong> Clean Remotion/GSAP vectors for 80% of runtime; deploy Crucible 3D PBR plates for climax moments.</li>
+            <li><strong>Automated Safe-Area QA:</strong> Verify Action Safe (90%), Title Safe (80%), and EBU R128 loudness (-16.0 LUFS) before generating cryptographic execution receipts.</li>
+          </ol>
+        </div>
+
+        <!-- 4 Reference Recipes Grid -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">🎬 The 4 Reverse-Engineered Production Recipes + NHIT Industrial Template</h3>
+        
+        <div class="arch-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+          <div class="arch-card" style="border-top: 3px solid #38bdf8;">
+            <div class="arch-card-title" style="color: #38bdf8;">⚡ Recipe C: SaaS Product Launch</div>
+            <div style="font-size: 0.78rem; color: #94a3b8; margin-bottom: 8px;">Slack-Style • 16:9 Landscape • Intensity 2–3 (Executive)</div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Polished software announcement for developers and enterprise buyers. Features monospace scramble decoding, glowing orbs condensing into glass dock icons, real UI windows tilted in 3D (<code>rotateY: 15°</code>), and rotating 3D monitors flattening into 2D blueprint lines.
+            </p>
+            <div style="margin-top: 10px; font-size: 0.8rem; color: #cbd5e1;">
+              <strong>Palette:</strong> Slate (#0B0F19), Cyan (#38BDF8), Indigo (#818CF8)<br>
+              <strong>SFX:</strong> Tactile clicks, dock open chime, subtle whoosh
+            </div>
+          </div>
+
+          <div class="arch-card" style="border-top: 3px solid #10b981;">
+            <div class="arch-card-title" style="color: #10b981;">📱 Recipe A: Premium Caption Reel</div>
+            <div style="font-size: 0.78rem; color: #10b981;">Creator Shorts • 9:16 Vertical • Intensity 3–4 (Kinetic)</div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Mobile-first high-retention reel for founders and creators. Centered subject or avatar with 1–3 word kinetic captions at chest height, rolling numeric counters, and rounded proof cards popping in an arc (<code>scale: 0 → 1.08 → 1.0</code>).
+            </p>
+            <div style="margin-top: 10px; font-size: 0.8rem; color: #cbd5e1;">
+              <strong>Palette:</strong> Onyx (#06090E), Emerald (#10B981), Vivid Cyan (#06B6D4)<br>
+              <strong>SFX:</strong> Low sub-boom on hook, rolling counter tick shimmer
+            </div>
+          </div>
+
+          <div class="arch-card" style="border-top: 3px solid #c5a059;">
+            <div class="arch-card-title" style="color: #c5a059;">🎞️ Recipe B: Storyteller Documentary</div>
+            <div style="font-size: 0.78rem; color: #c5a059;">Cinematic Manifesto • 16:9 Landscape • Intensity 5 (Hyper-Cine)</div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              High-drama founder origin story or company manifesto. 1.5s per visual idea, 2.39:1 letterbox bars, torn-paper framing windows, 3D extruded chunky typography casting long floor shadows, and hyperspace light-streak tunnels.
+            </p>
+            <div style="margin-top: 10px; font-size: 0.8rem; color: #cbd5e1;">
+              <strong>Palette:</strong> Film Noir (#08090B), Antique Gold (#C5A059), Bone (#E0E2EC)<br>
+              <strong>SFX:</strong> Paper rip rustle, distortion glitch, tension noise riser
+            </div>
+          </div>
+
+          <div class="arch-card" style="border-top: 3px solid #ff6a1a;">
+            <div class="arch-card-title" style="color: #ff6a1a;">🔥 Recipe D: Brand Kinetic Promo</div>
+            <div style="font-size: 0.78rem; color: #ff6a1a;">Frontify-Style • 16:9 Landscape • Intensity 4 (Kinetic)</div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              High-octane agency showcase. Strict alternating contrast (Off-White #FAF8FA ↔ Pure Black #0A0A0A) with Frontify Orange (#FF6A1A). Card snake trailing along a bezier curve, card stack shuffling on 96 BPM eighths, and exploding 4x2 grid with 3D Y-flips.
+            </p>
+            <div style="margin-top: 10px; font-size: 0.8rem; color: #cbd5e1;">
+              <strong>Palette:</strong> Stark Black (#0A0A0A), Off-White (#FAF8FA), Orange (#FF6A1A)<br>
+              <strong>SFX:</strong> Fast whoosh swipe, kick hits, sub-bass drop
+            </div>
+          </div>
+
+          <div class="arch-card" style="border-top: 3px solid #087eff;">
+            <div class="arch-card-title" style="color: #087eff;">🏆 Recipe E: NHIT Industrial Admission</div>
+            <div style="font-size: 0.78rem; color: #087eff;">Technical Campaign • 16:9 &amp; 9:16 • Intensity 3–4 (Kinetic)</div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              Technical engineering brand ad for working professionals. Deep Navy (#071B33), Electric Blue (#087EFF), and Industrial Orange (#FF9D32). Animated blueprint grids, SVG circuit trace, Crucible 3D mechanical gears &amp; transformer, and 30-seat dual branch breakdown.
+            </p>
+            <div style="margin-top: 10px; font-size: 0.8rem; color: #cbd5e1;">
+              <strong>Palette:</strong> Navy (#071B33), Electric Blue (#087EFF), Orange (#FF9D32)<br>
+              <strong>SFX:</strong> Heavy whoosh, circuit relay click, gear ratchet swish
+            </div>
+          </div>
+        </div>
+
+        <!-- Editing Intensity Matrix Table -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 28px 0 16px;">🎚️ Editing Intensity Matrix</h3>
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Intensity Level</th>
+              <th>Pacing</th>
+              <th>Scene Beat</th>
+              <th>Motion Dynamics</th>
+              <th>Target Output / Genre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Level 1–2 (Subtle)</strong></td>
+              <td>Calm, breathing</td>
+              <td>5.0s – 8.0s</td>
+              <td>Gentle fades, smooth pans, minimal camera moves</td>
+              <td>Academic lectures, policy briefs, investor updates</td>
+            </tr>
+            <tr>
+              <td><strong>Level 2–3 (Executive)</strong></td>
+              <td>Clarity-first</td>
+              <td>3.5s – 5.0s</td>
+              <td>Clean card slide-ins, spring UI mockups, subtle glow</td>
+              <td>SaaS Product Launch (Slack-style 16:9)</td>
+            </tr>
+            <tr>
+              <td><strong>Level 3–4 (Kinetic)</strong></td>
+              <td>Dynamic, rhythmic</td>
+              <td>2.0s – 3.5s</td>
+              <td>Word-by-word kinetic type, rolling counters, proof badges</td>
+              <td>Creator Reels (9:16), Admission Ads, Tech Showcases</td>
+            </tr>
+            <tr>
+              <td><strong>Level 4 (Fast Kinetic)</strong></td>
+              <td>Beat-synced</td>
+              <td>1.8s – 2.5s</td>
+              <td>Bezier card snakes, 96 BPM card shuffles, 3D Y-flips</td>
+              <td>Brand-Agency Promo (Frontify-style 16:9)</td>
+            </tr>
+            <tr>
+              <td><strong>Level 5 (Hyper-Cine)</strong></td>
+              <td>Relentless, explosive</td>
+              <td>0.8s – 2.0s</td>
+              <td>1-frame cuts, camera whips, 3D extruded type, light streaks</td>
+              <td>Cinematic Storyteller Documentary, Hype Promos</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Code Block -->
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Audit workstation environment for full director capabilities</span>
+<span class="cmd">python</span> .agent/skills/motion-video-director/scripts/preflight.py
+
+<span class="comment"># 2. Auto-generate storyboard using any of the 5 production recipes</span>
+<span class="cmd">python</span> scripts/storyboard_generator.py <span class="flag">--recipe</span> saas-launch <span class="flag">--duration</span> 30
+<span class="cmd">python</span> scripts/storyboard_generator.py <span class="flag">--recipe</span> caption-reel <span class="flag">--duration</span> 20
+<span class="cmd">python</span> scripts/storyboard_generator.py <span class="flag">--recipe</span> documentary <span class="flag">--duration</span> 25
+<span class="cmd">python</span> scripts/storyboard_generator.py <span class="flag">--recipe</span> brand-promo <span class="flag">--duration</span> 15
+<span class="cmd">python</span> scripts/storyboard_generator.py <span class="flag">--recipe</span> nhit-admission <span class="flag">--duration</span> 30</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 12: Motion AI Kit & Performance Doctor -->
+    <section id="step12-motion-ai">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">12</span>
+          Phase 12: Motion AI Kit &amp; MotionScore Performance Doctor
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.agent/skills/motion-ai • scripts/motion_auditor.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Adapted from <strong>Matt Perry's Motion AI Kit (<a href="https://motion.dev/docs/ai-kit" target="_blank">motion.dev/docs/ai-kit</a>)</strong>, the workstation integrates official Motion animation guidelines, modern <code>motion/react</code> patterns, GPU-accelerated web springs, and an automated static <strong>MotionScore Performance Doctor</strong>.
+        </p>
+
+        <!-- Motion Architectural Role Matrix -->
+        <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+          <h4 style="color: #38bdf8; margin-bottom: 8px; font-size: 0.95rem;">⚙️ Engine Role Partitioning in the Workstation</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 0;">
+            • <strong>Video Rendering (MP4 Exports):</strong> Handled by <strong>Remotion v4 + GSAP 3.15</strong> via <code>useGsapTimeline</code> and <code>useCurrentFrame()</code> to ensure 100% deterministic frame snapshots without multi-threaded dropped frames.<br>
+            • <strong>Interactive Web GUIs &amp; Dashboards:</strong> Handled by <strong>Motion Standalone Core</strong> (<code>docs/dashboard.html</code>, <code>scripts/storyboard_gui.py</code>) for 60/120 FPS spring physics, staggered card reveals, and tactile button interactions.<br>
+            • <strong>AI Agent Coding Rules:</strong> Enforced by <code>.agent/skills/motion-ai/SKILL.md</code> to prevent layout thrashing and eliminate deprecated <code>framer-motion</code> imports.
+          </p>
+        </div>
+
+        <!-- Layout Thrashing Rules -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">🩺 MotionScore Performance Doctor Rules</h3>
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Allowed / Recommended Pattern</th>
+              <th>Forbidden Anti-Pattern</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>GPU Transforms</strong></td>
+              <td><code>transform: translate3d(...)</code>, <code>scale()</code>, <code>rotate()</code></td>
+              <td><code>transition: top, left, width, height</code></td>
+              <td>Eliminates layout reflow and forces compositor GPU execution.</td>
+            </tr>
+            <tr>
+              <td><strong>React Imports</strong></td>
+              <td><code>import * as motion from "motion/react"</code></td>
+              <td><code>import { motion } from "framer-motion"</code></td>
+              <td>Ensures modern bundle tree-shaking and avoids deprecated APIs.</td>
+            </tr>
+            <tr>
+              <td><strong>Spring Physics</strong></td>
+              <td><code>stiffness: 140–300, damping: 18–25, mass: 0.6–0.8</code></td>
+              <td>Arbitrary linear durations or uncalibrated beziers</td>
+              <td>Organic physical acceleration and settling without bounce overshoot.</td>
+            </tr>
+            <tr>
+              <td><strong>Remotion Safety</strong></td>
+              <td>Pure functions of <code>useCurrentFrame()</code></td>
+              <td><code>Date.now()</code>, <code>Math.random()</code>, <code>requestAnimationFrame</code></td>
+              <td>Prevents frame dropping, audio desync, and parallel render flicker.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Code Block -->
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Run MotionScore Performance Doctor across all project templates and components</span>
+<span class="cmd">python</span> scripts/motion_auditor.py
+
+<span class="comment"># 2. Audit specific HTML dashboard or web GUI files</span>
+<span class="cmd">python</span> scripts/motion_auditor.py <span class="flag">--path</span> docs/dashboard.html scripts/storyboard_gui.py
+
+<span class="comment"># 3. Output raw JSON report for CI/CD pipelines</span>
+<span class="cmd">python</span> scripts/motion_auditor.py <span class="flag">--json</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 13: iart-ai Motion Skills Suite & Visual Contact Sheet Verifier -->
+    <section id="step13-iart-motion">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">13</span>
+          Phase 13: iart-ai Motion Skills Suite &amp; Visual Contact Sheet Verifier
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.agent/skills/motion-skills • scripts/contact_sheet.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Adapted from <strong>iart-ai's Motion Skills (<a href="https://github.com/iart-ai/motion-skills" target="_blank">iart-ai/motion-skills</a>)</strong>, the workstation integrates an extensive 19-pack motion design catalog, deep-dive skills for Data Animation, Kinetic Typography, and Video Advertising, and a signature <strong>Deliver-and-Verify Visual Contact Sheet</strong> tool.
+        </p>
+
+        <!-- Deliver-and-Verify Explainer -->
+        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+          <h4 style="color: #10b981; margin-bottom: 8px; font-size: 0.95rem;">📸 The "Deliver-and-Verify" Self-Auditing Loop</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 0;">
+            Before exporting full-length video masters or handing assets to clients, the agent generates a multi-frame <strong>Visual Contact Sheet Montage</strong>. This aggregates 6 to 9 milestone frames across the timeline into a single diagnostic plate—allowing instant verification of typography hierarchy, contrast against backgrounds, scene transition alignment, and safe-area boundaries without scrubbing video.
+          </p>
+        </div>
+
+        <!-- Contact Sheet Visual Showcase -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">🖼️ Multi-Frame Contact Sheet Visual Verifier Plates</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 24px;">
+          <div style="background: var(--bg-alt); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">16:9 Landscape Montage (NHIT-Infographic-16x9 • 6 Milestones)</h4>
+            <img src="screenshots/NHIT-Infographic-16x9_contact_sheet.png" alt="16:9 Visual Contact Sheet" style="width: 100%; border-radius: 6px; border: 1px solid rgba(0, 242, 254, 0.3);">
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 8px;">Evenly distributed milestone frames with timestamp badges, 90% Action Safe &amp; 80% Title Safe wireframes</p>
+          </div>
+          <div style="background: var(--bg-alt); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
+            <h4 style="color: var(--accent-pink); margin-bottom: 10px;">9:16 Vertical Reel Montage (NHIT-Infographic-9x16 • 6 Milestones)</h4>
+            <img src="screenshots/NHIT-Infographic-9x16_contact_sheet.png" alt="9:16 Visual Contact Sheet" style="width: 60%; margin: 0 auto; display: block; border-radius: 6px; border: 1px solid rgba(255, 45, 85, 0.4);">
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 8px;">Vertical reel audit with top 15% and bottom 20% Social UI Danger Zone clearance</p>
+          </div>
+        </div>
+
+        <!-- 19-Pack Domains Table -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 28px 0 16px;">📚 19-Pack Motion Catalog Across 6 Production Domains</h3>
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Included Packs</th>
+              <th>Primary Capabilities</th>
+              <th>Workstation Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Social &amp; Short-Form</strong></td>
+              <td><code>tiktok-video-skills</code>, <code>text-message-video-skills</code>, <code>youtube-video-skills</code></td>
+              <td>9:16 vertical safe areas, high-retention 3s hooks, SMS dialog bubble animations</td>
+              <td>Shorts slicing &amp; karaoke subtitle pipelines</td>
+            </tr>
+            <tr>
+              <td><strong>2. Data &amp; Explainers</strong></td>
+              <td><code>data-animation-skills</code>, <code>explainer-video-skills</code>, <code>map-animation-skills</code></td>
+              <td>Frame-accurate animated bar charts, metric counters, Vox-style route maps</td>
+              <td>Infographic scenes &amp; admission charts</td>
+            </tr>
+            <tr>
+              <td><strong>3. Web &amp; UI</strong></td>
+              <td><code>web-animation-skills</code>, <code>motion-design-skills</code></td>
+              <td>Frontend micro-interactions, GSAP sequencing, Lottie, SVG morphing</td>
+              <td>Web GUI &amp; interactive dashboard tools</td>
+            </tr>
+            <tr>
+              <td><strong>4. Typography &amp; Craft</strong></td>
+              <td><code>kinetic-typography-skills</code>, <code>brand-motion-skills</code></td>
+              <td>Staggered word reveals, active karaoke pop highlights, semantic weight scaling</td>
+              <td>Remotion &amp; GSAP kinetic headline reveals</td>
+            </tr>
+            <tr>
+              <td><strong>5. 3D, Shaders &amp; Math</strong></td>
+              <td><code>webgl-animation-skills</code>, <code>manim-skills</code>, <code>shader-animation-skills</code></td>
+              <td>Three.js 3D spatial scenes, particle clouds, Manim math proofs, GLSL shaders</td>
+              <td>Crucible 3D engine scene generation</td>
+            </tr>
+            <tr>
+              <td><strong>6. Commercial &amp; Agency</strong></td>
+              <td><code>ad-video-skills</code>, <code>freelance-motion-skills</code></td>
+              <td>Problem-Agitate-Solution arcs, proof badges, multi-variant 16:9 &amp; 9:16 testing</td>
+              <td>High-impact performance admission campaigns</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Code Block -->
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Generate 6-frame visual contact sheet for any composition</span>
+<span class="cmd">python</span> scripts/contact_sheet.py <span class="flag">--comp</span> NHIT-Infographic-16x9 <span class="flag">--frames</span> 6
+
+<span class="comment"># 2. Generate 9-frame contact sheet for vertical reels</span>
+<span class="cmd">python</span> scripts/contact_sheet.py <span class="flag">--comp</span> NHIT-Infographic-9x16 <span class="flag">--frames</span> 9
+
+<span class="comment"># 3. Generate contact sheet via unified pipeline runner</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--action</span> contact-sheet <span class="flag">--project</span> NHIT-Infographic-16x9</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 14: SkillsLLM Beat-Grid Musical Synchronizer & Showreel Director -->
+    <section id="step14-skillsllm-beatgrid">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">14</span>
+          Phase 14: Beat-Grid Musical Synchronizer &amp; Showreel Director Suite
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.agent/skills/motion-graphics-skills • scripts/beat_grid.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Adapted from <strong>Charlie Hills / Mort1d's Motion Graphics Skills (<a href="https://skillsllm.com/skill/motion-graphics-skills" target="_blank">skillsllm.com/skill/motion-graphics-skills</a>)</strong>, this suite elevates animation pacing from arbitrary durations into mathematically precise <strong>musical beat grids</strong> and provides a <strong>60 FPS Showreel &amp; Launch Trailer Director Recipe</strong>.
+        </p>
+
+        <!-- Musical Synchronizer Architecture Box -->
+        <div style="background: rgba(255, 87, 34, 0.08); border: 1px solid rgba(255, 87, 34, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+          <h4 style="color: #ff5722; margin-bottom: 8px; font-size: 0.95rem;">🎵 Pure Mathematical BPM Grid + Transient Audio Detection</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 0;">
+            Animation pacing is calculated strictly according to musical tempo: <code>FramesPerBeat = (FPS &times; 60) / BPM</code>. In addition to mathematical quarter, eighth, and sixteenth note subdivisions, <code>scripts/beat_grid.py</code> features a native <strong>Pure NumPy audio transient detector</strong> that streams raw 16-bit PCM via FFmpeg and detects percussive onset flux without heavy machine learning dependencies.
+          </p>
+        </div>
+
+        <!-- Dual Export System Table -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">⚡ Dual Export Pipeline: Remotion Code &amp; DaVinci Resolve Markers</h3>
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Target Engine</th>
+              <th>Generated File</th>
+              <th>Marker / Data Spec</th>
+              <th>Production Benefit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Remotion React &amp; GSAP</strong></td>
+              <td><code>src/data/beat_grid.json</code></td>
+              <td>JSON array of frame indices, beat numbers, measures, eighth-notes, and onset energies</td>
+              <td>Components snap keyframes and springs to exact musical hits</td>
+            </tr>
+            <tr>
+              <td><strong>DaVinci Resolve NLE</strong></td>
+              <td><code>out/resolve_exports/beat_markers.edl</code></td>
+              <td>CMX 3600 EDL with <code>ResolveColorBlue</code> (Bar starts), <code>ResolveColorCyan</code> (Beats), and <code>ResolveColorOrange</code> (Transients)</td>
+              <td>One-click import into DaVinci Resolve timeline puts visual cut markers directly under playhead</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Showreel Recipe Archetypes -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">🚀 60 FPS Showreel / Launch Trailer Recipe (High-Contrast Agency)</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 16px;">
+          Built with an executive palette of <strong>Pure Black (<code>#0A0A0A</code>)</strong>, <strong>Stark White (<code>#FFFFFF</code>)</strong>, <strong>Vibrant Agency Orange (<code>#FF5722</code>)</strong>, and <strong>Electric Amber (<code>#FFB800</code>)</strong>, this recipe sequences high-tension kinetic motion:
+        </p>
+
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Beat / Sequence</th>
+              <th>Archetype Key</th>
+              <th>Visual &amp; Audio Choreography</th>
+              <th>Spring Physics (d / s / m)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Beat 1</strong></td>
+              <td><code>showreel_cold_open</code></td>
+              <td>Sub-frame typographic sting with shutter blur, stark contrast flash, sub-boom drop</td>
+              <td>damping: 9, stiffness: 180, mass: 0.5</td>
+            </tr>
+            <tr>
+              <td><strong>Beat 2</strong></td>
+              <td><code>friction_contrast_break</code></td>
+              <td>Alternating inverted frames with high-tension typography and staccato kinetic cuts</td>
+              <td>damping: 10, stiffness: 160, mass: 0.55</td>
+            </tr>
+            <tr>
+              <td><strong>Beat 3</strong></td>
+              <td><code>feature_cascade_surge</code></td>
+              <td>Synchronized beat-grid cascading metrics accelerating across musical eighths</td>
+              <td>damping: 8, stiffness: 190, mass: 0.45</td>
+            </tr>
+            <tr>
+              <td><strong>Beat 4</strong></td>
+              <td><code>climax_3d_shockwave</code></td>
+              <td>Crucible 3D spatial geometry expanding with radial shockwave and camera zoom punch</td>
+              <td>damping: 11, stiffness: 140, mass: 0.7</td>
+            </tr>
+            <tr>
+              <td><strong>Beat 5</strong></td>
+              <td><code>brand_climax_cta</code></td>
+              <td>Final brand lockup explosion resolving into high-conversion action badge</td>
+              <td>damping: 10, stiffness: 170, mass: 0.6</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Terminal Execution Commands -->
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Generate mathematical 120 BPM grid at 30 FPS with Resolve EDL markers</span>
+<span class="cmd">python</span> scripts/beat_grid.py <span class="flag">--bpm</span> 120 <span class="flag">--fps</span> 30 <span class="flag">--duration</span> 30
+
+<span class="comment"># 2. Extract transient audio hits from music track and generate beat sync grid</span>
+<span class="cmd">python</span> scripts/beat_grid.py <span class="flag">--audio</span> inputs/multiscene_showcase_voicebox.wav <span class="flag">--bpm</span> 120 <span class="flag">--fps</span> 30
+
+<span class="comment"># 3. Generate 60 FPS Showreel storyboard synced to high-energy tempo</span>
+<span class="cmd">python</span> scripts/storyboard_generator.py <span class="flag">--recipe</span> showreel-launch <span class="flag">--duration</span> 30
+
+<span class="comment"># 4. Import markers into DaVinci Resolve:</span>
+<span class="comment"># DaVinci Resolve &gt; File &gt; Import &gt; Timeline Markers from EDL... &gt; select out/resolve_exports/beat_markers.edl</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 15: Clipwing Real SFX Sound Design & Audio Mixer -->
+    <section id="step15-real-sfx">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">15</span>
+          Phase 15: Real SFX Sound Design &amp; Fairlight Audio Engine
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.agent/skills/real-sfx • scripts/sfx_designer.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Adapted from <strong>Clipwing's Real SFX (<a href="https://github.com/Clipwing/skills/tree/edbefcbc3474869e6cc1e8a7ca583b0efd0dab7e/skills/real-sfx" target="_blank">Clipwing/skills/real-sfx</a>)</strong>, this audio production suite eliminates "silent motion graphics" by automating frame-accurate sound effects placement, acoustic Foley synthesis, and intelligent voiceover ducking.
+        </p>
+
+        <!-- Sound Design Core Architecture Box -->
+        <div style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+          <h4 style="color: #a78bfa; margin-bottom: 8px; font-size: 0.95rem;">🔊 15 Studio-Grade 48kHz Acoustic Textures + Intelligent Speech Ducking</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 0;">
+            Rather than relying on generic AI audio prompts, <code>scripts/sfx_library_builder.py</code> procedurally synthesizes 15 broadcast-grade 48kHz stereo WAV textures (sub-booms, trailer impacts, UI bubble pops, air whip whooshes, and industrial circuit relay clicks) using zero-download pure NumPy. During sound design, <code>scripts/sfx_designer.py</code> monitors voiceover dialogue via 50ms sliding RMS windows and automatically attenuates coinciding sound effects by <strong>4 dB</strong> to prevent speech masking.
+          </p>
+        </div>
+
+        <!-- Cue Archetypes Table -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">🎛️ Acoustic Cue Archetypes &amp; Calibrated Gain Hierarchy</h3>
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Cue Archetype</th>
+              <th>Acoustic Family</th>
+              <th>Nominal Gain</th>
+              <th>Choreography &amp; Visual Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>sub_boom_drop</code> / <code>logo_sub_boom</code></td>
+              <td>Cinematic Bass Impact</td>
+              <td>-10.0 dBFS</td>
+              <td>High-impact title cards, cold open stings, final brand lockups</td>
+            </tr>
+            <tr>
+              <td><code>heavy_sub_impact</code></td>
+              <td>Trailer Shockwave</td>
+              <td>-9.0 dBFS</td>
+              <td>Crucible 3D collisions, spatial shockwaves, explosive transitions</td>
+            </tr>
+            <tr>
+              <td><code>snappy_pop</code> / <code>tactile_pop</code></td>
+              <td>Organic UI Clicks</td>
+              <td>-15.0 dBFS</td>
+              <td>Card entrance bounces, checklist badge reveals, micro-interactions</td>
+            </tr>
+            <tr>
+              <td><code>whoosh_swipe</code> / <code>fast_whoosh_swipe</code></td>
+              <td>Stereo Air Displacement</td>
+              <td>-14.0 dBFS</td>
+              <td>Slide transitions (leads transition cut by 6 frames for propulsive feel)</td>
+            </tr>
+            <tr>
+              <td><code>circuit_relay_click</code> / <code>gear_ratchet</code></td>
+              <td>Industrial Mechanics</td>
+              <td>-16.0 dBFS</td>
+              <td>NHIT engineering graphics, circuit traces, 3D rotating gear teeth</td>
+            </tr>
+            <tr>
+              <td><code>tick_shimmer</code> / <code>metric_tick_shimmer</code></td>
+              <td>Quartz Clock / Crystal</td>
+              <td>-18.0 dBFS</td>
+              <td>Rolling data counters, quantitative milestone surge animations</td>
+            </tr>
+            <tr>
+              <td><code>dock_open_chime</code> / <code>airy_riser</code></td>
+              <td>Harmonic Bell / Swell</td>
+              <td>-15.0 dBFS</td>
+              <td>Glass dock appearances, pre-climax tension risers</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Multi-Track FCPXML Integration Table -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">🎞️ DaVinci Resolve Multi-Track Assembly &amp; Cryptographic Receipts</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 16px;">
+          Sound design is deeply integrated across all downstream workstation tools:
+        </p>
+
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Workstation Component</th>
+              <th>Integration Specification</th>
+              <th>Output Asset / Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>DaVinci Resolve FCPXML</strong></td>
+              <td>Embedded as <code>Track A2: [A2 Real SFX] master_sfx.wav</code> (<code>lane="-2"</code>) alongside Track A1 Voiceover</td>
+              <td><code>out/resolve_exports/NHIT_Hybrid_3D_Resolve_Timeline.fcpxml</code></td>
+            </tr>
+            <tr>
+              <td><strong>Master Video Muxer</strong></td>
+              <td>FFmpeg <code>amix</code> filter combines dialogue and SFX with 320kbps AAC broadcast audio</td>
+              <td><code>out/master/*_sfx_master.mp4</code></td>
+            </tr>
+            <tr>
+              <td><strong>Production Receipts</strong></td>
+              <td>SHA-256 fingerprint, cue count, ducked event count, and peak dBFS logged in provenance ledger</td>
+              <td><code>out/receipts/*_receipt.md</code> &amp; <code>.json</code></td>
+            </tr>
+            <tr>
+              <td><strong>Desktop Studio GUI</strong></td>
+              <td>One-click <code>🔊 Real SFX Mix</code> buttons in Tab 2 (Storyboard) and Tab 5 (Resolve Fairlight)</td>
+              <td>Interactive Desktop Application (<code>app.py</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Terminal Execution Commands -->
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Procedurally generate or refresh the 15 studio-grade 48kHz SFX assets</span>
+<span class="cmd">python</span> scripts/sfx_library_builder.py
+
+<span class="comment"># 2. Design and render master SFX audio stem (out/sfx/master_sfx.wav)</span>
+<span class="cmd">python</span> scripts/sfx_designer.py <span class="flag">--storyboard</span> src/data/storyboard.json <span class="flag">--fps</span> 30
+
+<span class="comment"># 3. Mux SFX track directly with master video MP4</span>
+<span class="cmd">python</span> scripts/sfx_designer.py <span class="flag">--mux</span> <span class="flag">--video</span> out/master/NHIT_Infographic_Admission_16x9.mp4
+
+<span class="comment"># 4. Trigger via unified pipeline runner</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--action</span> sfx</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 16: WordPress Openverse Commercial Media & Asset Sourcing Engine -->
+    <section id="step16-openverse-media">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">16</span>
+          Phase 16: WordPress Openverse Commercial Media &amp; Fairlight Track A3
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.agent/skills/openverse • scripts/openverse_search.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          Adapted from <strong>WordPress Openverse (<a href="https://github.com/WordPress/openverse" target="_blank">WordPress/openverse</a>)</strong>, the workstation taps into an index of <strong>800+ million open-source media assets</strong>. It automates commercial-safe B-Roll discovery, royalty-free background music (BGM) sourcing, and cryptographic legal attribution.
+        </p>
+
+        <!-- Commercial Safety Box -->
+        <div style="background: rgba(5, 150, 105, 0.08); border: 1px solid rgba(5, 150, 105, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+          <h4 style="color: #10b981; margin-bottom: 8px; font-size: 0.95rem;">⚖️ Strict Commercial-Safe Policy &amp; Aspect-Ratio Matching</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 0;">
+            Promotional and corporate motion graphics require rigorous copyright safety. The engine strictly restricts queries to <code>CC0</code>, <code>Public Domain Mark (PDM)</code>, and <code>CC-BY</code> licenses, automatically purging any Non-Commercial (<code>NC</code>) or No-Derivatives (<code>ND</code>) files. Queries automatically match project geometry: <code>aspect_ratio=wide</code> for 16:9 landscape master compositions and <code>aspect_ratio=tall</code> for 9:16 vertical Shorts.
+          </p>
+        </div>
+
+        <!-- 3-Stem Fairlight Architecture Table -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">🎚️ DaVinci Resolve Fairlight 3-Stem Audio Architecture</h3>
+        <table class="clean-table" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>Stem / Track</th>
+              <th>FCPXML Lane</th>
+              <th>Source Engine &amp; File</th>
+              <th>Calibrated Mixing Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Track A1: Dialogue</strong></td>
+              <td><code>lane="-1"</code></td>
+              <td>Voice Box / ElevenLabs (<code>nhit_elevenlabs_audio.wav</code>)</td>
+              <td>-16.0 LUFS broadcast standard, -1.0 dBTP ceiling</td>
+            </tr>
+            <tr>
+              <td><strong>Track A2: Real SFX</strong></td>
+              <td><code>lane="-2"</code></td>
+              <td>Real SFX Synthesizer (<code>out/sfx/master_sfx.wav</code>)</td>
+              <td>-9 to -18 dBFS, -4 dB speech sidechain ducked</td>
+            </tr>
+            <tr>
+              <td><strong>Track A3: BGM</strong></td>
+              <td><code>lane="-3"</code></td>
+              <td>Openverse Audio Catalog (<code>assets/bgm/master_bgm.mp3</code>)</td>
+              <td>-22.0 dBFS ambient bed, -6 dB voiceover ducked</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Attribution Ledger Overview -->
+        <h3 style="font-size: 1.15rem; color: #fff; margin: 24px 0 16px;">🔐 Automated Creative Commons Provenance &amp; Legal Attribution</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 16px;">
+          Every sourced image and music track is hashed with SHA-256 and logged into <code>out/openverse/attribution_ledger.md</code> and appended into the master production receipt (<code>out/receipts/*_receipt.md</code>), fulfilling all CC-BY license attribution requirements with zero human intervention.
+        </p>
+
+        <!-- Terminal Execution Commands -->
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Search and download commercial-safe stock images for 16:9 compositions</span>
+<span class="cmd">python</span> scripts/openverse_search.py <span class="flag">--query</span> "engineering laboratory" <span class="flag">--type</span> image <span class="flag">--aspect</span> wide <span class="flag">--limit</span> 3
+
+<span class="comment"># 2. Search and download royalty-free background music (BGM)</span>
+<span class="cmd">python</span> scripts/openverse_search.py <span class="flag">--query</span> "cinematic ambient synth" <span class="flag">--type</span> audio <span class="flag">--limit</span> 1 <span class="flag">--download</span>
+
+<span class="comment"># 3. Batch-fetch B-Roll plates and BGM directly from storyboard scenes</span>
+<span class="cmd">python</span> scripts/openverse_search.py <span class="flag">--storyboard</span> src/data/storyboard.json
+
+<span class="comment"># 4. Mux 3-stem audio (Voiceover + Real SFX + Openverse BGM) into master MP4</span>
+<span class="cmd">python</span> scripts/sfx_designer.py <span class="flag">--mux</span> <span class="flag">--video</span> out/master/NHIT_Infographic_Admission_16x9.mp4</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 17: Branch Education 3D Hardware Teardown & Tracking Engine -->
+    <section id="step17-hardware-teardown">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">17</span>
+          Phase 17: Branch Education 3D Hardware Teardown &amp; Tracking
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.agent/skills/hardware-teardown • scripts/blender_teardown.py • src/HardwareTeardownScene.tsx</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Inspired by <strong>Branch Education's</strong> iconic documentary <a href="https://www.youtube.com/watch?v=fCS8jGc3log" target="_blank" style="color: #38bdf8;">"What's Inside a Smartphone?"</a>, this engine orchestrates hyper-detailed 3D exploded hardware teardowns, microscopic silicon fly-throughs, automated 3D-to-2D screen coordinate projection for Remotion/GSAP HUD tracking, and procedural mechanical foley sound design.
+        </p>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Key Capabilities &amp; Technical Flow:</h4>
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Dual-Engine 3D Architecture:</strong> Headless Blender (Cycles/Eevee photorealistic plates) + Remotion <code>@remotion/three</code> WebGL fallback (runs instantly anywhere without external dependencies).</li>
+          <li><strong>Automated 3D-to-2D Matrix Projection:</strong> Computes exact pinhole lookAt camera perspective projection per frame, writing <code>out/tracking/screen_coords.json</code> so Remotion HUD leader lines track moving 3D components with sub-pixel precision.</li>
+          <li><strong>Dual-Layer Electrical Signal Flow:</strong> Blender physical copper emission curves + Remotion SVG glowing packet streams representing high-speed memory and processor buses.</li>
+          <li><strong>Dedicated Teardown Foley:</strong> Procedural 48kHz audio foley (<code>metallic_unlatch</code>, <code>glass_lift</code>, <code>silicon_macro_riser</code>, <code>data_packet_pulse</code>) with automatic speech ducking.</li>
+          <li><strong>DaVinci Resolve FCPXML Spine:</strong> Generates multi-track timeline (Track V1: 3D Plate, Track V2: Remotion HUD, Track A1: Voiceover, Track A2: Foley, Track A3: BGM).</li>
+        </ul>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Run complete automated hardware teardown pipeline (Blender tracking + Foley + FCPXML)</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--action</span> teardown
+
+<span class="comment"># 2. Re-compute 3D-to-2D camera perspective tracking coordinates</span>
+<span class="cmd">python</span> scripts/blender_teardown.py <span class="flag">--tracking-only</span>
+
+<span class="comment"># 3. Render Remotion WebGL exploded assembly (16:9 or 9:16)</span>
+<span class="cmd">npx</span> remotion render src/index.ts Hardware-Teardown-16x9 out/master/Hardware_Teardown_16x9.mp4 <span class="flag">--gl=angle</span>
+<span class="cmd">npx</span> remotion render src/index.ts Hardware-Teardown-9x16 out/master/Hardware_Teardown_9x16.mp4 <span class="flag">--gl=angle</span>
+
+<span class="comment"># 4. Generate DaVinci Resolve multi-track FCPXML project</span>
+<span class="cmd">python</span> scripts/generate_hybrid_3d_fcpxml.py <span class="flag">--teardown</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 18: Universal Multi-Genre Production Video Router -->
+    <section id="step18-multi-genre-router">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">18</span>
+          Phase 18: Universal Multi-Genre Production Router
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.agent/skills/multi-genre-router • scripts/video_engine_router.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Elevates the workstation from prototype animations to <strong>true broadcast production grade</strong> by dynamically routing projects across 4 specialized rendering engine paths:
+        </p>
+
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Genre 1: Motion Graphics (Ads, Flyers, Vox, Infographics):</strong> Remotion + GSAP 3 inertia physics, 2.5% film/paper texture grain, dynamic Bezier charts, and animated territory maps.</li>
+          <li><strong>Genre 2: 3D Realistic Explainer (Branch Education Teardowns):</strong> Headless Blender 4.2 Cycles GPU raytracing, 100mm optical macro lens, thin-film silicon iridescence, dynamic boolean FinFET slicing, and an editable <code>.blend</code> timeline scene.</li>
+          <li><strong>Genre 3: Documentary, History &amp; Cartoon (Vox / Kurzgesagt):</strong> 2.5D Parallax photo pushes (Ken Burns 2.0), animated vintage maps with route lines, yellow highlighter newspaper sweeps, and Kurzgesagt vector puppets.</li>
+          <li><strong>Genre 4: Podcast, Vodcast &amp; Audiograms:</strong> Automatic speaker diarization layout switching (Host/Guest/Split), 60-band reactive FFT audio waveforms, and bouncing word-level subtitles.</li>
+        </ul>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Route to Motion Graphics (2D Ads &amp; Infographics)</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--genre</span> motion-graphics <span class="flag">--project</span> "MyAd" <span class="flag">--aspect</span> 16:9
+
+<span class="comment"># 2. Route to 3D Realistic Explainer (Branch Education Teardown)</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--genre</span> 3d-realistic <span class="flag">--project</span> "SmartphoneTeardown" <span class="flag">--aspect</span> 16:9
+
+<span class="comment"># 3. Route to Documentary &amp; History (Vox / Kurzgesagt)</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--genre</span> documentary <span class="flag">--project</span> "HistoricalReport" <span class="flag">--aspect</span> 16:9
+
+<span class="comment"># 4. Route to Podcast &amp; Audiograms</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--genre</span> podcast <span class="flag">--project</span> "Episode42" <span class="flag">--audio</span> "inputs/test_voiceover.wav"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 19: Video Projects Isolation & Git Discipline -->
+    <section id="step19-project-isolation">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">19</span>
+          Phase 19: Video Projects Isolation &amp; Git Discipline
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.gitignore • scripts/new_project.py • projects/&lt;slug&gt;/</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          To maintain an ultra-lightweight, high-speed repository and ensure client data privacy, the workstation enforces a strict architectural separation between the <strong>core motion engine</strong> and <strong>individual video project instances</strong>:
+        </p>
+
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Zero Auto-Push Rule:</strong> Specific video production instances, raw voiceover stems (<code>*.wav</code>), video references (<code>*.mp4</code>), and render outputs (<code>out/</code>) are <strong>100% ignored by Git</strong> in the <code>projects/*</code> directory. Remote pushes to GitHub occur strictly upon explicit user command and only when core engine architecture evolves.</li>
+          <li><strong>Modular Scaffolding CLI:</strong> The <code>scripts/new_project.py</code> utility creates standardized project structures with modular <code>assets/</code>, <code>audio/</code>, <code>scenes/</code>, <code>vertical/</code>, and <code>renders/</code> in one terminal command.</li>
+          <li><strong>Shared Core Primitives:</strong> All reusable 3D hardware widgets, kinetic subtitle logic, and physics engines live in <code>src/components/kinetics/</code> and <code>src/engine/</code>, version-controlled cleanly without project bloat.</li>
+        </ul>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Standardized Project Directory Structure:</h4>
+        <div class="code-block" style="margin-bottom: 20px;">
+          <div class="code-header">
+            <span>Project Workspace Architecture</span>
+            <span>projects/&lt;slug&gt;/</span>
+          </div>
+          <div class="code-body"><span class="comment"># Isolated local directory (100% gitignored)</span>
+projects/
+└── &lt;project_slug&gt;/
+    ├── project_config.json        <span class="comment"># Metadata, aspect ratios, genre tags</span>
+    ├── assets/                    <span class="comment"># Raw media, SVG illustrations, reference videos</span>
+    ├── audio/                     <span class="comment"># Audio stems, Faster-Whisper transcriptions</span>
+    ├── scenes/                    <span class="comment"># 16:9 Landscape Remotion scene components</span>
+    ├── vertical/                  <span class="comment"># 9:16 Vertical Shorts/Reels scene components</span>
+    └── renders/                   <span class="comment"># MP4 master exports, contact sheets, and QA stills</span></div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Scaffold a new gitignored video project workspace</span>
+<span class="cmd">python</span> scripts/new_project.py incremental_backup_2008 <span class="flag">--title</span> "Incremental Backup in Windows Server 2008" <span class="flag">--category</span> "TECH EXPLAINER"
+
+<span class="comment"># 2. Verify git status remains completely clean and unpolluted by media stems</span>
+<span class="cmd">git</span> status <span class="flag">--ignored</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 20: Kinetic Typography & Reusable 3D B-Roll Widgets -->
+    <section id="step20-kinetic-3d-broll">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">20</span>
+          Phase 20: Kinetic Typography &amp; 3D B-Roll Widgets
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">src/components/kinetics/ • src/engine/ • scripts/extract_word_timestamps.py • Faster-Whisper</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Engineered to match the high-velocity <strong>"Insiderforce" / Reels / Shorts</strong> aesthetic from real-world viral educational videos. Combines millisecond-precise kinetic word-by-word active pop subtitles with a comprehensive suite of hardware and OS 3D widgets:
+        </p>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Key Capabilities &amp; Motion Primitives:</h4>
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Faster-Whisper Word Boundary Extraction:</strong> <code>scripts/extract_word_timestamps.py</code> utilizes CPU-optimized <code>int8</code> inference to extract frame-accurate word start/end times with zero external CUDA DLL dependencies, generating typed <code>subtitles.ts</code> data structures.</li>
+          <li><strong>Kinetic Subtitle Engine (<code>KineticSubtitleEngine.tsx</code>):</strong> Displays 2–4 words centered with active word spring pop (1.15x scale, elastic overshoot), bold dark typography (<code>#18181B</code>), keyword accents (Orange <code>#F45B16</code>, Blue <code>#2685D9</code>, Green <code>#10B981</code>, Red <code>#EF4444</code>), and muted upcoming text (<code>#A1A1AA</code>).</li>
+          <li><strong>SAS 15K Enterprise Hard Drive (<code>HardDrive3DWidget.tsx</code>):</strong> CNC aluminum chassis, continuous 3,000 RPM mirror platter rotation, concentric magnetic track grooves, sweeping actuator head arm, and pulsing read/write status LEDs.</li>
+          <li><strong>Windows Server 2008 R2 Aero Glass Dialog (<code>AeroDialog3DWidget.tsx</code>):</strong> Authentic Aero Glass blur chrome, interactive cursor movement, hover states, and smooth selection of "Faster backup performance" mode.</li>
+          <li><strong>Cloud Migration Beam (<code>CloudMigration3DWidget.tsx</code>):</strong> Legacy Server 2008 on-premise chassis with EOL badge streaming animated particle flows to modern Microsoft Azure / Windows Server 2025.</li>
+          <li><strong>Volume Shadow Copy Data Streams (<code>VssDataBlockStream.tsx</code>):</strong> 3D isometric delta data cubes representing block-level incremental vs differential storage differentials.</li>
+          <li><strong>Dual Delivery Layout Architecture:</strong>
+            <ul style="margin-top: 6px; margin-left: 18px;">
+              <li><strong>9:16 Vertical Shorts (1080x1920):</strong> Optimized split with top 55% dedicated to 3D floating hardware widgets and bottom 45% for high-velocity kinetic subtitles.</li>
+              <li><strong>16:9 Landscape Explainer (1920x1080):</strong> Spacious 2-column Canva presentation layout with full timeline comparison cards and kinetic subtitles.</li>
+            </ul>
+          </li>
+          <li><strong>100/100 Grade S MotionScore:</strong> Zero layout thrashing, zero reflows; all transitions execute via hardware-accelerated <code>transform: scaleX/scaleY/translate3d</code> and opacity.</li>
+        </ul>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Extract frame-accurate word boundaries via Faster-Whisper</span>
+<span class="cmd">python</span> scripts/extract_word_timestamps.py
+
+<span class="comment"># 2. Render 9:16 Vertical Shorts Edition (10,487 frames @ 30 FPS / ~5.83 min)</span>
+<span class="cmd">npx</span> remotion render src/index.ts Incremental-Backup-Vertical-Master-9x16 out/master/Incremental_Backup_9x16.mp4 <span class="flag">--gl=angle</span>
+
+<span class="comment"># 3. Render 16:9 Landscape Master Edition</span>
+<span class="cmd">npx</span> remotion render src/index.ts Incremental-Backup-Master-16x9 out/master/Incremental_Backup_16x9.mp4 <span class="flag">--gl=angle</span>
+
+<span class="comment"># 4. Audit animation performance &amp; verify 100/100 Grade S score</span>
+<span class="cmd">python</span> scripts/motion_auditor.py</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLI & Antigravity Skill Reference -->
+    <section id="cli-reference">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">⌘</span>
+          Antigravity Orchestrator &amp; CLI Reference
+        </h2>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          The entire workstation is unified under the Antigravity Skill runner:
+        </p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>One-Touch End-to-End Execution</span>
+            <span>Bash / PowerShell</span>
+          </div>
+          <div class="code-body"><span class="comment"># Execute entire pipeline: Ingest -> Spectrogram -> Remotion -> Shorts -> Karaoke -> Template -> Resolve</span>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py \
+  <span class="flag">--action</span> run-all \
+  <span class="flag">--audio</span> inputs/test_voiceover.wav \
+  <span class="flag">--project</span> "MyProductionDeck" \
+  <span class="flag">--aspect</span> 9:16</div>
+        </div>
+
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Options</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--action</code></td>
+              <td><code>run-all</code>, <code>voicebox</code>, <code>extract-audio</code>, <code>render-remotion</code>, <code>render-crucible</code>, <code>slice-shorts</code>, <code>karaoke</code>, <code>build-drfx</code>, <code>build-nhit-drfx</code>, <code>assemble-resolve</code>, <code>hybrid-3d-resolve</code>, <code>teardown</code>, <code>dashboard</code>, <code>qa-check</code>, <code>generate-receipt</code></td>
+              <td>Pipeline stage to execute (or entire suite).</td>
+            </tr>
+            <tr>
+              <td><code>--genre</code></td>
+              <td><code>motion-graphics</code>, <code>3d-realistic</code>, <code>documentary</code>, <code>podcast</code></td>
+              <td>Dynamic multi-genre production routing engine.</td>
+            </tr>
+            <tr>
+              <td><code>--audio</code></td>
+              <td>Path to <code>.wav</code>, <code>.mp3</code>, or <code>.aac</code></td>
+              <td>Source voiceover or audio file.</td>
+            </tr>
+            <tr>
+              <td><code>--aspect</code></td>
+              <td><code>16:9</code>, <code>9:16</code></td>
+              <td>Video canvas aspect ratio.</td>
+            </tr>
+            <tr>
+              <td><code>--project</code></td>
+              <td>String</td>
+              <td>Target project name for Resolve and artifact directories.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 style="color: #fff; margin-top: 24px; margin-bottom: 8px;">Standalone Engineering CLI Utilities:</h4>
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>Script</th>
+              <th>Command Example</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>scripts/new_project.py</code></td>
+              <td><code>python scripts/new_project.py &lt;slug&gt; --title "..."</code></td>
+              <td>Scaffolds isolated, gitignored video workspace in <code>projects/&lt;slug&gt;/</code>.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/extract_word_timestamps.py</code></td>
+              <td><code>python scripts/extract_word_timestamps.py</code></td>
+              <td>Transcribes audio via Faster-Whisper CPU int8 into frame-accurate word boundaries.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/motion_auditor.py</code></td>
+              <td><code>python scripts/motion_auditor.py</code></td>
+              <td>MotionScore doctor detecting layout reflows, non-GPU transforms, and CSS performance.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/contact_sheet.py</code></td>
+              <td><code>python scripts/contact_sheet.py --comp &lt;id&gt; --frames 6</code></td>
+              <td>Generates visual contact sheet montages with broadcast safe-area overlays.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/beat_grid.py</code></td>
+              <td><code>python scripts/beat_grid.py --audio &lt;path&gt; --bpm 120</code></td>
+              <td>Transient detection and musical beat-grid export for Remotion and DaVinci Resolve EDL.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/sfx_designer.py</code></td>
+              <td><code>python scripts/sfx_designer.py --storyboard src/data/storyboard.json --mux</code></td>
+              <td>Procedural 48kHz sound design placement with automated voiceover sidechain ducking.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/openverse_search.py</code></td>
+              <td><code>python scripts/openverse_search.py --query "keyword" --download</code></td>
+              <td>Searches and downloads commercial-safe CC0/PDM stock imagery and BGM stems.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Troubleshooting Matrix -->
+    <section id="troubleshooting">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">!</span>
+          Engineering Troubleshooting &amp; Environment Fixes
+        </h2>
+      </div>
+
+      <div class="card">
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>Symptom / Error</th>
+              <th>Root Cause</th>
+              <th>Permanent Resolution Applied</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fusionscript.dll</code> access violation (<code>0xc0000005</code>)</td>
+              <td>Windows dynamic linker loaded pre-release Python 3.14 DLLs into Python 3.12 process.</td>
+              <td>Disabled 3.14 registry keys, pinned <code>PYTHONHOME</code> to Python 3.12.</td>
+            </tr>
+            <tr>
+              <td><code>TypeError: open() got unexpected 'metadata_errors'</code> in faster-whisper</td>
+              <td>PyAV version 14.0+ removed the <code>metadata_errors</code> argument.</td>
+              <td>Pinned <code>av&lt;14</code> (<code>av==13.1.0</code>) in <code>requirements.txt</code>.</td>
+            </tr>
+            <tr>
+              <td>Hugging Face Hub download lock stall</td>
+              <td>Stale <code>*.lock</code> files in <code>.cache/huggingface/hub</code> from previous interrupts.</td>
+              <td>Pre-downloaded <code>models/whisper-tiny</code> locally with instant offline fallback.</td>
+            </tr>
+            <tr>
+              <td><code>bmd.scriptapp('Resolve')</code> returns <code>None</code></td>
+              <td>DaVinci Resolve Free edition disables external IPC scripting.</td>
+              <td>Auto-fallback to CMX3600 EDL + NVENC concat + Utility script generation.</td>
+            </tr>
+            <tr>
+              <td>Remotion fails to render audio in final mp4</td>
+              <td>Remotion requires assets in <code>public/</code> to be referenced via <code>staticFile()</code>.</td>
+              <td>Pipeline auto-copies audio input to <code>public/audio.mp3</code> prior to Remotion launch.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>Automated Motion Graphics &amp; DaVinci Resolve Workstation · Generated by Antigravity Autonomous Workflow</p>
+      <p style="margin-top: 6px; font-size: 0.78rem; color: var(--text-dim);">Engineered with Remotion, Anime.js, Faster-Whisper, FFmpeg NVENC, and Blackmagic DaVinci Resolve</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
+

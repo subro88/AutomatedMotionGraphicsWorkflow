@@ -714,6 +714,16 @@
         <span class="label">Multi-Genre Router</span>
         <span class="desc">Motion Graphics, 3D Teardowns, Documentary &amp; Podcasts</span>
       </a>
+      <a href="#step19-project-isolation" class="flow-step-box">
+        <span class="idx">PHASE 19</span>
+        <span class="label">Project Isolation &amp; Git</span>
+        <span class="desc">Gitignored projects/* workspace, CLI scaffolding &amp; zero auto-push</span>
+      </a>
+      <a href="#step20-kinetic-3d-broll" class="flow-step-box">
+        <span class="idx">PHASE 20</span>
+        <span class="label">Kinetic Subtitles &amp; 3D B-Roll</span>
+        <span class="desc">Faster-Whisper word-sync, SAS 15K drive, Aero UI &amp; Dual Delivery</span>
+      </a>
     </div>
 
     <!-- Section: High Level Architecture -->
@@ -2859,6 +2869,110 @@ launch_app.bat
       </div>
     </section>
 
+    <!-- Phase 19: Video Projects Isolation & Git Discipline -->
+    <section id="step19-project-isolation">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">19</span>
+          Phase 19: Video Projects Isolation &amp; Git Discipline
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">.gitignore • scripts/new_project.py • projects/&lt;slug&gt;/</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          To maintain an ultra-lightweight, high-speed repository and ensure client data privacy, the workstation enforces a strict architectural separation between the <strong>core motion engine</strong> and <strong>individual video project instances</strong>:
+        </p>
+
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Zero Auto-Push Rule:</strong> Specific video production instances, raw voiceover stems (<code>*.wav</code>), video references (<code>*.mp4</code>), and render outputs (<code>out/</code>) are <strong>100% ignored by Git</strong> in the <code>projects/*</code> directory. Remote pushes to GitHub occur strictly upon explicit user command and only when core engine architecture evolves.</li>
+          <li><strong>Modular Scaffolding CLI:</strong> The <code>scripts/new_project.py</code> utility creates standardized project structures with modular <code>assets/</code>, <code>audio/</code>, <code>scenes/</code>, <code>vertical/</code>, and <code>renders/</code> in one terminal command.</li>
+          <li><strong>Shared Core Primitives:</strong> All reusable 3D hardware widgets, kinetic subtitle logic, and physics engines live in <code>src/components/kinetics/</code> and <code>src/engine/</code>, version-controlled cleanly without project bloat.</li>
+        </ul>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Standardized Project Directory Structure:</h4>
+        <div class="code-block" style="margin-bottom: 20px;">
+          <div class="code-header">
+            <span>Project Workspace Architecture</span>
+            <span>projects/&lt;slug&gt;/</span>
+          </div>
+          <div class="code-body"><span class="comment"># Isolated local directory (100% gitignored)</span>
+projects/
+└── &lt;project_slug&gt;/
+    ├── project_config.json        <span class="comment"># Metadata, aspect ratios, genre tags</span>
+    ├── assets/                    <span class="comment"># Raw media, SVG illustrations, reference videos</span>
+    ├── audio/                     <span class="comment"># Audio stems, Faster-Whisper transcriptions</span>
+    ├── scenes/                    <span class="comment"># 16:9 Landscape Remotion scene components</span>
+    ├── vertical/                  <span class="comment"># 9:16 Vertical Shorts/Reels scene components</span>
+    └── renders/                   <span class="comment"># MP4 master exports, contact sheets, and QA stills</span></div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Scaffold a new gitignored video project workspace</span>
+<span class="cmd">python</span> scripts/new_project.py incremental_backup_2008 <span class="flag">--title</span> "Incremental Backup in Windows Server 2008" <span class="flag">--category</span> "TECH EXPLAINER"
+
+<span class="comment"># 2. Verify git status remains completely clean and unpolluted by media stems</span>
+<span class="cmd">git</span> status <span class="flag">--ignored</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 20: Kinetic Typography & Reusable 3D B-Roll Widgets -->
+    <section id="step20-kinetic-3d-broll">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">20</span>
+          Phase 20: Kinetic Typography &amp; 3D B-Roll Widgets
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">src/components/kinetics/ • src/engine/ • scripts/extract_word_timestamps.py • Faster-Whisper</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Engineered to match the high-velocity <strong>"Insiderforce" / Reels / Shorts</strong> aesthetic from real-world viral educational videos. Combines millisecond-precise kinetic word-by-word active pop subtitles with a comprehensive suite of hardware and OS 3D widgets:
+        </p>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Key Capabilities &amp; Motion Primitives:</h4>
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Faster-Whisper Word Boundary Extraction:</strong> <code>scripts/extract_word_timestamps.py</code> utilizes CPU-optimized <code>int8</code> inference to extract frame-accurate word start/end times with zero external CUDA DLL dependencies, generating typed <code>subtitles.ts</code> data structures.</li>
+          <li><strong>Kinetic Subtitle Engine (<code>KineticSubtitleEngine.tsx</code>):</strong> Displays 2–4 words centered with active word spring pop (1.15x scale, elastic overshoot), bold dark typography (<code>#18181B</code>), keyword accents (Orange <code>#F45B16</code>, Blue <code>#2685D9</code>, Green <code>#10B981</code>, Red <code>#EF4444</code>), and muted upcoming text (<code>#A1A1AA</code>).</li>
+          <li><strong>SAS 15K Enterprise Hard Drive (<code>HardDrive3DWidget.tsx</code>):</strong> CNC aluminum chassis, continuous 3,000 RPM mirror platter rotation, concentric magnetic track grooves, sweeping actuator head arm, and pulsing read/write status LEDs.</li>
+          <li><strong>Windows Server 2008 R2 Aero Glass Dialog (<code>AeroDialog3DWidget.tsx</code>):</strong> Authentic Aero Glass blur chrome, interactive cursor movement, hover states, and smooth selection of "Faster backup performance" mode.</li>
+          <li><strong>Cloud Migration Beam (<code>CloudMigration3DWidget.tsx</code>):</strong> Legacy Server 2008 on-premise chassis with EOL badge streaming animated particle flows to modern Microsoft Azure / Windows Server 2025.</li>
+          <li><strong>Volume Shadow Copy Data Streams (<code>VssDataBlockStream.tsx</code>):</strong> 3D isometric delta data cubes representing block-level incremental vs differential storage differentials.</li>
+          <li><strong>Dual Delivery Layout Architecture:</strong>
+            <ul style="margin-top: 6px; margin-left: 18px;">
+              <li><strong>9:16 Vertical Shorts (1080x1920):</strong> Optimized split with top 55% dedicated to 3D floating hardware widgets and bottom 45% for high-velocity kinetic subtitles.</li>
+              <li><strong>16:9 Landscape Explainer (1920x1080):</strong> Spacious 2-column Canva presentation layout with full timeline comparison cards and kinetic subtitles.</li>
+            </ul>
+          </li>
+          <li><strong>100/100 Grade S MotionScore:</strong> Zero layout thrashing, zero reflows; all transitions execute via hardware-accelerated <code>transform: scaleX/scaleY/translate3d</code> and opacity.</li>
+        </ul>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Extract frame-accurate word boundaries via Faster-Whisper</span>
+<span class="cmd">python</span> scripts/extract_word_timestamps.py
+
+<span class="comment"># 2. Render 9:16 Vertical Shorts Edition (10,487 frames @ 30 FPS / ~5.83 min)</span>
+<span class="cmd">npx</span> remotion render src/index.ts Incremental-Backup-Vertical-Master-9x16 out/master/Incremental_Backup_9x16.mp4 <span class="flag">--gl=angle</span>
+
+<span class="comment"># 3. Render 16:9 Landscape Master Edition</span>
+<span class="cmd">npx</span> remotion render src/index.ts Incremental-Backup-Master-16x9 out/master/Incremental_Backup_16x9.mp4 <span class="flag">--gl=angle</span>
+
+<span class="comment"># 4. Audit animation performance &amp; verify 100/100 Grade S score</span>
+<span class="cmd">python</span> scripts/motion_auditor.py</div>
+        </div>
+      </div>
+    </section>
+
     <!-- CLI & Antigravity Skill Reference -->
     <section id="cli-reference">
       <div class="section-title-wrap">
@@ -2897,8 +3011,13 @@ launch_app.bat
           <tbody>
             <tr>
               <td><code>--action</code></td>
-              <td><code>run-all</code>, <code>voicebox</code>, <code>extract-audio</code>, <code>render-remotion</code>, <code>render-crucible</code>, <code>slice-shorts</code>, <code>karaoke</code>, <code>build-drfx</code>, <code>build-nhit-drfx</code>, <code>assemble-resolve</code>, <code>hybrid-3d-resolve</code>, <code>dashboard</code></td>
+              <td><code>run-all</code>, <code>voicebox</code>, <code>extract-audio</code>, <code>render-remotion</code>, <code>render-crucible</code>, <code>slice-shorts</code>, <code>karaoke</code>, <code>build-drfx</code>, <code>build-nhit-drfx</code>, <code>assemble-resolve</code>, <code>hybrid-3d-resolve</code>, <code>teardown</code>, <code>dashboard</code>, <code>qa-check</code>, <code>generate-receipt</code></td>
               <td>Pipeline stage to execute (or entire suite).</td>
+            </tr>
+            <tr>
+              <td><code>--genre</code></td>
+              <td><code>motion-graphics</code>, <code>3d-realistic</code>, <code>documentary</code>, <code>podcast</code></td>
+              <td>Dynamic multi-genre production routing engine.</td>
             </tr>
             <tr>
               <td><code>--audio</code></td>
@@ -2914,6 +3033,54 @@ launch_app.bat
               <td><code>--project</code></td>
               <td>String</td>
               <td>Target project name for Resolve and artifact directories.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 style="color: #fff; margin-top: 24px; margin-bottom: 8px;">Standalone Engineering CLI Utilities:</h4>
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>Script</th>
+              <th>Command Example</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>scripts/new_project.py</code></td>
+              <td><code>python scripts/new_project.py &lt;slug&gt; --title "..."</code></td>
+              <td>Scaffolds isolated, gitignored video workspace in <code>projects/&lt;slug&gt;/</code>.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/extract_word_timestamps.py</code></td>
+              <td><code>python scripts/extract_word_timestamps.py</code></td>
+              <td>Transcribes audio via Faster-Whisper CPU int8 into frame-accurate word boundaries.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/motion_auditor.py</code></td>
+              <td><code>python scripts/motion_auditor.py</code></td>
+              <td>MotionScore doctor detecting layout reflows, non-GPU transforms, and CSS performance.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/contact_sheet.py</code></td>
+              <td><code>python scripts/contact_sheet.py --comp &lt;id&gt; --frames 6</code></td>
+              <td>Generates visual contact sheet montages with broadcast safe-area overlays.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/beat_grid.py</code></td>
+              <td><code>python scripts/beat_grid.py --audio &lt;path&gt; --bpm 120</code></td>
+              <td>Transient detection and musical beat-grid export for Remotion and DaVinci Resolve EDL.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/sfx_designer.py</code></td>
+              <td><code>python scripts/sfx_designer.py --storyboard src/data/storyboard.json --mux</code></td>
+              <td>Procedural 48kHz sound design placement with automated voiceover sidechain ducking.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/openverse_search.py</code></td>
+              <td><code>python scripts/openverse_search.py --query "keyword" --download</code></td>
+              <td>Searches and downloads commercial-safe CC0/PDM stock imagery and BGM stems.</td>
             </tr>
           </tbody>
         </table>

@@ -90,18 +90,59 @@ Live Execution Dashboard:
    - Broadcast soft peak limiter (<= -1.0 dBFS) outputting master stem `out/sfx/master_sfx.wav`.
    - Automated FFmpeg master video muxing into `out/master/*_sfx_master.mp4`.
    - Embedded into DaVinci Resolve timelines as **Track A2: Real SFX** (`lane="-2"`).
-16. **Phase 15 — WordPress Openverse Commercial Media Sourcing (`scripts/openverse_search.py`, `.agent/skills/openverse/`):**
+16. **Phase 16 — WordPress Openverse Commercial Media Sourcing (`scripts/openverse_search.py`, `.agent/skills/openverse/`):**
    - Access to 800M+ Creative Commons assets via the official Openverse REST API.
    - Enforces strict Commercial-Safe policy (CC0, PDM, CC-BY only; excludes NC/ND).
    - Dual-media extraction: aspect-ratio matched B-Roll imagery (`assets/broll/`) + royalty-free background music (`assets/bgm/`).
    - DaVinci Resolve Fairlight 3-Stem setup: Track A1 Voiceover, Track A2 Real SFX, Track A3 Openverse BGM (`lane="-3"`).
    - Automated cryptographic legal attribution ledger (`out/openverse/attribution_ledger.md`) and provenance receipt integration.
+17. **Phase 17 — Branch Education 3D Hardware Teardown & Tracking (`scripts/blender_teardown.py`, `src/HardwareTeardownScene.tsx`):**
+   - Dual-engine 3D hardware pipeline: Headless Blender Cycles/Eevee photorealistic exploded plates + Remotion `@remotion/three` WebGL fallback.
+   - Pinhole camera 3D-to-2D perspective projection (`out/tracking/screen_coords.json`) for sub-pixel Remotion HUD tracking.
+   - Multi-layer electrical signal flows, mechanical foley audio design, and DaVinci Resolve FCPXML multi-track timeline assembly.
+18. **Phase 18 — Universal Multi-Genre Production Video Router (`scripts/video_engine_router.py`):**
+   - Dynamic routing across 4 production genre paths: Motion Graphics (Ads/Infographics), 3D Realistic (Branch Education Teardowns), Documentary/History (Vox/Kurzgesagt), and Podcasts/Audiograms.
+   - Automated recipe validation and parameter synthesis.
+19. **Phase 19 — Isolated Project Workspace & Git Discipline (`projects/*`, `scripts/new_project.py`):**
+   - Dedicated, 100% gitignored `projects/<project_slug>/` workspaces for all topic/client video projects.
+   - Strict separation: Git tracks only the core workflow engine (`src/components/`, `src/engine/`, `scripts/`), never heavy media, audio stems, or project instances.
+   - One-command scaffolding CLI (`python scripts/new_project.py`) setting up modular `assets/`, `audio/`, `scenes/`, `vertical/`, and `renders/`.
+   - Strict push discipline: Pushes to remote GitHub occur only upon explicit user command after major architectural milestones. Zero auto-pushes of video projects.
+20. **Phase 20 — Kinetic Typography & Reusable 3D B-Roll Widgets (`src/components/kinetics/`, `src/engine/`):**
+   - Punchy word-by-word active pop (2–4 words centered) inspired by modern high-velocity tech reels and Insiderforce aesthetic.
+   - CPU-optimized Faster-Whisper extraction generating millisecond-accurate word boundaries (`subtitles.json` / `subtitles.ts`).
+   - Dynamic keyword accents (`#F45B16`, `#2685D9`, `#10B981`, `#EF4444`) with elastic spring overshoots (1.15x) and muted upcoming text (`#A1A1AA`).
+   - Reusable 3D B-Roll library: `HardDrive3DWidget` (SAS 15K 3000 RPM drive), `AeroDialog3DWidget` (Server 2008 R2 Aero Glass with cursor click), `CloudMigration3DWidget` (Server 2008 EOL to Azure particle flow), `VssDataBlockStream` (isometric delta data blocks), and `CanvaCard` (28px radius, multi-layer drop shadow).
+   - Dual Delivery: 9:16 Vertical Shorts (`1080x1920`) + 16:9 Landscape Explainer (`1920x1080`) with 100/100 Grade S MotionScore.
+
+---
+
+## 📁 Video Projects & Git Discipline
+
+All specific video projects, voiceover stems, raw footage, and rendered MP4s live strictly inside `projects/*` and are **100% ignored by Git**:
+
+```
+projects/
+├── incremental_backup_2008/        <-- Full 10-scene explainer (9:16 Shorts + 16:9 Landscape)
+│   ├── assets/                     <-- Original audio stems (1-9) & ref video
+│   ├── scenes/                     <-- Landscape compositions
+│   ├── vertical/                   <-- Vertical Shorts compositions
+│   ├── subtitles.ts                <-- Faster-Whisper word sync
+│   └── renders/                    <-- Rendered MP4s & contact sheets
+└── <your_new_project>/             <-- Local-only workspace
+```
 
 ---
 
 ## 🚀 CLI Usage
 
 ```bash
+# 0. Scaffold a New Gitignored Local Video Project Workspace
+python scripts/new_project.py my_new_video --title "My New Video Explainer" --category "TECH EXPLAINER"
+
+# 0. Extract Frame-Accurate Word Timestamps via Faster-Whisper (CPU int8)
+python scripts/extract_word_timestamps.py
+
 # 1. Universal Multi-Genre Production Router
 python .agent/skills/motion-pipeline/run.py --genre motion-graphics --project "BrandAd" --aspect 16:9
 python .agent/skills/motion-pipeline/run.py --genre 3d-realistic --project "HardwareTeardown" --aspect 16:9
