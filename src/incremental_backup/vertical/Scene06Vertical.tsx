@@ -3,16 +3,17 @@ import { spring, useCurrentFrame, useVideoConfig, Audio, staticFile } from "remo
 import { THEME } from "../theme";
 import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
 import { HardDrive3DWidget } from "../components/HardDrive3DWidget";
+import { DataFlowPipes } from "../components/DataFlowPipes";
 
 export const Scene06Vertical: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   const steps = [
-    { num: "1", title: "Full Server", sub: "Recommended scope", icon: "🖥️", delay: 20 },
-    { num: "2", title: "Daily Schedule", sub: "10:00 PM unattended", icon: "⏰", delay: 140 },
-    { num: "3", title: "Dedicated Hard Disk", sub: "Exclusive VSS volume", icon: "💾", delay: 260 },
-    { num: "4", title: "Confirm & Finish", sub: "Automatic execution", icon: "✅", delay: 380 },
+    { num: "1", title: "Full Server", sub: "Recommended backup scope", icon: "🖥️", delay: 20 },
+    { num: "2", title: "Daily Schedule", sub: "10:00 PM unattended execution", icon: "⏰", delay: 110 },
+    { num: "3", title: "Dedicated Hard Disk", sub: "Exclusive VSS shadow volume", icon: "💾", delay: 200 },
+    { num: "4", title: "Confirm & Finish", sub: "Automated schedule active", icon: "✅", delay: 290 },
   ];
 
   return (
@@ -21,141 +22,220 @@ export const Scene06Vertical: React.FC = () => {
         width: 1080,
         height: 1920,
         background: THEME.colors.cream,
-        backgroundImage: `radial-gradient(${THEME.colors.charcoal} 0.75px, transparent 0.75px)`,
+        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.07) 1.2px, transparent 1.2px)",
         backgroundSize: "28px 28px",
-        padding: "60px 48px",
+        padding: "50px 48px 40px 48px",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
         fontFamily: THEME.typography.fontFamily,
         display: "flex",
         flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
       <Audio src={staticFile("incremental_backup/scene6.wav")} />
 
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
+      {/* TOP 18%: PERMANENT STEP HEADER */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
         <div
           style={{
-            padding: "8px 22px",
+            padding: "8px 24px",
             borderRadius: "9999px",
             background: THEME.colors.blue,
             color: "#FFF",
-            fontSize: "14px",
+            fontSize: "15px",
             fontWeight: 800,
-            letterSpacing: "0.08em",
-            boxShadow: `0 8px 20px ${THEME.colors.blue}40`,
+            letterSpacing: "0.1em",
+            boxShadow: `0 8px 24px ${THEME.colors.blue}40`,
+            marginBottom: "14px",
           }}
         >
-          SCHEDULE WIZARD
+          STEP 03 • AUTOMATION WIZARD
+        </div>
+
+        <h1
+          style={{
+            ...THEME.typography.h1,
+            fontSize: "44px",
+            textAlign: "center",
+            margin: "0 0 8px 0",
+            color: THEME.colors.charcoal,
+          }}
+        >
+          Create a Backup Schedule
+        </h1>
+
+        <div style={{ fontSize: "17px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
+          Configuring daily unattended incremental jobs on dedicated target disks
         </div>
       </div>
 
-      <h1
-        style={{
-          ...THEME.typography.h1,
-          fontSize: "44px",
-          textAlign: "center",
-          margin: "0 0 24px 0",
-          color: THEME.colors.charcoal,
-        }}
-      >
-        Create a Backup Schedule
-      </h1>
-
-      {/* TOP 55% ZONE: 4 WIZARD STEPS + DEDICATED HARD DRIVE */}
+      {/* MIDDLE 62%: 4 WIZARD STEPS + GLOWING GREEN PIPELINE + 3D HARD DRIVE */}
       <div
         style={{
-          height: 980,
+          height: 1100,
           display: "flex",
           flexDirection: "column",
-          gap: "14px",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
+          position: "relative",
+          zIndex: 5,
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%", maxWidth: 620 }}>
-          {steps.map((s, idx) => {
-            const entrance = spring({
-              frame: Math.max(0, frame - s.delay),
-              fps,
-              config: THEME.springs.gentle,
-            });
-            return (
-              <div
-                key={idx}
-                style={{
-                  padding: "14px 20px",
-                  borderRadius: "18px",
-                  background: idx === 3 ? "#F0FDF4" : "#FFFFFF",
-                  border: idx === 3 ? `2px solid ${THEME.colors.green}` : `1px solid ${THEME.colors.border}`,
-                  boxShadow: THEME.shadows.card,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  transform: `translateY(${(1 - entrance) * 25}px) scale(${0.96 + entrance * 0.04})`,
-                  opacity: entrance,
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span style={{ fontSize: "24px" }}>{s.icon}</span>
-                  <div>
-                    <div style={{ fontSize: "15px", fontWeight: 800, color: THEME.colors.charcoal }}>
-                      Step {s.num}: {s.title}
-                    </div>
-                    <div style={{ fontSize: "12px", color: THEME.colors.charcoalMuted }}>
-                      {s.sub}
-                    </div>
-                  </div>
-                </div>
-                <span
+        {/* Glowing Green Automation Pipeline */}
+        <DataFlowPipes
+          startX={260}
+          startY={360}
+          endX={760}
+          endY={360}
+          color={THEME.colors.green}
+          lineWidth={5}
+          speed={1.6}
+          packetCount={5}
+          isLatching={frame > 120}
+          latchFrame={120}
+          label="SCHEDULE COMMITTED"
+        />
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+            maxWidth: 960,
+            zIndex: 6,
+          }}
+        >
+          {/* Left Column: 4 Staggered Wizard Steps */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px", width: "420px" }}>
+            {steps.map((s, idx) => {
+              const entrance = spring({
+                frame: Math.max(0, frame - s.delay),
+                fps,
+                config: THEME.springs.gentle,
+              });
+              const isFinished = idx === 3 && frame >= s.delay;
+
+              return (
+                <div
+                  key={idx}
                   style={{
-                    fontSize: "11px",
-                    fontWeight: 800,
-                    color: idx === 3 ? THEME.colors.green : THEME.colors.orange,
-                    background: idx === 3 ? THEME.colors.greenLight : THEME.colors.orangeLight,
-                    padding: "3px 8px",
-                    borderRadius: "9999px",
+                    padding: "16px 20px",
+                    borderRadius: "20px",
+                    background: isFinished ? "#F0FDF4" : "#FFFFFF",
+                    border: isFinished ? `2.5px solid ${THEME.colors.green}` : `1.5px solid ${THEME.colors.border}`,
+                    boxShadow: isFinished ? "0 18px 45px -8px rgba(16, 185, 129, 0.25)" : THEME.shadows.card,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    transform: `translateX(${(1 - entrance) * -40}px) scale(${0.96 + entrance * 0.04})`,
+                    opacity: entrance,
                   }}
                 >
-                  CONFIGURED
-                </span>
-              </div>
-            );
-          })}
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <div
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "12px",
+                        background: isFinished ? "#DCFCE7" : "#F1F5F9",
+                        color: isFinished ? THEME.colors.green : THEME.colors.charcoal,
+                        fontSize: "16px",
+                        fontWeight: 900,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {s.num}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "14px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                        {s.title}
+                      </div>
+                      <div style={{ fontSize: "11px", color: THEME.colors.charcoalMuted }}>
+                        {s.sub}
+                      </div>
+                    </div>
+                  </div>
+                  <span style={{ fontSize: "22px" }}>{s.icon}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right Column: 3D Dedicated SAS 15K Hard Drive */}
+          <HardDrive3DWidget width={380} height={440} isWriting delay={25} showSavedBadge={frame > 140} />
         </div>
 
-        <HardDrive3DWidget width={360} height={380} isWriting delay={400} />
+        {/* Wizard Confirmation Banner */}
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 820,
+            marginTop: "28px",
+            padding: "16px 26px",
+            borderRadius: "22px",
+            background: "#F0FDF4",
+            border: `2px solid ${THEME.colors.green}`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+            zIndex: 6,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <span style={{ fontSize: "24px" }}>✅</span>
+            <div>
+              <div style={{ fontSize: "14px", fontWeight: 900, color: THEME.colors.green }}>
+                TASK CONFIGURED
+              </div>
+              <div style={{ fontSize: "12px", color: THEME.colors.charcoalMuted }}>
+                Windows Server Backup daemon runs every day at 10:00 PM
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              padding: "6px 14px",
+              borderRadius: "12px",
+              background: THEME.colors.green,
+              color: "#FFFFFF",
+              fontSize: "12px",
+              fontWeight: 800,
+            }}
+          >
+            ACTIVE DAEMON
+          </div>
+        </div>
       </div>
 
-      {/* BOTTOM 45% ZONE: KINETIC SUBTITLES */}
+      {/* BOTTOM 20%: LOWER-THIRD KINETIC WORD-BY-WORD ACTIVE POP SUBTITLES */}
       <div
         style={{
-          flex: 1,
+          height: 240,
+          background: "#FFFFFF",
+          borderRadius: "28px",
+          boxShadow: "0 20px 50px -10px rgba(41, 37, 36, 0.12)",
+          border: `1.5px solid ${THEME.colors.border}`,
+          padding: "24px 32px",
+          boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
-          paddingBottom: "80px",
+          position: "relative",
+          zIndex: 10,
         }}
       >
-        <KineticSubtitleEngine sceneId="scene6" fontSize={60} layout="vertical" />
-      </div>
-
-      <div
-        style={{
-          position: "absolute",
-          bottom: "35px",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          fontSize: "14px",
-          fontWeight: 700,
-          color: THEME.colors.charcoalLight,
-          letterSpacing: "0.12em",
-        }}
-      >
-        techblock.io
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: THEME.colors.blue }} />
+          <span style={{ fontSize: "12px", fontWeight: 800, color: THEME.colors.charcoalMuted, letterSpacing: "0.06em" }}>
+            AUDIO SPOKEN TRANSCRIPT
+          </span>
+        </div>
+        <KineticSubtitleEngine sceneId="scene6" fontSize={42} layout="vertical" />
       </div>
     </div>
   );

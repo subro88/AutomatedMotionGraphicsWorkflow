@@ -7,3 +7,6 @@ export * from "./HardDrive3DWidget";
 export * from "./AeroDialog3DWidget";
 export * from "./CloudMigration3DWidget";
 export * from "./VssDataBlockStream";
+export * from "./DataFlowPipes";
+export * from "./StudioDesk3DEnvironment";
+export * from "./CylinderCarousel3D";

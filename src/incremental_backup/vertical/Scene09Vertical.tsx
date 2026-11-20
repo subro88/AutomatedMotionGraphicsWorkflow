@@ -3,6 +3,7 @@ import { useCurrentFrame, Audio, staticFile } from "remotion";
 import { THEME } from "../theme";
 import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
 import { CloudMigration3DWidget } from "../components/CloudMigration3DWidget";
+import { DataFlowPipes } from "../components/DataFlowPipes";
 
 export const Scene09Vertical: React.FC = () => {
   const frame = useCurrentFrame();
@@ -13,133 +14,170 @@ export const Scene09Vertical: React.FC = () => {
         width: 1080,
         height: 1920,
         background: THEME.colors.cream,
-        backgroundImage: `radial-gradient(${THEME.colors.charcoal} 0.75px, transparent 0.75px)`,
+        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.07) 1.2px, transparent 1.2px)",
         backgroundSize: "28px 28px",
-        padding: "60px 48px",
+        padding: "50px 48px 40px 48px",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
         fontFamily: THEME.typography.fontFamily,
         display: "flex",
         flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
       <Audio src={staticFile("incremental_backup/scene9.wav")} />
 
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
+      {/* TOP 18%: PERMANENT STEP HEADER */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
         <div
           style={{
-            padding: "8px 22px",
+            padding: "8px 24px",
             borderRadius: "9999px",
             background: THEME.colors.red,
             color: "#FFF",
-            fontSize: "14px",
+            fontSize: "15px",
             fontWeight: 800,
-            letterSpacing: "0.08em",
-            boxShadow: `0 8px 20px rgba(239, 68, 68, 0.35)`,
+            letterSpacing: "0.1em",
+            boxShadow: `0 8px 24px rgba(239, 68, 68, 0.35)`,
+            marginBottom: "14px",
           }}
         >
           LIFECYCLE SECURITY ADVISORY
         </div>
+
+        <h1
+          style={{
+            ...THEME.typography.h1,
+            fontSize: "44px",
+            textAlign: "center",
+            margin: "0 0 8px 0",
+            color: THEME.colors.charcoal,
+          }}
+        >
+          Don't Ignore Security
+        </h1>
+
+        <div style={{ fontSize: "17px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
+          Server 2008 is End-of-Life — backup without security leaves data vulnerable
+        </div>
       </div>
 
-      <h1
-        style={{
-          ...THEME.typography.h1,
-          fontSize: "44px",
-          textAlign: "center",
-          margin: "0 0 24px 0",
-          color: THEME.colors.charcoal,
-        }}
-      >
-        Don't Ignore Security
-      </h1>
-
-      {/* TOP 55% ZONE: EOL CALENDAR BADGE + CLOUD MIGRATION PATH */}
+      {/* MIDDLE 62%: EOL BADGE + 3D CLOUD MIGRATION BEAM + DATA FLOW PIPELINE */}
       <div
         style={{
-          height: 980,
+          height: 1100,
           display: "flex",
           flexDirection: "column",
           gap: "28px",
           alignItems: "center",
           justifyContent: "center",
+          position: "relative",
+          zIndex: 5,
         }}
       >
-        {/* Jan 14 2020 Badge */}
+        {/* Glowing Purple Cloud Migration Pipe */}
+        <DataFlowPipes
+          startX={260}
+          startY={360}
+          endX={760}
+          endY={360}
+          color={THEME.colors.purple}
+          lineWidth={5}
+          speed={1.6}
+          packetCount={5}
+          isLatching={true}
+          latchFrame={40}
+          label="MIGRATION PIPELINE"
+        />
+
+        {/* EOL January 14, 2020 Badge */}
         <div
           style={{
-            padding: "16px 28px",
-            borderRadius: "20px",
+            padding: "20px 32px",
+            borderRadius: "24px",
             background: "#FFFFFF",
             border: `2px solid ${THEME.colors.red}`,
             boxShadow: THEME.shadows.card,
             textAlign: "center",
             width: "100%",
-            maxWidth: 600,
+            maxWidth: 780,
+            zIndex: 6,
           }}
         >
-          <div style={{ fontSize: "14px", fontWeight: 800, color: THEME.colors.red, letterSpacing: "0.06em" }}>
-            END OF EXTENDED SUPPORT
+          <div style={{ fontSize: "14px", fontWeight: 800, color: THEME.colors.red, letterSpacing: "0.08em" }}>
+            OFFICIAL END OF EXTENDED SUPPORT
           </div>
-          <div style={{ fontSize: "28px", fontWeight: 900, color: THEME.colors.charcoal, margin: "4px 0" }}>
+          <div style={{ fontSize: "36px", fontWeight: 900, color: THEME.colors.charcoal, margin: "6px 0" }}>
             January 14, 2020
           </div>
-          <div style={{ fontSize: "13px", color: THEME.colors.charcoalMuted }}>
-            Zero regular security updates, leaving systems exposed to ransomware.
+          <div style={{ fontSize: "14px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
+            Zero regular security updates. Running backups on an unpatched OS cannot protect against modern ransomware.
           </div>
         </div>
 
-        {/* Cloud Migration 3D Widget */}
-        <CloudMigration3DWidget delay={100} style={{ width: "100%", maxWidth: 620 }} />
+        {/* 3D Cloud Migration Widget (Server 2008 EOL -> Modern Azure) */}
+        <CloudMigration3DWidget delay={60} style={{ width: "100%", maxWidth: 840, zIndex: 6 }} />
 
-        {/* Core Principle Banner */}
+        {/* Modernization Path Card */}
         <div
           style={{
             width: "100%",
-            maxWidth: 600,
-            background: THEME.colors.charcoal,
-            borderRadius: "18px",
-            padding: "14px 22px",
-            textAlign: "center",
-            color: "#FFF",
-            fontSize: "14px",
-            fontWeight: 700,
-            boxShadow: "0 10px 30px rgba(41, 37, 36, 0.25)",
+            maxWidth: 780,
+            padding: "16px 26px",
+            borderRadius: "20px",
+            background: "#EFF6FF",
+            border: `1.5px solid ${THEME.colors.blue}`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            zIndex: 6,
           }}
         >
-          "Backups protect data, but modern OS protects against attacks."
+          <span style={{ fontSize: "13px", fontWeight: 800, color: THEME.colors.blue }}>RECOMMENDED PATH:</span>
+          {["Windows Server 2022 / 2025", "Microsoft Azure IaaS", "Azure Backup"].map((t, i) => (
+            <span
+              key={i}
+              style={{
+                padding: "6px 14px",
+                borderRadius: "10px",
+                background: "#FFFFFF",
+                color: THEME.colors.charcoal,
+                fontSize: "12px",
+                fontWeight: 700,
+                border: "1px solid #BFDBFE",
+              }}
+            >
+              ✓ {t}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* BOTTOM 45% ZONE: KINETIC SUBTITLES */}
+      {/* BOTTOM 20%: LOWER-THIRD KINETIC WORD-BY-WORD ACTIVE POP SUBTITLES */}
       <div
         style={{
-          flex: 1,
+          height: 240,
+          background: "#FFFFFF",
+          borderRadius: "28px",
+          boxShadow: "0 20px 50px -10px rgba(41, 37, 36, 0.12)",
+          border: `1.5px solid ${THEME.colors.border}`,
+          padding: "24px 32px",
+          boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
-          paddingBottom: "80px",
+          position: "relative",
+          zIndex: 10,
         }}
       >
-        <KineticSubtitleEngine sceneId="scene9" fontSize={60} layout="vertical" />
-      </div>
-
-      <div
-        style={{
-          position: "absolute",
-          bottom: "35px",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          fontSize: "14px",
-          fontWeight: 700,
-          color: THEME.colors.charcoalLight,
-          letterSpacing: "0.12em",
-        }}
-      >
-        techblock.io
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: THEME.colors.red }} />
+          <span style={{ fontSize: "12px", fontWeight: 800, color: THEME.colors.charcoalMuted, letterSpacing: "0.06em" }}>
+            AUDIO SPOKEN TRANSCRIPT
+          </span>
+        </div>
+        <KineticSubtitleEngine sceneId="scene9" fontSize={42} layout="vertical" />
       </div>
     </div>
   );

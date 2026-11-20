@@ -6,6 +6,7 @@ interface HardDrive3DProps {
   width?: number;
   height?: number;
   isWriting?: boolean;
+  showSavedBadge?: boolean;
   style?: React.CSSProperties;
   delay?: number;
 }
@@ -14,6 +15,7 @@ export const HardDrive3DWidget: React.FC<HardDrive3DProps> = ({
   width = 380,
   height = 440,
   isWriting = true,
+  showSavedBadge = false,
   style = {},
   delay = 0,
 }) => {
@@ -260,6 +262,32 @@ export const HardDrive3DWidget: React.FC<HardDrive3DProps> = ({
           <span>Volume: <strong>Backup Drive (E:)</strong></span>
           <span style={{ fontWeight: 700, color: THEME.colors.blue }}>1000 GB NTFS</span>
         </div>
+
+        {/* Dynamic Latch / Saved Confirmation Badge */}
+        {showSavedBadge && (
+          <div
+            style={{
+              position: "absolute",
+              top: "-18px",
+              right: "20px",
+              padding: "6px 14px",
+              borderRadius: "20px",
+              background: "#10B981",
+              color: "#FFFFFF",
+              fontSize: "12px",
+              fontWeight: 800,
+              boxShadow: "0 6px 18px rgba(16, 185, 129, 0.45)",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              zIndex: 10,
+              animation: "bounce 0.5s ease",
+            }}
+          >
+            <span>✓</span>
+            <span>BACKUP SAVED</span>
+          </div>
+        )}
       </div>
     </div>
   );

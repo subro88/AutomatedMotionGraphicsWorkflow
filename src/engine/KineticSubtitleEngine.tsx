@@ -1,7 +1,7 @@
 import React from "react";
 import { spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { subtitlesData } from "../subtitles";
-import { THEME } from "../theme";
+import { THEME } from "./theme";
 
 interface WordItem {
   word: string;
@@ -42,16 +42,22 @@ export const KineticSubtitleEngine: React.FC<KineticSubtitleProps> = ({
     return null;
   }
 
-  // Find the active chunk for the current frame (with a slight grace period so it doesn't flicker between chunks)
-  const activeChunk = sceneInfo.chunks.find(
+  // Find the active chunk for the current frame
+  let activeChunk = sceneInfo.chunks.find(
     (c, i) =>
       frame >= c.startFrame - 2 &&
-      (frame <= c.endFrame + 8 ||
+      (frame <= c.endFrame + 12 ||
         (i === sceneInfo.chunks.length - 1 && frame >= c.startFrame))
   );
 
+  // Fallback to latest chunk that has started if between pauses, avoiding blank flashes
   if (!activeChunk) {
-    return null;
+    const pastChunks = sceneInfo.chunks.filter((c) => frame >= c.startFrame);
+    if (pastChunks.length > 0) {
+      activeChunk = pastChunks[pastChunks.length - 1];
+    } else {
+      activeChunk = sceneInfo.chunks[0];
+    }
   }
 
   // Chunk entrance spring
