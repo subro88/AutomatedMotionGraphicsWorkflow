@@ -70,3 +70,13 @@ desktop.ini
 *.tmp
 *.log
 .agent_scratch/
+
+# ==============================================================================
+# Video Projects Workspace (Local Only - Never Pushed to GitHub)
+# ==============================================================================
+projects/
+out/
+*.wav
+*.mp4
+public/incremental_backup/
+assets/Incremental Backup in Windows Server 2008/
