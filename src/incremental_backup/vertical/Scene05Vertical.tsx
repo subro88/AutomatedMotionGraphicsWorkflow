@@ -2,11 +2,18 @@ import React from "react";
 import { useCurrentFrame, Audio, staticFile } from "remotion";
 import { THEME } from "../theme";
 import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
-import { AeroDialog3DWidget } from "../components/AeroDialog3DWidget";
-import { DataFlowPipes } from "../components/DataFlowPipes";
+import {
+  InteractiveScreenshotCard,
+  ComponentSvgIcon,
+} from "../components/VectorComponents";
 
 export const Scene05Vertical: React.FC = () => {
   const frame = useCurrentFrame();
+
+  // Mouse cursor moves and clicks at frame 35
+  const isClicking = frame >= 30 && frame <= 75;
+  const cursorX = Math.min(510, 300 + frame * 6);
+  const cursorY = Math.min(360, 260 + frame * 3);
 
   return (
     <div
@@ -14,143 +21,128 @@ export const Scene05Vertical: React.FC = () => {
         width: 1080,
         height: 1920,
         background: THEME.colors.cream,
-        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.07) 1.2px, transparent 1.2px)",
+        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.08) 1.2px, transparent 1.2px)",
         backgroundSize: "28px 28px",
-        padding: "50px 48px 40px 48px",
+        padding: "80px 70px 70px 70px",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
         fontFamily: THEME.typography.fontFamily,
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         justifyContent: "space-between",
       }}
     >
       <Audio src={staticFile("incremental_backup/scene5.wav")} />
 
-      {/* TOP 18%: PERMANENT STEP HEADER */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
-        <div
-          style={{
-            padding: "8px 24px",
-            borderRadius: "9999px",
-            background: THEME.colors.orange,
-            color: "#FFF",
-            fontSize: "15px",
-            fontWeight: 800,
-            letterSpacing: "0.1em",
-            boxShadow: `0 8px 24px rgba(244, 91, 22, 0.35)`,
-            marginBottom: "14px",
-          }}
-        >
-          CRITICAL SETTING • PERFORMANCE
-        </div>
-
-        <h1
-          style={{
-            ...THEME.typography.h1,
-            fontSize: "44px",
-            textAlign: "center",
-            margin: "0 0 8px 0",
-            color: THEME.colors.charcoal,
-          }}
-        >
-          Configure Performance
-        </h1>
-
-        <div style={{ fontSize: "17px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
-          Switching from full volume copy to VSS block-level incremental mode
-        </div>
-      </div>
-
-      {/* MIDDLE 62%: 3D AERO DIALOG + GLOWING VSS PIPELINE + TAKEAWAY */}
+      {/* Top Category Badge */}
       <div
         style={{
-          height: 1100,
+          padding: "10px 28px",
+          borderRadius: "9999px",
+          background: THEME.colors.orange,
+          color: "#FFFFFF",
+          fontSize: "15px",
+          fontWeight: 800,
+          letterSpacing: "0.1em",
+          boxShadow: "0 8px 24px rgba(244, 91, 22, 0.32)",
+        }}
+      >
+        OPTIMIZE PERFORMANCE • SETTINGS
+      </div>
+
+      {/* Top Dynamic Kinetic Subtitle Phrase */}
+      <div
+        style={{
+          marginTop: "20px",
+          minHeight: "150px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <KineticSubtitleEngine sceneId="scene5" fontSize={54} layout="vertical" />
+      </div>
+
+      {/* Central Interactive Screenshot Stage: 940px Wide */}
+      <div
+        style={{
+          width: 940,
+          height: 1040,
           display: "flex",
           flexDirection: "column",
-          gap: "26px",
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
-          zIndex: 5,
+          gap: "28px",
         }}
       >
-        {/* Glowing Orange Bus Cable */}
-        <DataFlowPipes
-          startX={240}
-          startY={360}
-          endX={840}
-          endY={360}
-          color={THEME.colors.orange}
-          lineWidth={5}
-          speed={1.6}
-          packetCount={5}
-          isLatching={frame > 45}
-          latchFrame={45}
-          label="VSS BLOCK TRACKER"
-        />
-
-        {/* 3D Aero Glass Dialog Simulation with Cursor Hover & Click */}
-        <AeroDialog3DWidget
+        <InteractiveScreenshotCard
+          imageName="screen_3.jpg"
           title="Optimize Backup Performance"
-          width={680}
-          selectedOption="faster"
-          delay={15}
+          width={940}
+          height={740}
+          zoom={1.22}
+          cursorX={cursorX}
+          cursorY={cursorY}
+          isClicking={isClicking}
+          spotlightRect={{ x: 100, y: 240, w: 740, h: 115 }}
         />
 
-        {/* Takeaway Card with High Impact Visual Metaphor */}
+        {/* Feature Explainer Pill floating below (940px wide) */}
         <div
           style={{
-            width: "100%",
-            maxWidth: 680,
-            background: "#FFFBF7",
-            borderRadius: "24px",
-            padding: "22px 30px",
+            width: 940,
+            background: "#FFFFFF",
+            padding: "20px 36px",
+            borderRadius: "28px",
+            boxShadow: THEME.shadows.cardElevated,
             border: `2.5px solid ${THEME.colors.orange}`,
-            boxShadow: THEME.shadows.card,
             display: "flex",
             alignItems: "center",
-            gap: "18px",
-            zIndex: 6,
+            justifyContent: "space-between",
+            boxSizing: "border-box",
+            zIndex: 30,
           }}
         >
-          <span style={{ fontSize: "36px" }}>💡</span>
-          <div>
-            <div style={{ fontSize: "16px", fontWeight: 900, color: THEME.colors.orange, marginBottom: "4px" }}>
-              "FASTER BACKUP PERFORMANCE" = INCREMENTAL MODE
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <ComponentSvgIcon name="shield" size={42} />
+            <div>
+              <div style={{ fontSize: "19px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                VSS Incremental Engine Active
+              </div>
+              <div style={{ fontSize: "14px", color: THEME.colors.charcoalMuted, fontWeight: 600, marginTop: "2px" }}>
+                Tracks block changes in real-time with Volume Shadow Copy Service
+              </div>
             </div>
-            <div style={{ fontSize: "13px", color: THEME.colors.charcoal, fontWeight: 700, lineHeight: 1.4 }}>
-              Forces Windows Server 2008 to track block-level modifications in Volume Shadow Copy, avoiding repeated full disk transfers.
-            </div>
+          </div>
+          <div
+            style={{
+              background: THEME.colors.orange,
+              color: "#FFFFFF",
+              fontWeight: 800,
+              fontSize: "15px",
+              padding: "8px 18px",
+              borderRadius: "9999px",
+            }}
+          >
+            RECOMMENDED
           </div>
         </div>
       </div>
 
-      {/* BOTTOM 20%: LOWER-THIRD KINETIC WORD-BY-WORD ACTIVE POP SUBTITLES */}
+      {/* Subtle brand watermark */}
       <div
         style={{
-          height: 240,
-          background: "#FFFFFF",
-          borderRadius: "28px",
-          boxShadow: "0 20px 50px -10px rgba(41, 37, 36, 0.12)",
-          border: `1.5px solid ${THEME.colors.border}`,
-          padding: "24px 32px",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 10,
+          fontSize: "16px",
+          fontWeight: 700,
+          color: THEME.colors.charcoalLight,
+          letterSpacing: "0.08em",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: THEME.colors.orange }} />
-          <span style={{ fontSize: "12px", fontWeight: 800, color: THEME.colors.charcoalMuted, letterSpacing: "0.06em" }}>
-            AUDIO SPOKEN TRANSCRIPT
-          </span>
-        </div>
-        <KineticSubtitleEngine sceneId="scene5" fontSize={42} layout="vertical" />
+        tech-tutorial-series.io
       </div>
     </div>
   );

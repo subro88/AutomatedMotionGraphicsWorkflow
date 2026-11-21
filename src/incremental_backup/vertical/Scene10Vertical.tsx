@@ -1,22 +1,12 @@
 import React from "react";
-import { spring, useCurrentFrame, useVideoConfig, Audio, staticFile } from "remotion";
+import { useCurrentFrame, Audio, staticFile } from "remotion";
 import { THEME } from "../theme";
 import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
-import { HardDrive3DWidget } from "../components/HardDrive3DWidget";
-import { DataFlowPipes } from "../components/DataFlowPipes";
+import { CurvedSpline } from "../components/CurvedSpline";
+import { ElevatedCard, ComponentSvgIcon } from "../components/VectorComponents";
 
 export const Scene10Vertical: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const summaries = [
-    { title: "Incremental Mode", sub: "Tracks changed blocks via VSS", icon: "⚡", color: THEME.colors.blue },
-    { title: "Faster Performance", sub: "Essential WSB configuration toggle", icon: "🛠️", color: THEME.colors.orange },
-    { title: "Dedicated Disks", sub: "Preserves full historical versions", icon: "💾", color: THEME.colors.green },
-    { title: "Modernize OS", sub: "Migrate legacy Server 2008 to Azure", icon: "🛡️", color: THEME.colors.purple },
-  ];
-
-  const grandBanner = spring({ frame: Math.max(0, frame - 140), fps, config: THEME.springs.bouncy });
 
   return (
     <div
@@ -24,203 +14,158 @@ export const Scene10Vertical: React.FC = () => {
         width: 1080,
         height: 1920,
         background: THEME.colors.cream,
-        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.07) 1.2px, transparent 1.2px)",
+        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.08) 1.2px, transparent 1.2px)",
         backgroundSize: "28px 28px",
-        padding: "50px 48px 40px 48px",
+        padding: "80px 70px 70px 70px",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
         fontFamily: THEME.typography.fontFamily,
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         justifyContent: "space-between",
       }}
     >
       <Audio src={staticFile("incremental_backup/scene10.wav")} />
 
-      {/* TOP 18%: PERMANENT STEP HEADER */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
-        <div
-          style={{
-            padding: "8px 24px",
-            borderRadius: "9999px",
-            background: THEME.colors.orange,
-            color: "#FFF",
-            fontSize: "15px",
-            fontWeight: 800,
-            letterSpacing: "0.1em",
-            boxShadow: `0 8px 24px rgba(244, 91, 22, 0.35)`,
-            marginBottom: "14px",
-          }}
-        >
-          FINAL CHECKLIST • BEST PRACTICES
-        </div>
-
-        <h1
-          style={{
-            ...THEME.typography.h1,
-            fontSize: "44px",
-            textAlign: "center",
-            margin: "0 0 8px 0",
-            color: THEME.colors.charcoal,
-          }}
-        >
-          Let's Recap!
-        </h1>
-
-        <div style={{ fontSize: "17px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
-          The complete blueprint for reliable, high-speed incremental server backups
-        </div>
-      </div>
-
-      {/* MIDDLE 62%: 4 SUMMARY CARDS + 3D HARD DRIVE WITH PERMANENT SAVED BADGE */}
+      {/* Top Category Badge */}
       <div
         style={{
-          height: 1100,
+          padding: "10px 28px",
+          borderRadius: "9999px",
+          background: THEME.colors.green,
+          color: "#FFFFFF",
+          fontSize: "15px",
+          fontWeight: 800,
+          letterSpacing: "0.1em",
+          boxShadow: `0 8px 24px ${THEME.colors.green}35`,
+        }}
+      >
+        SUMMARY • PRODUCTION BEST PRACTICES
+      </div>
+
+      {/* Top Dynamic Kinetic Subtitle Phrase */}
+      <div
+        style={{
+          marginTop: "20px",
+          minHeight: "150px",
           display: "flex",
-          flexDirection: "column",
-          gap: "24px",
           alignItems: "center",
           justifyContent: "center",
-          position: "relative",
-          zIndex: 5,
+          width: "100%",
         }}
       >
-        {/* Glowing Green Pipeline */}
-        <DataFlowPipes
-          startX={260}
-          startY={360}
-          endX={760}
-          endY={360}
-          color={THEME.colors.green}
-          lineWidth={5}
-          speed={1.6}
-          packetCount={5}
-          isLatching={true}
-          latchFrame={30}
-          label="COMMITTED ARCHITECTURE"
-        />
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-            maxWidth: 960,
-            zIndex: 6,
-          }}
-        >
-          {/* Left Column: 4 Summary Checklist Cards */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "440px" }}>
-            {summaries.map((s, idx) => (
-              <div
-                key={idx}
-                style={{
-                  padding: "16px 20px",
-                  borderRadius: "20px",
-                  background: "#FFFFFF",
-                  border: `1.5px solid ${s.color}30`,
-                  boxShadow: THEME.shadows.card,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                }}
-              >
-                <div
-                  style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: "14px",
-                    background: `${s.color}15`,
-                    fontSize: "22px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  {s.icon}
-                </div>
-                <div>
-                  <div style={{ fontSize: "15px", fontWeight: 800, color: THEME.colors.charcoal }}>
-                    {s.title}
-                  </div>
-                  <div style={{ fontSize: "12px", color: THEME.colors.charcoalMuted, marginTop: "2px" }}>
-                    {s.sub}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Right Column: 3D Dedicated SAS 15K Drive with Saved Badge */}
-          <HardDrive3DWidget width={380} height={440} isWriting delay={20} showSavedBadge={true} />
-        </div>
-
-        {/* Grand Final Callout Card */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 820,
-            padding: "20px 28px",
-            borderRadius: "24px",
-            background: `linear-gradient(135deg, ${THEME.colors.orange} 0%, #EA580C 100%)`,
-            color: "#FFFFFF",
-            boxShadow: "0 25px 60px -10px rgba(244, 91, 22, 0.4)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            transform: `scale(${0.92 + grandBanner * 0.08})`,
-            opacity: grandBanner,
-            zIndex: 6,
-          }}
-        >
-          <div>
-            <div style={{ fontSize: "18px", fontWeight: 900 }}>PRODUCTION READY BACKUPS</div>
-            <div style={{ fontSize: "13px", opacity: 0.9, marginTop: "4px" }}>
-              Configure "Faster Performance" on dedicated disks today!
-            </div>
-          </div>
-          <div
-            style={{
-              padding: "10px 20px",
-              borderRadius: "14px",
-              background: "#FFFFFF",
-              color: THEME.colors.orange,
-              fontSize: "14px",
-              fontWeight: 900,
-            }}
-          >
-            ✓ COMPLETE
-          </div>
-        </div>
+        <KineticSubtitleEngine sceneId="scene10" fontSize={54} layout="vertical" />
       </div>
 
-      {/* BOTTOM 20%: LOWER-THIRD KINETIC WORD-BY-WORD ACTIVE POP SUBTITLES */}
+      {/* Central Visual Stage: Production Checklist & Verification (940px width, 1040px height) */}
       <div
         style={{
-          height: 240,
-          background: "#FFFFFF",
-          borderRadius: "28px",
-          boxShadow: "0 20px 50px -10px rgba(41, 37, 36, 0.12)",
-          border: `1.5px solid ${THEME.colors.border}`,
-          padding: "24px 32px",
-          boxSizing: "border-box",
+          width: 940,
+          height: 1040,
+          position: "relative",
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
           justifyContent: "center",
-          position: "relative",
-          zIndex: 10,
+          gap: "30px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: THEME.colors.orange }} />
-          <span style={{ fontSize: "12px", fontWeight: 800, color: THEME.colors.charcoalMuted, letterSpacing: "0.06em" }}>
-            AUDIO SPOKEN TRANSCRIPT
-          </span>
-        </div>
-        <KineticSubtitleEngine sceneId="scene10" fontSize={42} layout="vertical" />
+        {/* Animated Connecting Spline */}
+        <CurvedSpline x1={470} y1={520} x2={470} y2={760} curvature={0} color={THEME.colors.green} frame={frame} lineWidth={5} />
+
+        {/* 3-Step Production Checklist Card */}
+        <ElevatedCard
+          width={940}
+          height={480}
+          padding="32px 36px"
+          style={{ border: `3px solid ${THEME.colors.green}` }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "18px", marginBottom: "24px" }}>
+            <ComponentSvgIcon name="sync_arrows" size={54} />
+            <div>
+              <div style={{ fontSize: "24px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                Incremental Backup Checklist
+              </div>
+              <div style={{ fontSize: "15px", color: THEME.colors.charcoalMuted, fontWeight: 600, marginTop: "2px" }}>
+                3 Essential verification steps for enterprise reliability
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%" }}>
+            <div style={{ background: "#F0FDF4", padding: "16px 20px", borderRadius: "16px", border: "1.5px solid #BBF7D0", display: "flex", alignItems: "center", gap: "16px" }}>
+              <div style={{ background: THEME.colors.green, color: "#FFF", width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: "16px" }}>✓</div>
+              <div>
+                <div style={{ fontSize: "17px", fontWeight: 800, color: THEME.colors.charcoal }}>Configure "Faster backup performance"</div>
+                <div style={{ fontSize: "13px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>Enables native VSS block delta tracking for fast daily windows</div>
+              </div>
+            </div>
+
+            <div style={{ background: "#F0FDF4", padding: "16px 20px", borderRadius: "16px", border: "1.5px solid #BBF7D0", display: "flex", alignItems: "center", gap: "16px" }}>
+              <div style={{ background: THEME.colors.green, color: "#FFF", width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: "16px" }}>✓</div>
+              <div>
+                <div style={{ fontSize: "17px", fontWeight: 800, color: THEME.colors.charcoal }}>Use a Dedicated Physical Hard Disk</div>
+                <div style={{ fontSize: "13px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>Formatted exclusively for VSS and hidden from Explorer drive letters</div>
+              </div>
+            </div>
+
+            <div style={{ background: "#F0FDF4", padding: "16px 20px", borderRadius: "16px", border: "1.5px solid #BBF7D0", display: "flex", alignItems: "center", gap: "16px" }}>
+              <div style={{ background: THEME.colors.green, color: "#FFF", width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: "16px" }}>✓</div>
+              <div>
+                <div style={{ fontSize: "17px", fontWeight: 800, color: THEME.colors.charcoal }}>Perform Regular Disaster Recovery Drills</div>
+                <div style={{ fontSize: "13px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>A backup is only as good as its proven ability to restore</div>
+              </div>
+            </div>
+          </div>
+        </ElevatedCard>
+
+        {/* Disaster Recovery Verification Golden Card (Bottom) */}
+        <ElevatedCard
+          width={940}
+          height={160}
+          padding="24px 36px"
+          style={{ background: "#FFFBEB", border: `2.5px solid ${THEME.colors.yellow}` }}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <ComponentSvgIcon name="shield" size={68} />
+              <div>
+                <div style={{ fontSize: "22px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                  Disaster Recovery Verified
+                </div>
+                <div style={{ fontSize: "15px", color: THEME.colors.charcoalMuted, fontWeight: 600, marginTop: "4px" }}>
+                  Complete bare-metal recovery and file restore drills tested
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                background: THEME.colors.yellow,
+                color: THEME.colors.charcoal,
+                fontWeight: 900,
+                fontSize: "15px",
+                padding: "10px 22px",
+                borderRadius: "9999px",
+              }}
+            >
+              100% READY
+            </div>
+          </div>
+        </ElevatedCard>
+      </div>
+
+      {/* Subtle brand watermark */}
+      <div
+        style={{
+          fontSize: "16px",
+          fontWeight: 700,
+          color: THEME.colors.charcoalLight,
+          letterSpacing: "0.08em",
+        }}
+      >
+        tech-tutorial-series.io
       </div>
     </div>
   );

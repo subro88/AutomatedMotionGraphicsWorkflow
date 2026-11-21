@@ -1,20 +1,12 @@
 import React from "react";
-import { spring, useCurrentFrame, useVideoConfig, Audio, staticFile } from "remotion";
+import { useCurrentFrame, Audio, staticFile } from "remotion";
 import { THEME } from "../theme";
-import { HardDrive3DWidget } from "../components/HardDrive3DWidget";
 import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
-import { DataFlowPipes } from "../components/DataFlowPipes";
+import { CurvedSpline } from "../components/CurvedSpline";
+import { ElevatedCard, ComponentSvgIcon } from "../components/VectorComponents";
 
 export const Scene02Vertical: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const days = [
-    { day: "MON", label: "Full Backup", blocks: 10, color: THEME.colors.orange, isFull: true, delay: 15 },
-    { day: "TUE", label: "+3 Changed Blocks", blocks: 3, color: THEME.colors.blue, isFull: false, delay: 110 },
-    { day: "WED", label: "+2 Changed Blocks", blocks: 2, color: THEME.colors.green, isFull: false, delay: 200 },
-    { day: "THU", label: "+4 Changed Blocks", blocks: 4, color: THEME.colors.purple, isFull: false, delay: 290 },
-  ];
 
   return (
     <div
@@ -22,225 +14,171 @@ export const Scene02Vertical: React.FC = () => {
         width: 1080,
         height: 1920,
         background: THEME.colors.cream,
-        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.07) 1.2px, transparent 1.2px)",
+        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.08) 1.2px, transparent 1.2px)",
         backgroundSize: "28px 28px",
-        padding: "50px 48px 40px 48px",
+        padding: "80px 70px 70px 70px",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
         fontFamily: THEME.typography.fontFamily,
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         justifyContent: "space-between",
       }}
     >
       <Audio src={staticFile("incremental_backup/scene2.wav")} />
 
-      {/* TOP 18%: PERMANENT STEP HEADER */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
-        <div
-          style={{
-            padding: "8px 24px",
-            borderRadius: "9999px",
-            background: THEME.colors.blue,
-            color: "#FFF",
-            fontSize: "15px",
-            fontWeight: 800,
-            letterSpacing: "0.1em",
-            boxShadow: `0 8px 24px ${THEME.colors.blue}40`,
-            marginBottom: "14px",
-          }}
-        >
-          STEP 01 • THE INCREMENTAL TIMELINE
-        </div>
-
-        <h1
-          style={{
-            ...THEME.typography.h1,
-            fontSize: "44px",
-            textAlign: "center",
-            margin: "0 0 8px 0",
-            color: THEME.colors.charcoal,
-          }}
-        >
-          What is Incremental Backup?
-        </h1>
-
-        <div style={{ fontSize: "17px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
-          Backing up only the changes since the immediately previous backup
-        </div>
-      </div>
-
-      {/* MIDDLE 62%: 4-DAY TIMELINE CARDS + GLOWING PIPES + 3D HARD DRIVE */}
+      {/* Top Category Badge */}
       <div
         style={{
-          height: 1100,
+          padding: "10px 28px",
+          borderRadius: "9999px",
+          background: THEME.colors.blue,
+          color: "#FFFFFF",
+          fontSize: "15px",
+          fontWeight: 800,
+          letterSpacing: "0.1em",
+          boxShadow: `0 8px 24px ${THEME.colors.blue}35`,
+        }}
+      >
+        STEP 01 • INCREMENTAL ARCHITECTURE
+      </div>
+
+      {/* Top Dynamic Kinetic Subtitle Phrase */}
+      <div
+        style={{
+          marginTop: "20px",
+          minHeight: "150px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <KineticSubtitleEngine sceneId="scene2" fontSize={54} layout="vertical" />
+      </div>
+
+      {/* Central Architecture Stage: IMMERSIVE (1040px height, 940px width) */}
+      <div
+        style={{
+          width: 940,
+          height: 1040,
+          position: "relative",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          position: "relative",
-          zIndex: 5,
+          gap: "36px",
         }}
       >
-        {/* Animated Data Pipeline streaming from Active Day to Hard Drive */}
-        <DataFlowPipes
-          startX={260}
-          startY={360}
-          endX={760}
-          endY={360}
-          color={THEME.colors.blue}
-          lineWidth={5}
-          speed={1.6}
-          packetCount={5}
-          isLatching={true}
-          latchFrame={40}
-          label="DELTA STREAM"
-        />
+        {/* Curved Splines connecting Full Backup to Deltas */}
+        <CurvedSpline x1={470} y1={230} x2={160} y2={450} curvature={-50} color={THEME.colors.green} frame={frame} lineWidth={5} />
+        <CurvedSpline x1={470} y1={230} x2={470} y2={450} curvature={0} color={THEME.colors.orange} frame={frame} lineWidth={5} />
+        <CurvedSpline x1={470} y1={230} x2={780} y2={450} curvature={50} color={THEME.colors.blue} frame={frame} lineWidth={5} />
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-            maxWidth: 960,
-            zIndex: 6,
-          }}
-        >
-          {/* Left Column: 4 Daily Staggered Cards */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "14px", width: "420px" }}>
-            {days.map((d, idx) => {
-              const entrance = spring({
-                frame: Math.max(0, frame - d.delay),
-                fps,
-                config: THEME.springs.gentle,
-              });
-              const isActive = frame >= d.delay && (idx === days.length - 1 || frame < days[idx + 1].delay);
-
-              return (
-                <div
-                  key={idx}
-                  style={{
-                    padding: "16px 20px",
-                    borderRadius: "22px",
-                    background: "#FFFFFF",
-                    boxShadow: isActive ? "0 18px 45px -8px rgba(38, 133, 217, 0.25)" : THEME.shadows.card,
-                    border: isActive ? `2.5px solid ${d.color}` : `1.5px solid ${THEME.colors.border}`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    transform: `translateX(${(1 - entrance) * -40}px) scale(${0.96 + entrance * 0.04})`,
-                    opacity: entrance,
-                    transition: "border 0.2s ease, box-shadow 0.2s ease",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                    <div
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: "14px",
-                        background: `${d.color}15`,
-                        color: d.color,
-                        fontSize: "14px",
-                        fontWeight: 900,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {d.day}
-                    </div>
-                    <div>
-                      <div style={{ fontSize: "14px", fontWeight: 800, color: THEME.colors.charcoal }}>
-                        {d.label}
-                      </div>
-                      <div style={{ fontSize: "11px", color: THEME.colors.charcoalMuted }}>
-                        {d.isFull ? "Base Volume Image" : "Delta sectors only"}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Block Indicator Badges */}
-                  <div
-                    style={{
-                      padding: "5px 12px",
-                      borderRadius: "10px",
-                      background: d.color,
-                      color: "#FFFFFF",
-                      fontSize: "12px",
-                      fontWeight: 800,
-                    }}
-                  >
-                    {d.blocks} blocks
-                  </div>
+        {/* Day 0: Full Backup Base Container (940px wide) */}
+        <ElevatedCard width={940} height={180} padding="24px 36px">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <ComponentSvgIcon name="server_tower" size={90} />
+              <div>
+                <div style={{ fontSize: "24px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                  Sunday Baseline: Full Backup
                 </div>
-              );
-            })}
+                <div style={{ fontSize: "16px", color: THEME.colors.charcoalMuted, marginTop: "6px", fontWeight: 600 }}>
+                  Complete OS, System State & Volume Snapshot (C:\ + System Reserved)
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                background: THEME.colors.blueLight,
+                color: THEME.colors.blue,
+                fontWeight: 800,
+                fontSize: "24px",
+                padding: "12px 24px",
+                borderRadius: "16px",
+              }}
+            >
+              100 GB
+            </div>
           </div>
+        </ElevatedCard>
 
-          {/* Right Column: 3D SAS 15K Enterprise Hard Drive */}
-          <HardDrive3DWidget width={380} height={440} isWriting delay={20} showSavedBadge={frame > 60} />
+        {/* Row of 3 Daily Incremental Deltas (940px total span) */}
+        <div style={{ display: "flex", gap: "28px", width: "100%", justifyContent: "space-between", zIndex: 10 }}>
+          {/* Day 1 Delta */}
+          <ElevatedCard width={290} height={250} padding="24px 20px">
+            <div style={{ fontSize: "16px", fontWeight: 800, color: THEME.colors.green, marginBottom: "10px" }}>
+              MONDAY DELTA
+            </div>
+            <div style={{ fontSize: "40px", fontWeight: 800, color: THEME.colors.charcoal }}>
+              2.4 GB
+            </div>
+            <div style={{ fontSize: "14px", color: THEME.colors.charcoalMuted, marginTop: "12px", textAlign: "center", fontWeight: 600 }}>
+              Changed blocks only since Sunday
+            </div>
+          </ElevatedCard>
+
+          {/* Day 2 Delta */}
+          <ElevatedCard width={290} height={250} padding="24px 20px" style={{ border: `3px solid ${THEME.colors.orange}` }}>
+            <div style={{ fontSize: "16px", fontWeight: 800, color: THEME.colors.orange, marginBottom: "10px" }}>
+              TUESDAY DELTA
+            </div>
+            <div style={{ fontSize: "40px", fontWeight: 800, color: THEME.colors.charcoal }}>
+              1.1 GB
+            </div>
+            <div style={{ fontSize: "14px", color: THEME.colors.charcoalMuted, marginTop: "12px", textAlign: "center", fontWeight: 600 }}>
+              Changed blocks only since Monday
+            </div>
+          </ElevatedCard>
+
+          {/* Day 3 Delta */}
+          <ElevatedCard width={290} height={250} padding="24px 20px">
+            <div style={{ fontSize: "16px", fontWeight: 800, color: THEME.colors.blue, marginBottom: "10px" }}>
+              WEDNESDAY DELTA
+            </div>
+            <div style={{ fontSize: "40px", fontWeight: 800, color: THEME.colors.charcoal }}>
+              3.0 GB
+            </div>
+            <div style={{ fontSize: "14px", color: THEME.colors.charcoalMuted, marginTop: "12px", textAlign: "center", fontWeight: 600 }}>
+              Changed blocks only since Tuesday
+            </div>
+          </ElevatedCard>
         </div>
 
-        {/* Dynamic Timeline Progression Summary */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 820,
-            marginTop: "28px",
-            padding: "16px 26px",
-            borderRadius: "22px",
-            background: "#EFF6FF",
-            border: `2px solid ${THEME.colors.blue}`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            zIndex: 6,
-          }}
-        >
-          <div style={{ textAlign: "center" }}>
-            <div style={{ fontSize: "12px", color: THEME.colors.charcoalMuted, fontWeight: 700 }}>STORAGE SAVED</div>
-            <div style={{ fontSize: "22px", fontWeight: 900, color: THEME.colors.blue }}>~78% Less Disk</div>
+        {/* Dynamic Metric Card (940px wide) */}
+        <ElevatedCard width={940} height={140} padding="20px 36px" style={{ background: "#ECFDF5", border: "2px solid #A7F3D0" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
+              <span style={{ fontSize: "36px" }}>⚡</span>
+              <div>
+                <div style={{ fontSize: "22px", fontWeight: 800, color: "#065F46" }}>
+                  90% Storage Space Saved Every Week
+                </div>
+                <div style={{ fontSize: "15px", color: "#047857", fontWeight: 600, marginTop: "4px" }}>
+                  Fast delta transfer without duplicating 100 GB base image
+                </div>
+              </div>
+            </div>
+            <div style={{ fontSize: "26px", fontWeight: 800, color: "#059669" }}>
+              SUB-MINUTE
+            </div>
           </div>
-          <div style={{ width: 1, height: 36, background: "#BFDBFE" }} />
-          <div style={{ textAlign: "center" }}>
-            <div style={{ fontSize: "12px", color: THEME.colors.charcoalMuted, fontWeight: 700 }}>BACKUP DURATION</div>
-            <div style={{ fontSize: "22px", fontWeight: 900, color: THEME.colors.green }}>5 Min vs 2 Hours</div>
-          </div>
-          <div style={{ width: 1, height: 36, background: "#BFDBFE" }} />
-          <div style={{ textAlign: "center" }}>
-            <div style={{ fontSize: "12px", color: THEME.colors.charcoalMuted, fontWeight: 700 }}>DEPENDENCY</div>
-            <div style={{ fontSize: "22px", fontWeight: 900, color: THEME.colors.orange }}>Chained Sequence</div>
-          </div>
-        </div>
+        </ElevatedCard>
       </div>
 
-      {/* BOTTOM 20%: LOWER-THIRD KINETIC WORD-BY-WORD ACTIVE POP SUBTITLES */}
+      {/* Subtle brand watermark */}
       <div
         style={{
-          height: 240,
-          background: "#FFFFFF",
-          borderRadius: "28px",
-          boxShadow: "0 20px 50px -10px rgba(41, 37, 36, 0.12)",
-          border: `1.5px solid ${THEME.colors.border}`,
-          padding: "24px 32px",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 10,
+          fontSize: "16px",
+          fontWeight: 700,
+          color: THEME.colors.charcoalLight,
+          letterSpacing: "0.08em",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: THEME.colors.blue }} />
-          <span style={{ fontSize: "12px", fontWeight: 800, color: THEME.colors.charcoalMuted, letterSpacing: "0.06em" }}>
-            AUDIO SPOKEN TRANSCRIPT
-          </span>
-        </div>
-        <KineticSubtitleEngine sceneId="scene2" fontSize={42} layout="vertical" />
+        tech-tutorial-series.io
       </div>
     </div>
   );

@@ -1,24 +1,12 @@
 import React from "react";
-import { spring, useCurrentFrame, useVideoConfig, Audio, staticFile } from "remotion";
+import { useCurrentFrame, Audio, staticFile } from "remotion";
 import { THEME } from "../theme";
 import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
-import { AeroDialog3DWidget } from "../components/AeroDialog3DWidget";
-import { DataFlowPipes } from "../components/DataFlowPipes";
+import { CurvedSpline } from "../components/CurvedSpline";
+import { ElevatedCard, ComponentSvgIcon } from "../components/VectorComponents";
 
 export const Scene04Vertical: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const progress = Math.min(
-    100,
-    Math.floor(
-      spring({
-        frame: Math.max(0, frame - 160),
-        fps,
-        config: { damping: 18, stiffness: 60 },
-      }) * 100
-    )
-  );
 
   return (
     <div
@@ -26,184 +14,177 @@ export const Scene04Vertical: React.FC = () => {
         width: 1080,
         height: 1920,
         background: THEME.colors.cream,
-        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.07) 1.2px, transparent 1.2px)",
+        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.08) 1.2px, transparent 1.2px)",
         backgroundSize: "28px 28px",
-        padding: "50px 48px 40px 48px",
+        padding: "80px 70px 70px 70px",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
         fontFamily: THEME.typography.fontFamily,
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         justifyContent: "space-between",
       }}
     >
       <Audio src={staticFile("incremental_backup/scene4.wav")} />
 
-      {/* TOP 18%: PERMANENT STEP HEADER */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
-        <div
-          style={{
-            padding: "8px 24px",
-            borderRadius: "9999px",
-            background: THEME.colors.green,
-            color: "#FFF",
-            fontSize: "15px",
-            fontWeight: 800,
-            letterSpacing: "0.1em",
-            boxShadow: `0 8px 24px ${THEME.colors.green}40`,
-            marginBottom: "14px",
-          }}
-        >
-          METHOD 1 • SERVER MANAGER
-        </div>
-
-        <h1
-          style={{
-            ...THEME.typography.h1,
-            fontSize: "44px",
-            textAlign: "center",
-            margin: "0 0 8px 0",
-            color: THEME.colors.charcoal,
-          }}
-        >
-          Install Windows Server Backup
-        </h1>
-
-        <div style={{ fontSize: "17px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
-          Server Manager ➔ Features ➔ Add Features ➔ Windows Server Backup
-        </div>
-      </div>
-
-      {/* MIDDLE 62%: 3D AERO WINDOW + DATA FLOW PIPELINE + PROGRESS */}
+      {/* Top Category Badge */}
       <div
         style={{
-          height: 1100,
+          padding: "10px 28px",
+          borderRadius: "9999px",
+          background: THEME.colors.orange,
+          color: "#FFFFFF",
+          fontSize: "15px",
+          fontWeight: 800,
+          letterSpacing: "0.1em",
+          boxShadow: "0 8px 24px rgba(244, 91, 22, 0.32)",
+        }}
+      >
+        CONFIGURATION • WINDOWS SERVER BACKUP
+      </div>
+
+      {/* Top Dynamic Kinetic Subtitle Phrase */}
+      <div
+        style={{
+          marginTop: "20px",
+          minHeight: "150px",
           display: "flex",
-          flexDirection: "column",
-          gap: "28px",
           alignItems: "center",
           justifyContent: "center",
-          position: "relative",
-          zIndex: 5,
+          width: "100%",
         }}
       >
-        {/* Glowing Green Feature Installation Pipe */}
-        <DataFlowPipes
-          startX={240}
-          startY={110}
-          endX={840}
-          endY={110}
-          color={THEME.colors.green}
-          lineWidth={5}
-          speed={1.5}
-          packetCount={4}
-          isLatching={progress === 100}
-          latchFrame={220}
-          label="FEATURE REGISTRATION"
-        />
-
-        {/* 3D Aero Glass Dialog Simulation */}
-        <AeroDialog3DWidget
-          title="Server Manager - Add Features Wizard"
-          width={680}
-          selectedOption="faster"
-          delay={20}
-        />
-
-        {/* Real-time 0-100% Progress Bar Widget */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 680,
-            background: "#FFFFFF",
-            borderRadius: "24px",
-            padding: "24px 32px",
-            boxShadow: THEME.shadows.card,
-            border: `1.5px solid ${THEME.colors.border}`,
-            zIndex: 6,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "14px",
-              fontSize: "15px",
-              fontWeight: 800,
-              color: THEME.colors.charcoal,
-            }}
-          >
-            <span>Windows Server Backup Features</span>
-            <span
-              style={{
-                fontSize: "14px",
-                fontWeight: 900,
-                color: progress === 100 ? THEME.colors.green : THEME.colors.orange,
-              }}
-            >
-              {progress === 100 ? "✓ INSTALLED" : `${progress}%`}
-            </span>
-          </div>
-
-          {/* GPU Accelerated ScaleX Progress Bar (Zero Layout Reflow) */}
-          <div style={{ width: "100%", height: 14, borderRadius: "7px", background: "#E2E8F0", overflow: "hidden" }}>
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                background:
-                  progress === 100
-                    ? "linear-gradient(90deg, #10B981 0%, #059669 100%)"
-                    : "linear-gradient(90deg, #F45B16 0%, #EA580C 100%)",
-                borderRadius: "7px",
-                transform: `scaleX(${progress / 100})`,
-                transformOrigin: "left center",
-              }}
-            />
-          </div>
-
-          <div
-            style={{
-              marginTop: "14px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              fontSize: "12px",
-              color: THEME.colors.charcoalMuted,
-            }}
-          >
-            <span>Component: wbadmin.exe & GUI Console</span>
-            <span style={{ fontWeight: 700, color: THEME.colors.green }}>VSS Writer Ready</span>
-          </div>
-        </div>
+        <KineticSubtitleEngine sceneId="scene4" fontSize={54} layout="vertical" />
       </div>
 
-      {/* BOTTOM 20%: LOWER-THIRD KINETIC WORD-BY-WORD ACTIVE POP SUBTITLES */}
+      {/* Central Visual Stage: MMC Console & Network Topology (940px width, 1040px height) */}
       <div
         style={{
-          height: 240,
-          background: "#FFFFFF",
-          borderRadius: "28px",
-          boxShadow: "0 20px 50px -10px rgba(41, 37, 36, 0.12)",
-          border: `1.5px solid ${THEME.colors.border}`,
-          padding: "24px 32px",
-          boxSizing: "border-box",
+          width: 940,
+          height: 1040,
+          position: "relative",
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
           justifyContent: "center",
-          position: "relative",
-          zIndex: 10,
+          gap: "32px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: THEME.colors.green }} />
-          <span style={{ fontSize: "12px", fontWeight: 800, color: THEME.colors.charcoalMuted, letterSpacing: "0.06em" }}>
-            AUDIO SPOKEN TRANSCRIPT
-          </span>
+        {/* Dynamic Curved Spline connecting Admin Console to Server Host */}
+        <CurvedSpline
+          x1={470}
+          y1={280}
+          x2={470}
+          y2={540}
+          curvature={0}
+          color={THEME.colors.blue}
+          lineWidth={6}
+          frame={frame}
+          packetCount={4}
+        />
+
+        {/* Admin Workstation Node (Top) */}
+        <ElevatedCard width={940} height={200} padding="24px 36px">
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+              <ComponentSvgIcon name="workstation" size={100} />
+              <div>
+                <div style={{ fontSize: "24px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                  Administrative Console • MMC Snap-in
+                </div>
+                <div style={{ fontSize: "16px", color: THEME.colors.charcoalMuted, fontWeight: 600, marginTop: "6px" }}>
+                  Server Manager $\to$ Tools $\to$ Windows Server Backup (`wbadmin.msc`)
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                background: THEME.colors.blueLight,
+                color: THEME.colors.blue,
+                fontWeight: 800,
+                fontSize: "16px",
+                padding: "10px 20px",
+                borderRadius: "9999px",
+              }}
+            >
+              WBADMIN
+            </div>
+          </div>
+        </ElevatedCard>
+
+        {/* Action Panel: Two Modes Breakdown */}
+        <div style={{ display: "flex", gap: "28px", width: "100%", justifyContent: "space-between", zIndex: 10 }}>
+          {/* Action 1: Backup Schedule */}
+          <ElevatedCard
+            width={450}
+            height={260}
+            padding="24px 24px"
+            style={{ border: `3px solid ${THEME.colors.orange}` }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+              <span style={{ fontSize: "30px" }}>📅</span>
+              <div style={{ fontSize: "20px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                Backup Schedule
+              </div>
+            </div>
+            <div style={{ fontSize: "15px", color: THEME.colors.charcoalMuted, fontWeight: 600, lineHeight: 1.4 }}>
+              Automated daily backup schedule. Unlocks VSS incremental performance tracking to dedicated target disks.
+            </div>
+            <div style={{ marginTop: "16px", background: THEME.colors.orangeLight, color: THEME.colors.orange, padding: "8px 14px", borderRadius: "10px", fontWeight: 800, fontSize: "13px", textAlign: "center" }}>
+              SUPPORTS INCREMENTAL
+            </div>
+          </ElevatedCard>
+
+          {/* Action 2: Backup Once */}
+          <ElevatedCard width={450} height={260} padding="24px 24px">
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+              <span style={{ fontSize: "30px" }}>⚡</span>
+              <div style={{ fontSize: "20px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                Backup Once
+              </div>
+            </div>
+            <div style={{ fontSize: "15px", color: THEME.colors.charcoalMuted, fontWeight: 600, lineHeight: 1.4 }}>
+              Ad-hoc manual one-time backup. Typically creates full copies or system state snapshots without scheduled delta chaining.
+            </div>
+            <div style={{ marginTop: "16px", background: "#F1F5F9", color: "#64748B", padding: "8px 14px", borderRadius: "10px", fontWeight: 800, fontSize: "13px", textAlign: "center" }}>
+              ONE-TIME MANUAL RUN
+            </div>
+          </ElevatedCard>
         </div>
-        <KineticSubtitleEngine sceneId="scene4" fontSize={42} layout="vertical" />
+
+        {/* RJ45 Network Cable Connection Bar */}
+        <ElevatedCard width={940} height={140} padding="20px 36px">
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+              <ComponentSvgIcon name="ethernet_cable" size={70} />
+              <div>
+                <div style={{ fontSize: "20px", fontWeight: 800, color: THEME.colors.charcoal }}>
+                  Integrated VSS Block Service
+                </div>
+                <div style={{ fontSize: "14px", color: THEME.colors.charcoalMuted, fontWeight: 600, marginTop: "4px" }}>
+                  Requires no third-party agents; built directly into Windows Server 2008 R2 kernel
+                </div>
+              </div>
+            </div>
+            <div style={{ fontSize: "18px", fontWeight: 900, color: THEME.colors.green }}>
+              NATIVE ENGINE
+            </div>
+          </div>
+        </ElevatedCard>
+      </div>
+
+      {/* Subtle brand watermark */}
+      <div
+        style={{
+          fontSize: "16px",
+          fontWeight: 700,
+          color: THEME.colors.charcoalLight,
+          letterSpacing: "0.08em",
+        }}
+      >
+        tech-tutorial-series.io
       </div>
     </div>
   );

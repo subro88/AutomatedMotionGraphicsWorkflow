@@ -1,10 +1,14 @@
 import React from "react";
 import { useCurrentFrame, Audio, staticFile } from "remotion";
 import { THEME } from "../theme";
-import { HardDrive3DWidget } from "../components/HardDrive3DWidget";
-import { VssDataBlockStream } from "../components/VssDataBlockStream";
 import { KineticSubtitleEngine } from "../components/KineticSubtitleEngine";
-import { DataFlowPipes } from "../components/DataFlowPipes";
+import { CurvedSpline } from "../components/CurvedSpline";
+import {
+  ElevatedCard,
+  ServerRackCard,
+  HardDrivePlatterCard,
+  ComponentSvgIcon,
+} from "../components/VectorComponents";
 
 export const Scene01Vertical: React.FC = () => {
   const frame = useCurrentFrame();
@@ -15,192 +19,162 @@ export const Scene01Vertical: React.FC = () => {
         width: 1080,
         height: 1920,
         background: THEME.colors.cream,
-        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.07) 1.2px, transparent 1.2px)",
+        backgroundImage: "radial-gradient(rgba(41, 37, 36, 0.08) 1.2px, transparent 1.2px)",
         backgroundSize: "28px 28px",
-        padding: "50px 48px 40px 48px",
+        padding: "80px 70px 70px 70px",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
         fontFamily: THEME.typography.fontFamily,
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         justifyContent: "space-between",
       }}
     >
       <Audio src={staticFile("incremental_backup/scene1.wav")} />
 
-      {/* TOP 18%: PERMANENT STEP & TOPIC HEADER */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", zIndex: 10 }}>
-        <div
-          style={{
-            padding: "8px 24px",
-            borderRadius: "9999px",
-            background: THEME.colors.orange,
-            color: "#FFF",
-            fontSize: "15px",
-            fontWeight: 800,
-            letterSpacing: "0.1em",
-            boxShadow: "0 8px 24px rgba(244, 91, 22, 0.35)",
-            marginBottom: "14px",
-          }}
-        >
-          WINDOWS SERVER 2008 R2 • OVERVIEW
-        </div>
-
-        <h1
-          style={{
-            ...THEME.typography.h1,
-            fontSize: "44px",
-            textAlign: "center",
-            margin: "0 0 8px 0",
-            color: THEME.colors.charcoal,
-          }}
-        >
-          Incremental Backup Architecture
-        </h1>
-
-        <div style={{ fontSize: "17px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
-          Backing up only what changes — without duplicating full systems
-        </div>
-      </div>
-
-      {/* MIDDLE 62%: PROMINENT 3D B-ROLL & GLOWING DATA PIPELINES */}
+      {/* Top Category Badge */}
       <div
         style={{
-          height: 1100,
+          padding: "10px 28px",
+          borderRadius: "9999px",
+          background: THEME.colors.orange,
+          color: "#FFFFFF",
+          fontSize: "15px",
+          fontWeight: 800,
+          letterSpacing: "0.1em",
+          boxShadow: "0 8px 24px rgba(244, 91, 22, 0.32)",
+        }}
+      >
+        WINDOWS SERVER 2008 R2 • OVERVIEW
+      </div>
+
+      {/* Top Dynamic Kinetic Subtitle Phrase */}
+      <div
+        style={{
+          marginTop: "20px",
+          minHeight: "150px",
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          position: "relative",
-          zIndex: 5,
+          width: "100%",
         }}
       >
-        {/* Glowing Orange Data Flow Bus Cable */}
-        <DataFlowPipes
-          startX={300}
-          startY={220}
-          endX={740}
-          endY={220}
-          color={THEME.colors.orange}
-          lineWidth={5}
-          speed={1.5}
-          packetCount={4}
-          isLatching={true}
-          latchFrame={35}
-          label="VSS DELTA STREAM"
+        <KineticSubtitleEngine sceneId="scene1" fontSize={56} layout="vertical" />
+      </div>
+
+      {/* Central Visual Stage: IMMERSIVE (1040px height, 940px width) */}
+      <div
+        style={{
+          width: 940,
+          height: 1040,
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {/* Dynamic Curved Spline with flowing glowing data packets */}
+        <CurvedSpline
+          x1={240}
+          y1={300}
+          x2={700}
+          y2={740}
+          curvature={110}
+          color={THEME.colors.blue}
+          lineWidth={6}
+          frame={frame}
+          packetCount={5}
         />
 
-        {/* 3D Hardware Arrangement */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-            maxWidth: 920,
-            zIndex: 6,
-          }}
-        >
-          {/* Left: Production Server Node */}
-          <div
-            style={{
-              width: 320,
-              padding: "24px",
-              background: "#FFFFFF",
-              borderRadius: "28px",
-              boxShadow: "0 25px 60px -10px rgba(41, 37, 36, 0.18)",
-              border: `2px solid ${THEME.colors.border}`,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            <div style={{ fontSize: "52px", marginBottom: "12px" }}>🖥️</div>
-            <div style={{ fontSize: "18px", fontWeight: 900, color: THEME.colors.charcoal, marginBottom: "6px" }}>
-              Production Server
-            </div>
-            <div style={{ fontSize: "13px", color: THEME.colors.charcoalMuted, marginBottom: "16px" }}>
-              Active Database & System Files
-            </div>
-            <div
-              style={{
-                padding: "6px 14px",
-                borderRadius: "12px",
-                background: "#FEF2F2",
-                color: THEME.colors.red,
-                fontSize: "12px",
-                fontWeight: 800,
-              }}
-            >
-              ● High Modification Rate
-            </div>
-          </div>
-
-          {/* Right: SAS 15K 3000 RPM Dedicated Hard Drive */}
-          <HardDrive3DWidget width={380} height={440} isWriting delay={10} showSavedBadge={frame > 45} />
+        {/* Server Rack Node from Component.svg (Top-Left) */}
+        <div style={{ position: "absolute", left: 10, top: 40 }}>
+          <ServerRackCard frame={frame} label="Primary Host Server" width={420} height={460} />
         </div>
 
-        {/* Middle Floating 3D Isometric Data Stream */}
-        <div style={{ marginTop: "32px", zIndex: 6 }}>
-          <VssDataBlockStream blockCount={5} isIncremental style={{ transform: "scale(1.15)" }} />
+        {/* Dedicated Hard Drive Node from Component.svg (Bottom-Right) */}
+        <div style={{ position: "absolute", right: 10, bottom: 40 }}>
+          <HardDrivePlatterCard frame={frame} label="Dedicated Backup Disk" width={420} height={460} />
         </div>
 
-        {/* Floating Core Question Dilemma Card */}
+        {/* Central Sync Badge between Server & Platter */}
         <div
           style={{
-            width: "100%",
-            maxWidth: 780,
-            marginTop: "28px",
-            padding: "18px 28px",
-            background: "rgba(255, 255, 255, 0.95)",
-            backdropFilter: "blur(12px)",
-            borderRadius: "24px",
-            boxShadow: THEME.shadows.card,
-            border: `2px solid ${THEME.colors.orange}`,
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "#FFFFFF",
+            padding: "16px 24px",
+            borderRadius: "20px",
+            boxShadow: THEME.shadows.cardElevated,
+            border: `2px solid ${THEME.colors.blue}`,
             display: "flex",
             alignItems: "center",
-            gap: "16px",
-            zIndex: 6,
+            gap: "12px",
+            zIndex: 15,
           }}
         >
-          <span style={{ fontSize: "36px" }}>❓</span>
-          <div>
-            <div style={{ fontSize: "16px", fontWeight: 900, color: THEME.colors.orange }}>
-              THE CORE PROBLEM:
-            </div>
-            <div style={{ fontSize: "14px", color: THEME.colors.charcoal, fontWeight: 700, lineHeight: 1.4 }}>
-              How can we back up changing data continuously without repeating full backups every single day?
-            </div>
-          </div>
+          <ComponentSvgIcon name="sync_arrows" size={32} />
+          <span style={{ fontSize: "16px", fontWeight: 800, color: THEME.colors.charcoal }}>
+            Continuous Sync Loop
+          </span>
         </div>
       </div>
 
-      {/* BOTTOM 20%: LOWER-THIRD KINETIC WORD-BY-WORD ACTIVE POP SUBTITLES */}
+      {/* Bottom Metric Pill: Fills lower canvas */}
       <div
         style={{
-          height: 240,
+          width: 900,
+          height: 120,
           background: "#FFFFFF",
+          padding: "20px 36px",
           borderRadius: "28px",
-          boxShadow: "0 20px 50px -10px rgba(41, 37, 36, 0.12)",
-          border: `1.5px solid ${THEME.colors.border}`,
-          padding: "24px 32px",
-          boxSizing: "border-box",
+          boxShadow: THEME.shadows.card,
+          border: `1px solid ${THEME.colors.border}`,
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 10,
+          alignItems: "center",
+          justifyContent: "space-between",
+          boxSizing: "border-box",
+          marginBottom: "10px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: THEME.colors.orange }} />
-          <span style={{ fontSize: "12px", fontWeight: 800, color: THEME.colors.charcoalMuted, letterSpacing: "0.06em" }}>
-            AUDIO SPOKEN TRANSCRIPT
-          </span>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <span style={{ fontSize: "32px" }}>⚡</span>
+          <div>
+            <div style={{ fontSize: "20px", fontWeight: 800, color: THEME.colors.charcoal }}>
+              VSS Block-Level Delta Tracking Active
+            </div>
+            <div style={{ fontSize: "14px", color: THEME.colors.charcoalMuted, fontWeight: 600 }}>
+              Captures changed clusters without duplicating full volume
+            </div>
+          </div>
         </div>
-        <KineticSubtitleEngine sceneId="scene1" fontSize={42} layout="vertical" />
+        <div
+          style={{
+            background: THEME.colors.greenLight,
+            color: THEME.colors.green,
+            fontWeight: 800,
+            fontSize: "16px",
+            padding: "8px 18px",
+            borderRadius: "9999px",
+          }}
+        >
+          ONLINE
+        </div>
+      </div>
+
+      {/* Subtle brand / topic footer watermark */}
+      <div
+        style={{
+          fontSize: "16px",
+          fontWeight: 700,
+          color: THEME.colors.charcoalLight,
+          letterSpacing: "0.08em",
+        }}
+      >
+        tech-tutorial-series.io
       </div>
     </div>
   );

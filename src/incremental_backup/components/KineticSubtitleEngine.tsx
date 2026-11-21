@@ -96,17 +96,17 @@ export const KineticSubtitleEngine: React.FC<KineticSubtitleProps> = ({
         });
 
         // Determine styling based on state
-        let textColor = "#A1A1AA"; // default upcoming muted grey
-        let fontWeight = 600;
-        let scale = 0.95;
+        let textColor = "#A8A29E"; // upcoming muted warm grey
+        let fontWeight = 700;
+        let scale = 0.98;
 
         if (isCurrent) {
-          textColor = w.isKeyword ? w.accentColor : "#18181B";
+          textColor = w.isKeyword ? THEME.colors.orange : THEME.colors.charcoal;
           fontWeight = 900;
-          scale = 0.95 + wordSpring * 0.18; // Pop punch!
+          scale = 1.0 + wordSpring * 0.12; // Punchy pop!
         } else if (isSpoken) {
-          textColor = "#27272A"; // Spoken past word
-          fontWeight = 700;
+          textColor = w.isKeyword ? THEME.colors.orange : THEME.colors.charcoal; // Spoken word
+          fontWeight = 800;
           scale = 1.0;
         }
 
@@ -115,16 +115,19 @@ export const KineticSubtitleEngine: React.FC<KineticSubtitleProps> = ({
             key={wIdx}
             style={{
               fontSize: `${fontSize}px`,
-              lineHeight: 1.15,
+              lineHeight: 1.18,
               fontWeight,
               color: textColor,
               display: "inline-block",
               transform: `scale(${scale})`,
               transformOrigin: "center center",
-              transition: "color 0.1s ease",
-              letterSpacing: "-0.03em",
+              transition: "color 0.08s ease",
+              letterSpacing: "-0.025em",
               fontFamily: THEME.typography.fontFamily,
-              textShadow: isCurrent && w.isKeyword ? `0 4px 18px ${w.accentColor}35` : "none",
+              textShadow:
+                isCurrent && w.isKeyword
+                  ? `0 6px 20px ${THEME.colors.orange}45`
+                  : "none",
             }}
           >
             {w.word}
