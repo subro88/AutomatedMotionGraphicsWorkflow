@@ -10,3 +10,4 @@ Config.addElementLibrary({
     'url': 'https://snapcn.dev/docs/components',
     'displayName': 'snapcn'
 });
+Config.setPreservePitchOnPlayback(false);

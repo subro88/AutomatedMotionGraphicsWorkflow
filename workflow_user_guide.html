@@ -729,6 +729,16 @@
         <span class="label">Unified Remotion Runner</span>
         <span class="desc">13 Remotion skills, Mediabunny bridge, GPU renders &amp; dual output</span>
       </a>
+      <a href="#step22-anime-engine" class="flow-step-box">
+        <span class="idx">PHASE 22</span>
+        <span class="label">Anime Storytelling Engine</span>
+        <span class="desc">Story Markdown, Voicebox multi-cast, Blender 4.2 NPR cel-shading &amp; speed lines</span>
+      </a>
+      <a href="#step23-stablegen-vault" class="flow-step-box">
+        <span class="idx">PHASE 23</span>
+        <span class="label">StableGen 3D Asset Vault</span>
+        <span class="desc">Blender 4.2.3 + ComfyUI 6GB Low-VRAM, LATO remeshing &amp; automated ingestion bridge</span>
+      </a>
     </div>
 
     <!-- Section: High Level Architecture -->
@@ -3046,6 +3056,87 @@ projects/
       </div>
     </section>
 
+    <!-- Phase 22: Anime & Cinematic Storytelling Engine -->
+    <section id="step22-anime-engine">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">22</span>
+          Phase 22: Anime &amp; Cinematic Storytelling Engine (Local $0 GPU Evolution)
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">scripts/anime_story_engine.py • scripts/blender_anime_studio.py • AnimeSpeedLines.tsx</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          An offline, $0 cloud-cost evolution of the <code>claude-make-an-anime</code> paradigm. Transforms raw Markdown screenplays into broadcast-ready anime scenes featuring multi-character voice acting via Voicebox (with personal cloned <code>myVoice</code>), headless Blender 4.2 NPR cel-shading &amp; LineArt ink on your local NVIDIA RTX 3060, Remotion action speed lines, and DaVinci Resolve multi-track FCPXML timelines.
+        </p>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Key Architectural Capabilities:</h4>
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Story Markdown Parser (<code>story.md</code>):</strong> Intelligently extracts character dialogue, emotive camera tags (<code>close-up</code>, <code>dramatic-pan</code>, <code>wide</code>), and SFX cues (<code>[SFX: katana_draw]</code>) from natural Markdown scripts.</li>
+          <li><strong>Multi-Character Voicebox Casting:</strong> Automatically assigns characters to voice profiles—mapping the Protagonist to your personal cloned voice (<code>myVoice</code>), AI/Mecha to <code>tech</code>, and Mentors to <code>bm_george</code>, mastered to -16 LUFS with Faster-Whisper word timestamps.</li>
+          <li><strong>Headless Blender 4.2 NPR Cel-Shader:</strong> Applies stepped ColorRamp cel-shading and inverted-hull LineArt ink outlines to 3D characters and sci-fi environments, rendering directly on the local RTX 3060 GPU without manual UI work.</li>
+          <li><strong>GPU Action Speed Lines (MotionScore Grade S 100/100):</strong> Procedural Remotion component (<code>AnimeSpeedLines.tsx</code>) rendering dynamic radial action bursts with zero layout thrashing.</li>
+          <li><strong>DaVinci Resolve Multi-Track FCPXML:</strong> Automatically outputs an XML timeline separating Voice Dialogue (A1), SFX Stems (A2), Background Music (A3), Anime Video Stills (V1), and Speed Line FX (V2).</li>
+        </ul>
+
+        <div class="code-block" style="margin-bottom: 20px;">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Generate full anime production from Markdown screenplay</span>
+<span class="cmd">python</span> scripts/anime_story_engine.py <span class="flag">--story</span> inputs/sample_anime_story.md <span class="flag">--project</span> "NeoTokyo_01"
+
+<span class="comment"># 2. Or route through master video engine router</span>
+<span class="cmd">python</span> scripts/video_engine_router.py <span class="flag">--genre</span> anime <span class="flag">--script</span> inputs/sample_anime_story.md <span class="flag">--project</span> "CyberSamurai"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase 23: StableGen 3D Asset Vault & Low-VRAM Workflow -->
+    <section id="step23-stablegen-vault">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">23</span>
+          Phase 23: StableGen 3D Asset Vault &amp; 6GB Low-VRAM Pipeline
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">sakalond/StableGen • scripts/ingest_stablegen_asset.py • assets/3d_models/</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Integrates <strong>sakalond/StableGen</strong> into Blender 4.2.3 LTS with aggressive low-VRAM optimizations for your <strong>NVIDIA RTX 3060 Laptop GPU (6 GB VRAM)</strong>. Eliminates third-party 3D stock dependencies by generating custom 3D hardware props and anime characters on-demand, optimizing topology with LATO remeshing, and indexing assets into a structured vault with one-touch Remotion web synchronization.
+        </p>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Hardware &amp; 6GB VRAM Optimization Strategy:</h4>
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Aggressive Memory Paging:</strong> Launch ComfyUI with <code>--lowvram --fp8_e4m3fn-text-enc --fp8_e4m3fn-unet</code> to keep SDXL/ControlNet texturing within a ~3.8 GB VRAM envelope.</li>
+          <li><strong>Dual High-Impact Focus:</strong>
+            <br>• <em>3D Realistic:</em> Generates enterprise datacenter hardware, server blades, and backup storage drives with 2K PBR texture maps (Diffuse, Normal, Roughness, Metallic).
+            <br>• <em>Anime Storytelling:</em> Generates stylized cyber props, holographic terminals, and character bases ready for NPR cel-shading.</li>
+          <li><strong>LATO Automated Retopology:</strong> Reduces dense, chaotic AI point clouds to clean low-poly meshes (&lt; 20k–50k polygons) on the CPU with zero VRAM overhead.</li>
+          <li><strong>Instant Remotion Web Sync:</strong> Ingestion bridge automatically copies web-ready GLB models to <code>public/3d_models/</code> for zero-latency loading in Remotion <code>&lt;ThreeCanvas&gt;</code> and <code>@react-three/fiber</code>.</li>
+        </ul>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Vault CLI Operations:</h4>
+        <div class="code-block" style="margin-bottom: 20px;">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Ingest a 3D asset generated in StableGen / Blender into the vault</span>
+<span class="cmd">python</span> scripts/ingest_stablegen_asset.py <span class="flag">--source</span> "path/to/server_chassis.glb" <span class="flag">--id</span> enterprise_blade <span class="flag">--genre</span> 3d-realistic <span class="flag">--name</span> "Enterprise Server Blade" <span class="flag">--category</span> hardware <span class="flag">--tags</span> "datacenter,server,pbr"
+
+<span class="comment"># 2. List all registered 3D assets, polygon counts, file sizes, and Remotion sync status</span>
+<span class="cmd">python</span> scripts/ingest_stablegen_asset.py <span class="flag">--list</span>
+
+<span class="comment"># 3. Inspect detailed asset metadata (bounding box dimensions, materials, textures)</span>
+<span class="cmd">python</span> scripts/ingest_stablegen_asset.py <span class="flag">--inspect</span> enterprise_blade</div>
+        </div>
+      </div>
+    </section>
+
     <!-- CLI & Antigravity Skill Reference -->
     <section id="cli-reference">
       <div class="section-title-wrap">
@@ -3159,6 +3250,16 @@ projects/
               <td><code>scripts/openverse_search.py</code></td>
               <td><code>python scripts/openverse_search.py --query "keyword" --download</code></td>
               <td>Searches and downloads commercial-safe CC0/PDM stock imagery and BGM stems.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/anime_story_engine.py</code></td>
+              <td><code>python scripts/anime_story_engine.py --story inputs/story.md</code></td>
+              <td>Parses anime Markdown stories, casts Voicebox actors, drives headless Blender NPR cel-shading, and generates Resolve timelines.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/ingest_stablegen_asset.py</code></td>
+              <td><code>python scripts/ingest_stablegen_asset.py --list</code></td>
+              <td>Ingests StableGen/Blender 3D assets, parses binary GLB polygons, optimizes PBR textures, and syncs to Remotion public vault.</td>
             </tr>
           </tbody>
         </table>

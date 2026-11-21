@@ -1,0 +1,28 @@
+{
+  "id": "cyber_server_pod",
+  "name": "Cyber Server Pod",
+  "genre": "3d-realistic",
+  "category": "hardware",
+  "vault_path": "assets/3d_models/realistic/cyber_server_pod/model.glb",
+  "remotion_path": "public/3d_models/cyber_server_pod.glb",
+  "format": "glb",
+  "file_size_mb": 0.01,
+  "poly_count": 188,
+  "vertex_count": 384,
+  "dimensions_xyz": [
+    2,
+    2,
+    2
+  ],
+  "materials": [
+    "ServerChassis_PBR"
+  ],
+  "textures": [],
+  "animations": [],
+  "tags": [
+    "server",
+    "datacenter",
+    "cyber"
+  ],
+  "created_at": "2026-11-21T11:33:03.794298Z"
+}
