@@ -46,6 +46,12 @@ import { Scene07Vertical } from "./incremental_backup/vertical/Scene07Vertical";
 import { Scene08Vertical } from "./incremental_backup/vertical/Scene08Vertical";
 import { Scene09Vertical } from "./incremental_backup/vertical/Scene09Vertical";
 import { Scene10Vertical } from "./incremental_backup/vertical/Scene10Vertical";
+import {
+  SampleFrame1Scene01,
+  SampleFrame2Scene02,
+  SampleFrame3Scene05,
+  SampleFrame4Scene06,
+} from "./incremental_backup/SampleFramePreview";
 
 interface MasterProps {
   baseRadius: number;
@@ -1070,6 +1076,39 @@ export const RemotionRoot: React.FC = () => {
           dialogue: "The main database is expanding at fifty gigabytes per hour. We need incremental snapshots now!",
           isActionShot: true,
         }}
+      />
+      {/* 4 Motlab/Reference Style Visual Test Frames */}
+      <Composition
+        id="SampleFrame1-Scene01"
+        component={SampleFrame1Scene01}
+        durationInFrames={60}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="SampleFrame2-Scene02"
+        component={SampleFrame2Scene02}
+        durationInFrames={60}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="SampleFrame3-Scene05"
+        component={SampleFrame3Scene05}
+        durationInFrames={60}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="SampleFrame4-Scene06"
+        component={SampleFrame4Scene06}
+        durationInFrames={60}
+        fps={30}
+        width={1080}
+        height={1920}
       />
     </>
   );
