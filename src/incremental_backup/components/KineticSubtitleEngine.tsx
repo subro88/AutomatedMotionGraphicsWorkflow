@@ -119,10 +119,11 @@ export const KineticSubtitleEngine: React.FC<KineticSubtitleProps> = ({
               fontWeight,
               color: textColor,
               display: "inline-block",
+              margin: "0 8px",
               transform: `scale(${scale})`,
               transformOrigin: "center center",
               transition: "color 0.08s ease",
-              letterSpacing: "-0.025em",
+              letterSpacing: "-0.015em",
               fontFamily: THEME.typography.fontFamily,
               textShadow:
                 isCurrent && w.isKeyword

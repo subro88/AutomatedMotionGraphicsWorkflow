@@ -202,20 +202,28 @@ export const InteractiveScreenshotCard: React.FC<{
   width?: number;
   height?: number;
   zoom?: number;
+  transformOrigin?: string;
   cursorX?: number;
   cursorY?: number;
+  cursorOpacity?: number;
   isClicking?: boolean;
+  clickRippleProgress?: number;
   spotlightRect?: { x: number; y: number; w: number; h: number };
+  spotlightOpacity?: number;
 }> = ({
   imageName,
   title,
   width = 940,
   height = 720,
   zoom = 1.0,
+  transformOrigin = "center center",
   cursorX = 460,
   cursorY = 320,
+  cursorOpacity = 1.0,
   isClicking = false,
+  clickRippleProgress = 0,
   spotlightRect,
+  spotlightOpacity = 1.0,
 }) => {
   return (
     <div
@@ -296,7 +304,8 @@ export const InteractiveScreenshotCard: React.FC<{
         <div
           style={{
             transform: `scale(${zoom})`,
-            transition: "transform 0.4s ease",
+            transformOrigin: transformOrigin,
+            transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
             width: "100%",
             height: "100%",
             display: "flex",
@@ -315,7 +324,7 @@ export const InteractiveScreenshotCard: React.FC<{
         </div>
 
         {/* Spotlight Focus Box */}
-        {spotlightRect && (
+        {spotlightRect && spotlightOpacity > 0 && (
           <div
             style={{
               position: "absolute",
@@ -325,51 +334,57 @@ export const InteractiveScreenshotCard: React.FC<{
               height: spotlightRect.h,
               border: `3.5px solid ${THEME.colors.orange}`,
               borderRadius: "10px",
-              boxShadow: `0 0 24px ${THEME.colors.orangeLight}, 0 0 0 9999px rgba(0, 0, 0, 0.4)`,
+              boxShadow: `0 0 28px ${THEME.colors.orange}, 0 0 0 9999px rgba(0, 0, 0, ${0.45 * spotlightOpacity})`,
+              opacity: spotlightOpacity,
               pointerEvents: "none",
+              transition: "opacity 0.25s ease",
             }}
           />
         )}
 
         {/* Animated Mouse Cursor */}
-        <div
-          style={{
-            position: "absolute",
-            left: cursorX,
-            top: cursorY,
-            pointerEvents: "none",
-            zIndex: 20,
-            transform: isClicking ? "scale(0.85)" : "scale(1)",
-            transition: "transform 0.1s ease",
-          }}
-        >
-          {/* Vector Pointer SVG */}
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M3 3L10.07 20.97L13.58 13.58L20.97 10.07L3 3Z"
-              fill={THEME.colors.charcoal}
-              stroke="#FFFFFF"
-              strokeWidth="2.5"
-              strokeLinejoin="round"
-            />
-          </svg>
+        {cursorOpacity > 0 && (
+          <div
+            style={{
+              position: "absolute",
+              left: cursorX,
+              top: cursorY,
+              pointerEvents: "none",
+              zIndex: 20,
+              opacity: cursorOpacity,
+              transform: isClicking ? "scale(0.85)" : "scale(1)",
+              transition: "transform 0.08s ease",
+            }}
+          >
+            {/* Vector Pointer SVG */}
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M3 3L10.07 20.97L13.58 13.58L20.97 10.07L3 3Z"
+                fill={THEME.colors.charcoal}
+                stroke="#FFFFFF"
+                strokeWidth="2.5"
+                strokeLinejoin="round"
+              />
+            </svg>
 
-          {/* Click Ripple Effect */}
-          {isClicking && (
-            <div
-              style={{
-                position: "absolute",
-                left: -16,
-                top: -16,
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-                border: `3.5px solid ${THEME.colors.orange}`,
-                opacity: 0.85,
-              }}
-            />
-          )}
-        </div>
+            {/* Click Ripple Effect */}
+            {(isClicking || clickRippleProgress > 0) && (
+              <div
+                style={{
+                  position: "absolute",
+                  left: -12 - clickRippleProgress * 20,
+                  top: -12 - clickRippleProgress * 20,
+                  width: 32 + clickRippleProgress * 40,
+                  height: 32 + clickRippleProgress * 40,
+                  borderRadius: "50%",
+                  border: `3px solid ${THEME.colors.orange}`,
+                  opacity: Math.max(0, 1 - clickRippleProgress),
+                  pointerEvents: "none",
+                }}
+              />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

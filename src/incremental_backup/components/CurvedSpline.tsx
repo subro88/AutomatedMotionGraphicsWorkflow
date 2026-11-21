@@ -11,6 +11,7 @@ interface CurvedSplineProps {
   lineWidth?: number;
   frame?: number;
   packetCount?: number;
+  drawProgress?: number; // 0 to 1 progressive drawing
 }
 
 export const CurvedSpline: React.FC<CurvedSplineProps> = ({
@@ -23,7 +24,10 @@ export const CurvedSpline: React.FC<CurvedSplineProps> = ({
   lineWidth = 4,
   frame = 0,
   packetCount = 3,
+  drawProgress = 1.0,
 }) => {
+  // If not yet started drawing, don't render anything
+  if (drawProgress <= 0.01) return null;
   // SVG Viewport bounding box with padding
   const minX = Math.min(x1, x2) - 100;
   const minY = Math.min(y1, y2) - 100;
@@ -95,6 +99,9 @@ export const CurvedSpline: React.FC<CurvedSplineProps> = ({
         stroke="rgba(41, 37, 36, 0.08)"
         strokeWidth={lineWidth + 2}
         strokeLinecap="round"
+        pathLength={100}
+        strokeDasharray="100"
+        strokeDashoffset={100 * (1 - Math.min(1, drawProgress))}
       />
 
       {/* Main animated dashed path */}
@@ -104,18 +111,20 @@ export const CurvedSpline: React.FC<CurvedSplineProps> = ({
         stroke={color}
         strokeWidth={lineWidth}
         strokeLinecap="round"
-        strokeDasharray="12 8"
-        strokeDashoffset={-frame * 1.5}
+        pathLength={100}
+        strokeDasharray={drawProgress >= 0.99 ? "12 8" : "100"}
+        strokeDashoffset={drawProgress >= 0.99 ? -frame * 1.5 : 100 * (1 - drawProgress)}
         opacity={0.85}
       />
 
-      {/* Flowing glowing data packets */}
-      {packets.map((p, idx) => (
-        <g key={idx} filter="url(#splineGlow)">
-          <circle cx={p.x} cy={p.y} r={7} fill={color} />
-          <circle cx={p.x} cy={p.y} r={3.5} fill="#FFFFFF" />
-        </g>
-      ))}
+      {/* Flowing glowing data packets (only once connection has latched) */}
+      {drawProgress >= 0.85 &&
+        packets.map((p, idx) => (
+          <g key={idx} filter="url(#splineGlow)">
+            <circle cx={p.x} cy={p.y} r={7} fill={color} />
+            <circle cx={p.x} cy={p.y} r={3.5} fill="#FFFFFF" />
+          </g>
+        ))}
     </svg>
   );
 };
