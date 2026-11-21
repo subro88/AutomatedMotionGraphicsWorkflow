@@ -2848,7 +2848,7 @@ launch_app.bat
 
       <div class="card">
         <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
-          Elevates the workstation from prototype animations to <strong>true broadcast production grade</strong> by dynamically routing projects across 4 specialized rendering engine paths:
+          Elevates the workstation from prototype animations to <strong>true broadcast production grade</strong> by dynamically routing projects across 5 specialized rendering engine paths:
         </p>
 
         <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
@@ -2856,6 +2856,7 @@ launch_app.bat
           <li><strong>Genre 2: 3D Realistic Explainer (Branch Education Teardowns):</strong> Headless Blender 4.2 Cycles GPU raytracing, 100mm optical macro lens, thin-film silicon iridescence, dynamic boolean FinFET slicing, and an editable <code>.blend</code> timeline scene.</li>
           <li><strong>Genre 3: Documentary, History &amp; Cartoon (Vox / Kurzgesagt):</strong> 2.5D Parallax photo pushes (Ken Burns 2.0), animated vintage maps with route lines, yellow highlighter newspaper sweeps, and Kurzgesagt vector puppets.</li>
           <li><strong>Genre 4: Podcast, Vodcast &amp; Audiograms:</strong> Automatic speaker diarization layout switching (Host/Guest/Split), 60-band reactive FFT audio waveforms, and bouncing word-level subtitles.</li>
+          <li><strong>Genre 5: Anime &amp; Cinematic Storytelling (Local $0 GPU Evolution):</strong> Story markdown parser (<code>story.md</code>), multi-character voice acting via Voicebox (<code>myVoice</code>), headless Blender 4.2 NPR anime cel-shading &amp; LineArt ink on RTX 3060, Remotion action speed lines, and DaVinci Resolve multi-track FCPXML timelines.</li>
         </ul>
 
         <div class="code-block">
@@ -2873,7 +2874,10 @@ launch_app.bat
 <span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--genre</span> documentary <span class="flag">--project</span> "HistoricalReport" <span class="flag">--aspect</span> 16:9
 
 <span class="comment"># 4. Route to Podcast &amp; Audiograms</span>
-<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--genre</span> podcast <span class="flag">--project</span> "Episode42" <span class="flag">--audio</span> "inputs/test_voiceover.wav"</div>
+<span class="cmd">python</span> .agent/skills/motion-pipeline/run.py <span class="flag">--genre</span> podcast <span class="flag">--project</span> "Episode42" <span class="flag">--audio</span> "inputs/test_voiceover.wav"
+
+<span class="comment"># 5. Route to Anime &amp; Cinematic Storytelling ($0 Local GPU Engine)</span>
+<span class="cmd">python</span> scripts/video_engine_router.py <span class="flag">--genre</span> anime <span class="flag">--script</span> inputs/sample_anime_story.md <span class="flag">--project</span> "CyberSamurai"</div>
         </div>
       </div>
     </section>

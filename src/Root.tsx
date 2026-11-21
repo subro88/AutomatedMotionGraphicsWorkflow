@@ -23,6 +23,7 @@ import { GsapEngineeringMotion } from "./components/GsapEngineeringMotion";
 import { HardwareTeardownScene } from "./HardwareTeardownScene";
 import { DocumentaryHistoryScene } from "./DocumentaryHistoryScene";
 import { PodcastStudioScene } from "./PodcastStudioScene";
+import { AnimeScene } from "./components/anime/AnimeScene";
 import { IncrementalBackupMaster } from "./incremental_backup/IncrementalBackupMaster";
 import { Scene01Intro } from "./incremental_backup/scenes/Scene01Intro";
 import { Scene02WhatIsIncremental } from "./incremental_backup/scenes/Scene02WhatIsIncremental";
@@ -1055,6 +1056,20 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1920}
+      />
+      <Composition
+        id="AnimeShowcase-16x9"
+        component={AnimeScene}
+        durationInFrames={180}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          title: "EPISODE 01: THE INCREMENTAL PROTOCOL",
+          speaker: "PROTAGONIST",
+          dialogue: "The main database is expanding at fifty gigabytes per hour. We need incremental snapshots now!",
+          isActionShot: true,
+        }}
       />
     </>
   );

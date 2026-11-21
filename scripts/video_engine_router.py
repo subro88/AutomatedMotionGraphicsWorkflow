@@ -50,11 +50,18 @@ GENRE_MAP = {
     "audiogram": "podcast",
     "interview": "podcast",
     "vodcast": "podcast",
-    "audio-video": "podcast"
+    "audio-video": "podcast",
+    # 5. Anime & Cinematic Storytelling
+    "anime": "anime",
+    "storytelling": "anime",
+    "cinematic": "anime",
+    "fiction": "anime",
+    "toon": "anime",
+    "manga": "anime"
 }
 
 def resolve_genre(raw_genre: str) -> str:
-    """Normalizes any genre alias into one of the 4 canonical genre keys."""
+    """Normalizes any genre alias into one of the 5 canonical genre keys."""
     clean = raw_genre.strip().lower().replace("_", "-").replace(" ", "-")
     return GENRE_MAP.get(clean, "motion-graphics")
 
@@ -241,6 +248,46 @@ def route_and_execute(
             results["master_video"] = str(out_v)
             results["steps_completed"].append("remotion_podcast_render")
 
+    # ==========================================================================
+    # ROUTE 5: ANIME & CINEMATIC STORYTELLING (Local 3D NPR Cel-Shading + Voicebox)
+    # ==========================================================================
+    elif canon_genre == "anime":
+        story_file = Path(storyboard).resolve() if storyboard else (ROOT / "inputs/sample_anime_story.md")
+        out_anime_dir = ROOT / f"out/anime/{project_name}"
+        out_anime_dir.mkdir(parents=True, exist_ok=True)
+
+        # 1. Parse Story & Synthesize Multi-Character Dialogue
+        run_step([
+            sys.executable, "scripts/anime_story_engine.py",
+            "--story", str(story_file),
+            "--out-dir", str(out_anime_dir)
+        ], "Anime Story Parsing & Multi-Character Voicebox Ingestion")
+        results["steps_completed"].append("anime_story_parsing")
+
+        # 2. Scaffold 3D NPR Anime Scene in Blender 4.2 LTS (RTX 3060 GPU)
+        run_step([
+            sys.executable, "scripts/blender_anime_studio.py",
+            "--out-dir", str(out_anime_dir),
+            "--render"
+        ], "Blender 4.2 NPR Cel-Shading & Camera Rigging")
+        results["steps_completed"].append("blender_anime_npr")
+
+        # 3. Generate Anime Atmospheric Foley & Sound Effects
+        sfx_wav = out_anime_dir / "anime_sfx.wav"
+        run_step([
+            sys.executable, "scripts/sfx_designer.py",
+            "--out", str(sfx_wav)
+        ], "Anime Sound Effects & Action Foley")
+        results["steps_completed"].append("anime_sfx")
+
+        # 4. Generate Multi-Track DaVinci Resolve Timeline (FCPXML)
+        fcpxml_file = out_anime_dir / f"{project_name}_anime.fcpxml"
+        run_step([
+            sys.executable, "scripts/generate_hybrid_3d_fcpxml.py"
+        ], "Anime Multi-Track DaVinci Resolve Timeline (FCPXML)")
+        results["steps_completed"].append("anime_fcpxml_timeline")
+        results["fcpxml"] = str(fcpxml_file)
+
     print("\n" + "=" * 80)
     print(f"✨ [VIDEO ENGINE ROUTER] PIPELINE COMPLETED FOR: {canon_genre.upper()}")
     print(f"   • Steps Executed: {', '.join(results['steps_completed'])}")
@@ -249,10 +296,11 @@ def route_and_execute(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Universal Multi-Genre Video Engine Router")
-    parser.add_argument("--genre", default="motion-graphics", help="Genre: motion-graphics, 3d-realistic, documentary, podcast")
+    parser.add_argument("--genre", default="motion-graphics", help="Genre: motion-graphics, 3d-realistic, documentary, podcast, anime")
     parser.add_argument("--project", default="Production_Master", help="Project name")
     parser.add_argument("--aspect", default="16:9", help="Aspect ratio (16:9 or 9:16)")
-    parser.add_argument("--storyboard", default=None, help="Path to storyboard JSON")
+    parser.add_argument("--storyboard", default=None, help="Path to storyboard JSON or story markdown")
+    parser.add_argument("--script", default=None, help="Path to anime / narrative story markdown")
     parser.add_argument("--audio", default=None, help="Path to input audio file")
     parser.add_argument("--text", default=None, help="Input script text")
     parser.add_argument("--render", action="store_true", help="Render final video MP4")
@@ -262,7 +310,7 @@ if __name__ == "__main__":
         genre=args.genre,
         project_name=args.project,
         aspect_ratio=args.aspect,
-        storyboard=args.storyboard,
+        storyboard=args.script or args.storyboard,
         audio=args.audio,
         text=args.text,
         render_video=args.render

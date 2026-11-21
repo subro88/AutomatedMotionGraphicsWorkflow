@@ -275,6 +275,19 @@ python scripts/remotion_agent_runner.py docs "spring physics config"
    python scripts/remotion_agent_runner.py render Scene01Explainer --out out/scene1_render.mp4
    ```
 
+### Walkthrough 2: Generating an Anime Story Scene (Genre 5)
+1. **Prepare Story Markdown (`story.md`)**:
+   Define characters, camera directions, and dialogue in standard markdown.
+2. **Execute Multi-Genre Router**:
+   ```bash
+   python scripts/video_engine_router.py --genre anime --script inputs/sample_anime_story.md --project CyberSamurai
+   ```
+3. **Inspect Produced Assets**:
+   - Multi-character dialogue mastered to EBU R128 (-16 LUFS) with Faster-Whisper word timestamps.
+   - Headless Blender 4.2.3 NPR cel-shaded 3D scene (`out/anime/CyberSamurai/anime_scene.blend`).
+   - DaVinci Resolve multi-track FCPXML timeline (`out/resolve_exports/`).
+   - Remotion anime speed lines & stylized subtitles preview (`AnimeShowcase-16x9`).
+
 ---
 
 ## 5. Troubleshooting & FAQ
