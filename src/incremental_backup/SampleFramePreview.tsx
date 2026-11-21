@@ -132,7 +132,7 @@ export const SampleFrame1Scene01: React.FC = () => {
             zIndex: 15,
           }}
         >
-          <span style={{ fontSize: "28px" }}>🔄</span>
+          <ComponentSvgIcon name="sync_arrows" size={32} />
           <span style={{ fontSize: "16px", fontWeight: 800, color: THEME.colors.charcoal }}>
             Continuous Sync Loop
           </span>
@@ -373,7 +373,7 @@ export const SampleFrame3Scene05: React.FC = () => {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <span style={{ fontSize: "30px" }}>🎯</span>
+            <ComponentSvgIcon name="shield" size={38} />
             <div>
               <div style={{ fontSize: "18px", fontWeight: 800, color: THEME.colors.charcoal }}>
                 VSS Incremental Engine Active

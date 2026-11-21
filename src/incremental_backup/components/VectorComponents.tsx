@@ -5,6 +5,7 @@ import { THEME } from "../theme";
 // --- AUTHENTIC COMPONENT.SVG ICON SPRITE ---
 export const ComponentSvgIcon: React.FC<{
   name:
+    | "server_rack"
     | "server_blades"
     | "server_tower"
     | "hard_drive"
@@ -12,10 +13,18 @@ export const ComponentSvgIcon: React.FC<{
     | "router"
     | "workstation"
     | "gears"
-    | "shield";
+    | "shield"
+    | "sync_arrows"
+    | "laptop"
+    | "tablet"
+    | "smartphone"
+    | "wrench_unit"
+    | "ethernet_cable"
+    | "folder";
   size?: number;
   style?: React.CSSProperties;
 }> = ({ name, size = 180, style }) => {
+  const actualName = name === "server_blades" ? "server_rack" : name;
   return (
     <div
       style={{
@@ -30,7 +39,7 @@ export const ComponentSvgIcon: React.FC<{
       }}
     >
       <Img
-        src={staticFile(`incremental_backup/svg/${name}.svg`)}
+        src={staticFile(`incremental_backup/svg/${actualName}.svg`)}
         style={{
           width: "100%",
           height: "100%",
