@@ -78,12 +78,18 @@ async function main() {
 
   console.log(`[Motlab Worker] Specs: ${finalWidth}x${finalHeight} @ ${finalFps} FPS | Duration: ${finalDuration}s | Total Frames: ${totalFrames}`);
 
-  // Spawn FFmpeg to receive PNG stream on stdin
-  // Test NVENC, fallback to libx264
+  // Ensure assets are fully decoded
+  await page.evaluate(async () => {
+    if (window.ASSETS_LOADED) {
+      try { await window.ASSETS_LOADED; } catch (e) {}
+    }
+  });
+
+  // Spawn FFmpeg to receive MJPEG stream on stdin for ultra-fast NVENC encoding
   const ffmpegArgs = [
     '-y',
     '-f', 'image2pipe',
-    '-vcodec', 'png',
+    '-vcodec', 'mjpeg',
     '-r', finalFps.toString(),
     '-i', '-',
     '-c:v', 'h264_nvenc',
@@ -118,12 +124,12 @@ async function main() {
   for (let frame = 0; frame < totalFrames; frame++) {
     const t = frame / finalFps;
 
-    // Evaluate renderAt(t) and extract PNG base64 directly from canvas
+    // Evaluate renderAt(t) and extract JPEG base64 directly from canvas
     const base64Data = await page.evaluate(async (currentTime) => {
       window.renderAt(currentTime);
       const c = document.getElementById('c') || document.querySelector('canvas');
       if (!c) return null;
-      return c.toDataURL('image/png').split(',')[1];
+      return c.toDataURL('image/jpeg', 0.98).slice(23);
     }, t);
 
     if (base64Data) {

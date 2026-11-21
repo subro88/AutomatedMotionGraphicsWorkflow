@@ -92,16 +92,19 @@ def main():
 
     args = parser.parse_args()
 
+    out_target = Path(args.out).resolve()
+    temp_raw = out_target.parent / f"temp_raw_{out_target.name}"
+
     rendered_video = render_scene(
         scene_path=args.scene,
-        out_path=args.out if not args.audio else "out/temp_motlab_raw.mp4",
+        out_path=str(out_target) if not args.audio else str(temp_raw),
         fps=args.fps,
         width=args.width,
         height=args.height,
         duration=args.duration
     )
 
-    final_video = Path(args.out).resolve()
+    final_video = out_target
     if args.audio:
         audio_p = Path(args.audio).resolve()
         if audio_p.exists():
