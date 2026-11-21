@@ -8,30 +8,43 @@ timestamped spatial revision notes into selection.json for coding agents.
 
 Features:
 - Pure Python zero-dependency HTTP server with HTTP Range streaming for smooth scrubbing.
+- Dynamic Project Selector: switch seamlessly between any workstation project or video.
 - Frame-stepping controls (< / > keys, J-K-L playback, timestamp overlay).
 - Click-and-drag bounding box overlay on any video frame.
 - Real-time selection.json synchronization.
 - CLI modes: --watch, --apply, --list, and full interactive server.
 
 Usage:
+  python scripts/motlab_reviewer.py
+  python scripts/motlab_reviewer.py --project "CanvasShowcase"
   python scripts/motlab_reviewer.py --video out/master/video.mp4 --project "MyProject"
-  python scripts/motlab_reviewer.py --project "MyProject" --watch
-  python scripts/motlab_reviewer.py --project "MyProject" --apply
-  python scripts/motlab_reviewer.py --project "MyProject" --list
+  python scripts/motlab_reviewer.py --project "CanvasShowcase" --watch
+  python scripts/motlab_reviewer.py --project "CanvasShowcase" --apply
 """
 
 import os
 import sys
 import json
 import time
+import shutil
 import argparse
 import webbrowser
-import threading
+import urllib.parse
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 from datetime import datetime, timezone
 
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+
+# Import discovery engine
+try:
+    from scripts.motlab_projects import discover_projects
+except ImportError:
+    try:
+        from motlab_projects import discover_projects
+    except ImportError:
+        def discover_projects():
+            return []
 
 
 def get_selection_path(project_name: str) -> Path:
@@ -95,29 +108,44 @@ VIEWER_HTML = """<!DOCTYPE html>
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--surface-border);
-      padding: 12px 24px;
+      padding: 10px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 10;
+      gap: 16px;
     }
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .logo-badge {
       background: linear-gradient(135deg, var(--accent), var(--accent-cyan));
       color: #fff;
       font-weight: 800;
       font-size: 0.85rem;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 6px;
       letter-spacing: 0.05em;
     }
-    .proj-title {
-      font-weight: 700;
-      font-size: 1.1rem;
+    .project-dropdown {
+      background: #171a29;
+      color: #fff;
+      border: 1px solid var(--accent);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      outline: none;
+      min-width: 280px;
+      transition: all 0.2s;
+    }
+    .project-dropdown:hover, .project-dropdown:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
     }
     .meta-tag {
       font-family: 'JetBrains Mono', monospace;
@@ -368,9 +396,11 @@ VIEWER_HTML = """<!DOCTYPE html>
   <header>
     <div class="brand">
       <span class="logo-badge">MOTLAB</span>
-      <span class="proj-title">Project: __PROJECT_NAME__</span>
+      <select id="project-selector" class="project-dropdown">
+        <option value="">Loading Projects...</option>
+      </select>
     </div>
-    <div class="meta-tag">FPS: 30 / 60 • Zero Slop Video as Code</div>
+    <div class="meta-tag" id="header-meta">FPS: 30 / 60 • Zero Slop Video as Code</div>
   </header>
 
   <div class="main-layout">
@@ -435,6 +465,8 @@ VIEWER_HTML = """<!DOCTYPE html>
     const modalComment = document.getElementById('modal-comment');
     const modalCancel = document.getElementById('modal-cancel');
     const modalSave = document.getElementById('modal-save');
+    const projectSelector = document.getElementById('project-selector');
+    const headerMeta = document.getElementById('header-meta');
 
     let isDrawing = false;
     let startX = 0, startY = 0;
@@ -442,6 +474,8 @@ VIEWER_HTML = """<!DOCTYPE html>
     let pendingAnnotation = null;
     let annotations = [];
     const FPS = 30;
+
+    let currentProject = new URLSearchParams(window.location.search).get('project') || '__DEFAULT_PROJECT__';
 
     function resizeCanvas() {
       canvas.width = v.clientWidth;
@@ -544,7 +578,6 @@ VIEWER_HTML = """<!DOCTYPE html>
       if (!isDrawing) return;
       isDrawing = false;
       if (Math.abs(currentBox.w) > 10 && Math.abs(currentBox.h) > 10) {
-        // Normalize box
         const normBox = {
           x: Math.round(Math.min(startX, startX + currentBox.w)),
           y: Math.round(Math.min(startY, startY + currentBox.h)),
@@ -559,6 +592,7 @@ VIEWER_HTML = """<!DOCTYPE html>
       const curSec = v.currentTime;
       pendingAnnotation = {
         id: 'rev_' + Date.now().toString().slice(-6),
+        project: currentProject,
         timestamp: Math.round(curSec * 100) / 100,
         frame: Math.round(curSec * FPS),
         timecode: formatTime(curSec),
@@ -584,13 +618,14 @@ VIEWER_HTML = """<!DOCTYPE html>
       pendingAnnotation.comment = comment;
       modal.style.display = 'none';
 
-      await fetch('/api/selection', {
+      await fetch('/api/selection?project=' + encodeURIComponent(currentProject), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pendingAnnotation)
       });
 
       await fetchAnnotations();
+      await fetchProjects(); // refresh note badge in dropdown
     });
 
     function drawActiveBoxes() {
@@ -613,7 +648,7 @@ VIEWER_HTML = """<!DOCTYPE html>
 
     async function fetchAnnotations() {
       try {
-        const res = await fetch('/api/selection');
+        const res = await fetch('/api/selection?project=' + encodeURIComponent(currentProject));
         const data = await res.json();
         annotations = data.annotations || [];
         renderSidebarNotes();
@@ -646,8 +681,67 @@ VIEWER_HTML = """<!DOCTYPE html>
       });
     }
 
-    document.getElementById('btn-refresh').addEventListener('click', fetchAnnotations);
-    fetchAnnotations();
+    // Projects Discovery & Dropdown
+    async function fetchProjects() {
+      try {
+        const res = await fetch('/api/projects');
+        const list = await res.json();
+        if (!list || list.length === 0) return;
+
+        projectSelector.innerHTML = '';
+        list.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          const genreIcon = {
+            'canvas': '⚡',
+            'motion-graphics': '🎬',
+            '3d-realistic': '🧊',
+            'anime': '⛩️',
+            'podcast': '🎙️',
+            'documentary': '📜'
+          }[p.genre] || '📁';
+
+          const vidBadge = p.video_path ? `${p.video_size_mb}MB` : 'no mp4';
+          const noteBadge = p.pending_notes > 0 ? ` • ${p.pending_notes} notes` : '';
+          opt.textContent = `${genreIcon} ${p.name} (${vidBadge}${noteBadge})`;
+          if (p.id.toLowerCase() === currentProject.toLowerCase()) {
+            opt.selected = true;
+          }
+          projectSelector.appendChild(opt);
+        });
+
+        // If currentProject wasn't found, pick first option
+        if (!projectSelector.value && list.length > 0) {
+          projectSelector.value = list[0].id;
+          switchProject(list[0].id);
+        }
+      } catch (e) {
+        console.error('Failed to fetch projects', e);
+      }
+    }
+
+    function switchProject(newProjectId) {
+      currentProject = newProjectId;
+      v.src = '/video?project=' + encodeURIComponent(currentProject);
+      v.load();
+      window.history.pushState(null, '', '/?project=' + encodeURIComponent(currentProject));
+      headerMeta.textContent = `Project: ${currentProject} • Frame-Accurate Zero Slop`;
+      fetchAnnotations();
+    }
+
+    projectSelector.addEventListener('change', (e) => {
+      switchProject(e.target.value);
+    });
+
+    document.getElementById('btn-refresh').addEventListener('click', () => {
+      fetchAnnotations();
+      fetchProjects();
+    });
+
+    // Initialize
+    fetchProjects().then(() => {
+      fetchAnnotations();
+    });
   </script>
 </body>
 </html>
@@ -659,29 +753,55 @@ class MotlabReviewHandler(BaseHTTPRequestHandler):
     project_name: str = "default_project"
 
     def do_GET(self):
-        if self.path == "/" or self.path.startswith("/?"):
+        parsed = urllib.parse.urlparse(self.path)
+        query = urllib.parse.parse_qs(parsed.query)
+        target_project = query.get("project", [self.project_name])[0]
+
+        if parsed.path == "/" or parsed.path == "/index.html":
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
-            rendered_html = VIEWER_HTML.replace("__PROJECT_NAME__", self.project_name)
+            rendered_html = VIEWER_HTML.replace("__DEFAULT_PROJECT__", self.project_name)
             self.wfile.write(rendered_html.encode("utf-8"))
             return
 
-        if self.path == "/api/selection":
+        if parsed.path == "/api/projects":
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            data = load_selection(self.project_name)
+            projects = discover_projects()
+            clean_list = [{k: v for k, v in p.items() if k != "mtime"} for p in projects]
+            self.wfile.write(json.dumps(clean_list, indent=2).encode("utf-8"))
+            return
+
+        if parsed.path == "/api/selection":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            data = load_selection(target_project)
             self.wfile.write(json.dumps(data, indent=2).encode("utf-8"))
             return
 
-        if self.path == "/video":
-            if not self.video_path or not self.video_path.exists():
-                self.send_error(404, "Video file not found")
-                return
+        if parsed.path == "/video":
+            # Locate target video
+            target_vid = None
+            if target_project.lower() == self.project_name.lower() and self.video_path and self.video_path.exists():
+                target_vid = self.video_path
+            else:
+                projects = discover_projects()
+                matched = next((p for p in projects if p["id"].lower() == target_project.lower()), None)
+                if matched and matched.get("video_path"):
+                    target_vid = WORKSPACE_ROOT / matched["video_path"]
 
-            # Support HTTP Range for smooth frame scrubbing
-            file_size = self.video_path.stat().st_size
+            # Fallback to self.video_path or newest video
+            if not target_vid or not target_vid.exists():
+                if self.video_path and self.video_path.exists():
+                    target_vid = self.video_path
+                else:
+                    self.send_error(404, "No video found for selected project")
+                    return
+
+            file_size = target_vid.stat().st_size
             range_header = self.headers.get("Range")
 
             if range_header:
@@ -698,7 +818,7 @@ class MotlabReviewHandler(BaseHTTPRequestHandler):
                 self.send_header("Accept-Ranges", "bytes")
                 self.end_headers()
 
-                with open(self.video_path, "rb") as f:
+                with open(target_vid, "rb") as f:
                     f.seek(start)
                     self.wfile.write(f.read(length))
             else:
@@ -708,35 +828,39 @@ class MotlabReviewHandler(BaseHTTPRequestHandler):
                 self.send_header("Accept-Ranges", "bytes")
                 self.end_headers()
 
-                with open(self.video_path, "rb") as f:
+                with open(target_vid, "rb") as f:
                     shutil.copyfileobj(f, self.wfile)
             return
 
         self.send_error(404, "Not Found")
 
     def do_POST(self):
-        if self.path == "/api/selection":
+        parsed = urllib.parse.urlparse(self.path)
+        query = urllib.parse.parse_qs(parsed.query)
+
+        if parsed.path == "/api/selection":
             content_length = int(self.headers.get("Content-Length", 0))
             body = self.rfile.read(content_length).decode("utf-8")
             new_note = json.loads(body)
 
-            data = load_selection(self.project_name)
+            target_project = new_note.get("project") or query.get("project", [self.project_name])[0]
+
+            data = load_selection(target_project)
             annotations = data.get("annotations", [])
             annotations.append(new_note)
             data["annotations"] = annotations
-            save_selection(self.project_name, data)
+            save_selection(target_project, data)
 
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps({"status": "ok", "id": new_note.get("id")}).encode("utf-8"))
-            print(f"\n[Motlab Review] 📥 New visual note captured at {new_note.get('timecode')}: {new_note.get('comment')}")
+            print(f"\n[Motlab Review] 📥 New visual note for [{target_project}] at {new_note.get('timecode')}: {new_note.get('comment')}")
             return
 
         self.send_error(404, "Not Found")
 
     def log_message(self, format, *args):
-        # Mute normal GET request spam
         pass
 
 
@@ -747,16 +871,19 @@ def run_server(video_path: Path, project: str, port: int = 4173):
 
     server = HTTPServer(("127.0.0.1", port), handler)
     url = f"http://127.0.0.1:{port}"
-    print("\n" + "=" * 70)
-    print(" 🎬 MOTLAB FRAME-ACCURATE REVIEW VIEWER")
-    print("=" * 70)
-    print(f" Project:  {project}")
-    print(f" Video:    {video_path or '(Live Canvas / Demo)'}")
-    print(f" Local UI: {url}")
-    print(f" Feedback: {get_selection_path(project)}")
-    print("-" * 70)
-    print(" Controls: Space = Play/Pause | < > = Step Frame | Drag Box = Note")
-    print("=" * 70 + "\n")
+    if project:
+        url += f"/?project={project}"
+
+    print("\n" + "=" * 75)
+    print(" 🎬 MOTLAB FRAME-ACCURATE REVIEW VIEWER (WITH PROJECT REGISTRY)")
+    print("=" * 75)
+    print(f" Default Project: {project}")
+    print(f" Initial Video:   {video_path or '(Auto-Discovered from Project)'}")
+    print(f" Local Web UI:    {url}")
+    print("-" * 75)
+    print(" Switch projects dynamically in the top-bar dropdown without reloading!")
+    print(" Controls: Space = Play/Pause | < > = Step Frame | Drag Box = Add Note")
+    print("=" * 75 + "\n")
 
     webbrowser.open(url)
     try:
@@ -770,7 +897,6 @@ def watch_selection(project: str):
     print(f"\n👀 Watching for visual feedback in {sel_path} (Press Ctrl+C to stop)...")
     seen_ids = set()
 
-    # Pre-populate seen
     data = load_selection(project)
     for a in data.get("annotations", []):
         seen_ids.add(a.get("id"))
@@ -786,6 +912,7 @@ def watch_selection(project: str):
                     print("\n" + "!" * 60)
                     print(f" 🔔 NEW VISUAL FEEDBACK RECEIVED [{a.get('timecode')}]")
                     print("!" * 60)
+                    print(f"  Project:   {project}")
                     print(f"  Note ID:   {aid}")
                     print(f"  Timestamp: {a.get('timestamp')}s (Frame {a.get('frame')})")
                     print(f"  Bounding:  x={a['bbox']['x']}, y={a['bbox']['y']}, w={a['bbox']['width']}, h={a['bbox']['height']}")
@@ -851,7 +978,7 @@ def list_notes(project: str):
 def main():
     parser = argparse.ArgumentParser(description="Motlab Frame-Accurate Review Viewer & Spatial Feedback")
     parser.add_argument("--video", type=str, help="Path to rendered MP4 video file to review")
-    parser.add_argument("--project", type=str, default="default_project", help="Project name")
+    parser.add_argument("--project", type=str, default="CanvasShowcase", help="Default project to open")
     parser.add_argument("--port", type=int, default=4173, help="Port to serve viewer (default: 4173)")
     parser.add_argument("--watch", action="store_true", help="Watch selection.json and print live feedback notifications")
     parser.add_argument("--apply", action="store_true", help="Print pending revision tasks and mark them resolved")

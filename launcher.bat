@@ -46,37 +46,32 @@ goto MENU
 :MOTLAB_REVIEWER
 cls
 echo ===============================================================================
-echo   🎬 MOTLAB FRAME-ACCURATE REVIEW VIEWER
+echo   🎬 MOTLAB FRAME-ACCURATE REVIEW VIEWER & PROJECT REGISTRY
 echo ===============================================================================
 echo.
-echo   Searching for newest rendered video in out/master/...
-set "LATEST_VIDEO="
-for /f "delims=" %%F in ('dir /b /o-d /s "out\*.mp4" 2^>nul') do (
-    if not defined LATEST_VIDEO set "LATEST_VIDEO=%%F"
-)
+"%PY_BIN%" scripts/motlab_projects.py --list
+echo   [1] 🚀 Launch Review Viewer with Live Project Switcher (http://127.0.0.1:4173)
+echo   [2] 🎯 Open Specific Project by ID
+echo   [3] 📂 Review Custom Video File
+echo   [0] ↩️  Back to Main Menu
+echo.
+set /p "VCHOICE=Select [0-3]: "
 
-if defined LATEST_VIDEO (
-    echo   Found latest video: !LATEST_VIDEO!
-    echo.
-    echo   [1] Review this video
-    echo   [2] Enter custom video path
-    echo   [3] Back to menu
-    set /p "VCHOICE=Select [1-3]: "
-    if "!VCHOICE!"=="1" (
-        start "" "%PY_BIN%" scripts/motlab_reviewer.py --video "!LATEST_VIDEO!" --project "MasterReview"
-        goto MENU
-    )
-    if "!VCHOICE!"=="2" (
-        set /p "CUSTOM_V=Enter video path: "
-        start "" "%PY_BIN%" scripts/motlab_reviewer.py --video "!CUSTOM_V!" --project "CustomReview"
-        goto MENU
-    )
-    goto MENU
-) else (
-    echo   No rendered MP4 found yet in out/. Starting viewer in blank stage mode...
-    start "" "%PY_BIN%" scripts/motlab_reviewer.py --project "DefaultProject"
+if "%VCHOICE%"=="1" (
+    start "" "%PY_BIN%" scripts/motlab_reviewer.py
     goto MENU
 )
+if "%VCHOICE%"=="2" (
+    set /p "SPEC_PROJ=Enter Project ID: "
+    start "" "%PY_BIN%" scripts/motlab_reviewer.py --project "!SPEC_PROJ!"
+    goto MENU
+)
+if "%VCHOICE%"=="3" (
+    set /p "CUSTOM_V=Enter video path: "
+    start "" "%PY_BIN%" scripts/motlab_reviewer.py --video "!CUSTOM_V!" --project "CustomReview"
+    goto MENU
+)
+goto MENU
 
 :REMOTION_STUDIO
 cls
