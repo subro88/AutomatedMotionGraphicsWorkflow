@@ -57,7 +57,13 @@ GENRE_MAP = {
     "cinematic": "anime",
     "fiction": "anime",
     "toon": "anime",
-    "manga": "anime"
+    "manga": "anime",
+    # 6. Motlab Video as Code & Canvas Explainer
+    "canvas": "canvas",
+    "explainer": "canvas",
+    "motlab": "canvas",
+    "video-as-code": "canvas",
+    "code-video": "canvas"
 }
 
 def resolve_genre(raw_genre: str) -> str:
@@ -288,6 +294,31 @@ def route_and_execute(
         results["steps_completed"].append("anime_fcpxml_timeline")
         results["fcpxml"] = str(fcpxml_file)
 
+    # ==========================================================================
+    # ROUTE 6: MOTLAB VIDEO-AS-CODE & CANVAS EXPLAINER
+    # ==========================================================================
+    elif canon_genre == "canvas":
+        scene_file = Path(storyboard).resolve() if storyboard else (ROOT / "scenes/sample_canvas_explainer.html")
+        out_v = ROOT / f"out/master/{project_name}_canvas_{aspect_ratio.replace(':', 'x')}.mp4"
+        out_v.parent.mkdir(parents=True, exist_ok=True)
+
+        w, h = (1920, 1080) if aspect_ratio == "16:9" else (1080, 1920)
+
+        cmd = [
+            sys.executable, "scripts/motlab_renderer.py",
+            "--scene", str(scene_file),
+            "--out", str(out_v),
+            "--width", str(w),
+            "--height", str(h),
+            "--project", project_name
+        ]
+        if audio:
+            cmd.extend(["--audio", str(Path(audio).resolve())])
+
+        run_step(cmd, "Motlab Canvas WebCodecs Render")
+        results["master_video"] = str(out_v)
+        results["steps_completed"].append("motlab_canvas_render")
+
     print("\n" + "=" * 80)
     print(f"✨ [VIDEO ENGINE ROUTER] PIPELINE COMPLETED FOR: {canon_genre.upper()}")
     print(f"   • Steps Executed: {', '.join(results['steps_completed'])}")
@@ -296,17 +327,18 @@ def route_and_execute(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Universal Multi-Genre Video Engine Router")
-    parser.add_argument("--genre", default="motion-graphics", help="Genre: motion-graphics, 3d-realistic, documentary, podcast, anime")
+    parser.add_argument("--genre", default="motion-graphics", help="Genre: motion-graphics, 3d-realistic, documentary, podcast, anime, canvas")
     parser.add_argument("--project", default="Production_Master", help="Project name")
     parser.add_argument("--aspect", default="16:9", help="Aspect ratio (16:9 or 9:16)")
-    parser.add_argument("--storyboard", default=None, help="Path to storyboard JSON or story markdown")
+    parser.add_argument("--storyboard", default=None, help="Path to storyboard JSON or story markdown or canvas HTML")
     parser.add_argument("--script", default=None, help="Path to anime / narrative story markdown")
     parser.add_argument("--audio", default=None, help="Path to input audio file")
     parser.add_argument("--text", default=None, help="Input script text")
     parser.add_argument("--render", action="store_true", help="Render final video MP4")
+    parser.add_argument("--review", action="store_true", help="Launch Motlab Review Viewer immediately after execution")
     args = parser.parse_args()
 
-    route_and_execute(
+    results = route_and_execute(
         genre=args.genre,
         project_name=args.project,
         aspect_ratio=args.aspect,
@@ -315,3 +347,12 @@ if __name__ == "__main__":
         text=args.text,
         render_video=args.render
     )
+
+    if args.review:
+        master_v = results.get("master_video")
+        if master_v and Path(master_v).exists():
+            print("\n🔍 Launching Motlab Review Viewer for project:", args.project)
+            reviewer_script = ROOT / "scripts" / "motlab_reviewer.py"
+            subprocess.run([sys.executable, str(reviewer_script), "--video", str(master_v), "--project", args.project])
+        else:
+            print("\nNotice: --review was passed, but no rendered master video exists to inspect. Pass --render or use --genre canvas.")

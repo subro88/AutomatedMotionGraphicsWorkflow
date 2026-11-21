@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Motlab Explainer Scene</title>
+  <style>
+    body, html { margin: 0; padding: 0; overflow: hidden; background: #0a0b10; }
+    canvas { width: 1920px; height: 1080px; display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="c" width="1920" height="1080"></canvas>
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+
+    // Scene Metadata Contract for Motlab
+    window.SCENE_META = {
+      duration: 3.0,
+      fps: 60,
+      width: 1920,
+      height: 1080
+    };
+
+    // Quartic Ease Out
+    function easeOutQuart(x) {
+      return 1 - Math.pow(1 - x, 4);
+    }
+
+    // Spring math
+    function spring(t, delay = 0) {
+      const elapsed = Math.max(t - delay, 0);
+      if (elapsed === 0) return 0;
+      return 1 - Math.exp(-6 * elapsed) * Math.cos(14 * elapsed);
+    }
+
+    // Deterministic state function evaluated at timestamp t (seconds)
+    window.renderAt = function(t) {
+      ctx.clearRect(0, 0, 1920, 1080);
+
+      // 1. Dark Cyberpunk Grid
+      ctx.strokeStyle = 'rgba(99, 102, 241, 0.08)';
+      ctx.lineWidth = 1;
+      const gridSize = 60;
+      const gridOffset = (t * 20) % gridSize;
+      for (let x = 0; x < 1920; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 1080);
+        ctx.stroke();
+      }
+      for (let y = gridOffset; y < 1080; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(1920, y);
+        ctx.stroke();
+      }
+
+      // 2. Radial Glow Ambient
+      const grad = ctx.createRadialGradient(960, 540, 50, 960, 540, 600);
+      grad.addColorStop(0, 'rgba(99, 102, 241, 0.25)');
+      grad.addColorStop(0.5, 'rgba(56, 189, 248, 0.08)');
+      grad.addColorStop(1, 'rgba(10, 11, 16, 0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1920, 1080);
+
+      // 3. Kinetic Central Card with Spring Animation
+      const cardScale = Math.min(spring(t, 0.2), 1.05);
+      const cardAlpha = Math.min(t / 0.4, 1.0);
+
+      ctx.save();
+      ctx.translate(960, 540);
+      ctx.scale(cardScale, cardScale);
+      ctx.globalAlpha = cardAlpha;
+
+      // Card Background with Rounded Rect
+      ctx.fillStyle = '#121526';
+      ctx.strokeStyle = '#6366f1';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.roundRect(-360, -180, 720, 360, 24);
+      ctx.fill();
+      ctx.stroke();
+
+      // Top Badge
+      ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(-140, -145, 280, 38, 19);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = 'bold 15px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('⚡ MOTLAB VIDEO AS CODE', 0, -121);
+
+      // Main Title
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 44px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Deterministic Canvas 2D', 0, -35);
+
+      // Subtitle
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Zero Generative Slop · Pixel-Perfect Motion', 0, 15);
+
+      // Animated Progress Bar
+      const progressWidth = Math.min(Math.max((t - 0.6) / 1.8, 0), 1) * 580;
+      ctx.fillStyle = '#1e2338';
+      ctx.beginPath();
+      ctx.roundRect(-290, 75, 580, 18, 9);
+      ctx.fill();
+
+      if (progressWidth > 0) {
+        const barGrad = ctx.createLinearGradient(-290, 0, -290 + progressWidth, 0);
+        barGrad.addColorStop(0, '#6366f1');
+        barGrad.addColorStop(1, '#38bdf8');
+        ctx.fillStyle = barGrad;
+        ctx.beginPath();
+        ctx.roundRect(-290, 75, progressWidth, 18, 9);
+        ctx.fill();
+      }
+
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '14px "JetBrains Mono", monospace';
+      ctx.fillText(`FRAME BUFFER: ${(progressWidth / 580 * 100).toFixed(0)}% SYNCHRONIZED`, 0, 125);
+
+      ctx.restore();
+    };
+  </script>
+</body>
+</html>

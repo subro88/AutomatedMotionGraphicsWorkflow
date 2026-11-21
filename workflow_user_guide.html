@@ -739,6 +739,11 @@
         <span class="label">StableGen 3D Asset Vault</span>
         <span class="desc">Blender 4.2.3 + ComfyUI 6GB Low-VRAM, LATO remeshing &amp; automated ingestion bridge</span>
       </a>
+      <a href="#step24-motlab-engine" class="flow-step-box">
+        <span class="idx">PHASE 24</span>
+        <span class="label">Motlab Video-as-Code &amp; Reviewer</span>
+        <span class="desc">renderAt(t) Canvas 2D, WebCodecs NVENC &amp; frame-accurate spatial review viewer</span>
+      </a>
     </div>
 
     <!-- Section: High Level Architecture -->
@@ -3137,6 +3142,54 @@ projects/
       </div>
     </section>
 
+    <!-- Phase 24: Motlab Video-as-Code & Visual Review Loop -->
+    <section id="step24-motlab-engine">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="section-title-num">24</span>
+          Phase 24: Motlab Video-as-Code &amp; Universal Visual Review Loop
+        </h2>
+        <span class="pill-badge" style="margin-bottom: 0;">staryone/motlab • scripts/motlab_reviewer.py • scripts/motlab_renderer.py</span>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Integrates <strong>staryone/motlab</strong> into the workstation as a dual-role power engine: <strong>Genre 6 (Canvas &amp; Explainer Ads)</strong> for ultra-fast, zero-slop 2D video generation driven by deterministic math functions (<code>renderAt(t)</code>) and WebCodecs NVENC encoding, plus an <strong>Interactive Universal Review Viewer</strong> that enables frame-accurate spatial revision notes (<code>selection.json</code>) across any project.
+        </p>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Key Architectural Features:</h4>
+        <ul style="color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; line-height: 1.6;">
+          <li><strong>Deterministic Math-Driven Canvas (<code>renderAt(t)</code>):</strong> Eliminates generative AI hallucinations. Every scene is an HTML5 Canvas drawing function evaluated strictly as a function of time <code>t</code> with sub-pixel quartic easing and spring dynamics.</li>
+          <li><strong>Universal Frame-Accurate Review Viewer (<code>selection.json</code>):</strong> Scrub any rendered video with keyboard shortcuts (<code>Space</code> play/pause, <code>&lt;</code> <code>&gt;</code> frame-step). Click and drag a glowing bounding box over any visual element to leave exact revision notes for the agent.</li>
+          <li><strong>Automated Feedback Watcher &amp; Apply:</strong> <code>scripts/motlab_reviewer.py --watch</code> detects your new notes in real-time and prints task alerts; <code>--apply</code> compiles them for automated code modifications.</li>
+          <li><strong>Hardware-Accelerated WebCodecs Rendering:</strong> Headless Chrome evaluates <code>renderAt(t)</code> and streams in-memory frames directly into FFmpeg NVENC (<code>h264_nvenc</code>), encoding 1080p60 videos at up to 100+ FPS without saving intermediate PNGs to disk.</li>
+          <li><strong>Native Multi-Genre Router Integration:</strong> Invoke with <code>python scripts/video_engine_router.py --genre canvas --review</code>.</li>
+        </ul>
+
+        <h4 style="color: #fff; margin-bottom: 8px;">Motlab CLI Cheatsheet:</h4>
+        <div class="code-block" style="margin-bottom: 20px;">
+          <div class="code-header">
+            <span>Terminal Execution</span>
+            <span>CLI</span>
+          </div>
+          <div class="code-body"><span class="comment"># 1. Render a Motlab Canvas scene (1920x1080 @ 60 FPS) via WebCodecs + NVENC</span>
+<span class="cmd">python</span> scripts/motlab_renderer.py <span class="flag">--scene</span> scenes/sample_canvas_explainer.html <span class="flag">--out</span> out/explainer.mp4 <span class="flag">--fps</span> 60
+
+<span class="comment"># 2. Launch the Universal Frame-Accurate Review Viewer on any rendered MP4</span>
+<span class="cmd">python</span> scripts/motlab_reviewer.py <span class="flag">--video</span> out/master/video.mp4 <span class="flag">--project</span> "MyProductionDeck"
+
+<span class="comment"># 3. Watch for visual feedback notes saved from the viewer</span>
+<span class="cmd">python</span> scripts/motlab_reviewer.py <span class="flag">--project</span> "MyProductionDeck" <span class="flag">--watch</span>
+
+<span class="comment"># 4. List and resolve pending feedback tasks</span>
+<span class="cmd">python</span> scripts/motlab_reviewer.py <span class="flag">--project</span> "MyProductionDeck" <span class="flag">--apply</span>
+
+<span class="comment"># 5. Route via Video Engine Router with automated post-render review</span>
+<span class="cmd">python</span> scripts/video_engine_router.py <span class="flag">--genre</span> canvas <span class="flag">--project</span> "CanvasShowcase" <span class="flag">--review</span></div>
+        </div>
+      </div>
+    </section>
+
     <!-- CLI & Antigravity Skill Reference -->
     <section id="cli-reference">
       <div class="section-title-wrap">
@@ -3260,6 +3313,16 @@ projects/
               <td><code>scripts/ingest_stablegen_asset.py</code></td>
               <td><code>python scripts/ingest_stablegen_asset.py --list</code></td>
               <td>Ingests StableGen/Blender 3D assets, parses binary GLB polygons, optimizes PBR textures, and syncs to Remotion public vault.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/motlab_reviewer.py</code></td>
+              <td><code>python scripts/motlab_reviewer.py --video out/video.mp4 --project "Demo"</code></td>
+              <td>Interactive frame-accurate review web viewer with click-and-drag bounding box spatial notes synced to selection.json.</td>
+            </tr>
+            <tr>
+              <td><code>scripts/motlab_renderer.py</code></td>
+              <td><code>python scripts/motlab_renderer.py --scene scenes/intro.html --out out/intro.mp4</code></td>
+              <td>High-framerate headless Chrome WebCodecs canvas renderer piping frames directly into FFmpeg NVENC hardware encoding.</td>
             </tr>
           </tbody>
         </table>
