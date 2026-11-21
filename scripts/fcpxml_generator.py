@@ -15,7 +15,7 @@ def create_fcpxml_timeline(
     aspect_ratio: str = "9:16",
     fps: int = 30,
     duration_sec: float = 30.0,
-    two_track: bool = False
+    two_track: bool = True
 ):
     output_xml.parent.mkdir(parents=True, exist_ok=True)
     is_vertical = aspect_ratio == "9:16"
@@ -36,7 +36,8 @@ def create_fcpxml_timeline(
         name=f"FFVideoFormat{height}p{fps}",
         frameDuration=frame_dur,
         width=str(width),
-        height=str(height)
+        height=str(height),
+        colorSpace="1-1-1 (Rec. 709)"
     )
 
     # Assets
@@ -48,6 +49,7 @@ def create_fcpxml_timeline(
         start="0s",
         duration=dur_str,
         hasVideo="1",
+        hasAudio="1",
         format="r1"
     )
 
@@ -195,7 +197,7 @@ if __name__ == "__main__":
     parser.add_argument("--out", default="out/resolve_exports/timeline.fcpxml")
     parser.add_argument("--aspect", default="9:16")
     parser.add_argument("--duration", type=float, default=30.0)
-    parser.add_argument("--two_track", action="store_true", help="Generate direct 2-track timeline (V1 + A1)")
+    parser.add_argument("--two_track", action="store_true", default=True, help="Generate direct 2-track timeline (V1 + A1)")
     args = parser.parse_args()
 
     create_fcpxml_timeline(

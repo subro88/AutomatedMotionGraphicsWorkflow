@@ -1,0 +1,89 @@
+{
+  "projectName": "Incremental_Backup_2008_Master_16x9",
+  "fps": 30,
+  "aspectRatio": "16:9",
+  "durationSeconds": 349.57,
+  "totalFrames": 10487,
+  "scenes": [
+    {
+      "id": "scene_01",
+      "title": "Scene 1: Introduction to Incremental Backup",
+      "startFrame": 0,
+      "durationInFrames": 914,
+      "type": "infographic",
+      "description": "Core challenge of enterprise server data growth and introducing incremental backup."
+    },
+    {
+      "id": "scene_02",
+      "title": "Scene 2: What is Incremental Backup",
+      "startFrame": 914,
+      "durationInFrames": 1510,
+      "type": "corporate_slide",
+      "description": "Explaining the mechanism: Full backup followed by block-level changed data blocks."
+    },
+    {
+      "id": "scene_03",
+      "title": "Scene 3: Incremental vs Differential",
+      "startFrame": 2424,
+      "durationInFrames": 1111,
+      "type": "infographic",
+      "description": "Architectural comparison: Storage efficiency, backup speed, and recovery chains."
+    },
+    {
+      "id": "scene_04",
+      "title": "Scene 4: Windows Server Backup Native Setup",
+      "startFrame": 3535,
+      "durationInFrames": 780,
+      "type": "kinetic",
+      "description": "Server Manager feature installation wizard for Windows Server Backup."
+    },
+    {
+      "id": "scene_05",
+      "title": "Scene 5: Optimize Performance Settings",
+      "startFrame": 4315,
+      "durationInFrames": 893,
+      "type": "corporate_slide",
+      "description": "Configuring performance options: Faster backup performance with block-level tracking."
+    },
+    {
+      "id": "scene_06",
+      "title": "Scene 6: Backup Schedule Wizard",
+      "startFrame": 5208,
+      "durationInFrames": 1022,
+      "type": "infographic",
+      "description": "5-step wizard walkthrough: Full server, daily schedule, dedicated destination disk."
+    },
+    {
+      "id": "scene_07",
+      "title": "Scene 7: Alternative AOMEI Backupper Server",
+      "startFrame": 6230,
+      "durationInFrames": 1216,
+      "type": "corporate_slide",
+      "description": "Enterprise third-party solution: Flexible schedules, notifications, retention policies."
+    },
+    {
+      "id": "scene_08",
+      "title": "Scene 8: Native Tool Limitations",
+      "startFrame": 7446,
+      "durationInFrames": 1217,
+      "type": "infographic",
+      "description": "Key constraints: Overwrite risks, network share single copy, lack of granular retention."
+    },
+    {
+      "id": "scene_09",
+      "title": "Scene 9: End of Support & Migration",
+      "startFrame": 8663,
+      "durationInFrames": 763,
+      "type": "kinetic",
+      "description": "Security risks of running Windows Server 2008 post-EOS and upgrading to modern servers."
+    },
+    {
+      "id": "scene_10",
+      "title": "Scene 10: Best Practices & Final Summary",
+      "startFrame": 9426,
+      "durationInFrames": 1061,
+      "type": "infographic",
+      "description": "3-2-1 backup rule, disaster recovery testing, and concluding takeaway checklist."
+    }
+  ]
+}
